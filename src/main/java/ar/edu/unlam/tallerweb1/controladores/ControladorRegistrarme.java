@@ -1,11 +1,24 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class ControladorRegistrarme {
 
-    public ModelAndView registrarUsuario(DatosRegistro datos) {
+    @RequestMapping(method = RequestMethod.GET, path = "/ir-a-registrarme")
+    public ModelAndView irARegistrarme(){
+        ModelMap model = new ModelMap();
+        DatosRegistro datos = new DatosRegistro();
+        datos.setEmail("ingrese su email...");
+        model.put("datos", datos);
+        return new ModelAndView("registro-usuario", model);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/registrarme")
+    public ModelAndView registrarUsuario(@ModelAttribute("datos") DatosRegistro datos) {
 
         ModelMap model = new ModelMap();
 
@@ -13,11 +26,15 @@ public class ControladorRegistrarme {
 
             model.put("email", datos.getEmail());
             model.put("msg", "Registro Exitoso");
-            return new ModelAndView("login", model);
+
+            DatosLogin datosLogin = new DatosLogin();
+            datosLogin.setEmail(datos.getEmail());
+            model.put("datosLogin", datosLogin);
+            return new ModelAndView("redirect:/login", model);
         }
 
         model.put("msg", "Registro Fallido por mail incorrecto");
-        return new ModelAndView("registrarme", model);
+        return new ModelAndView("registro-usuario", model);
     }
 
     private boolean esValido(String email) {

@@ -34,13 +34,13 @@ public class ControladorRegistrarmeTest {
     }
 
     private void thenElRegistroEsExitoso(ModelAndView mav) {
-        assertThat(mav.getViewName()).isEqualTo("login");
+        assertThat(mav.getViewName()).isEqualTo("redirect:/login");
         assertThat(mav.getModel().get("msg")).isEqualTo("Registro Exitoso");
         assertThat(mav.getModel().get("email")).isEqualTo(USUARIO.getEmail());
     }
 
     private void thenElRegistroFalla(ModelAndView mav) {
-        assertThat(mav.getViewName()).isEqualTo("registrarme");
+        assertThat(mav.getViewName()).isEqualTo("registro-usuario");
         assertThat(mav.getModel().get("msg")).isEqualTo("Registro Fallido por mail incorrecto");
     }
 }
