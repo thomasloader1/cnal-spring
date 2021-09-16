@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ControladorRegistrarme {
+
+    private ServicioLogin servicioLogin;
+
+    @Autowired
+    public ControladorRegistrarme(ServicioLogin servicioLogin){
+        this.servicioLogin = servicioLogin;
+    }
 
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-registrarme")
     public ModelAndView irARegistrarme(){
@@ -23,6 +32,13 @@ public class ControladorRegistrarme {
         ModelMap model = new ModelMap();
 
         if (esValido(datos.getEmail())) {
+
+            try {
+                servicioLogin.registrar(datos.getEmail(), datos.getClave());
+            } catch (Exception e) {
+                model.put("msg", "El usuario ya existe");
+                return new ModelAndView("registro-usuario", model);
+            }
 
             model.put("email", datos.getEmail());
             model.put("msg", "Registro Exitoso");
