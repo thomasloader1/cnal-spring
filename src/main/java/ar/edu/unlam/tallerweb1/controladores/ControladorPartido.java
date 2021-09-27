@@ -19,9 +19,52 @@ public class ControladorPartido {
 
 
     //@RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
-    public Boolean registrarPartido(Partido partido) {
-        return true;
+    public ModelAndView registrarPartido(Partido partido) {
+        ModelMap model = new ModelMap();
+        ModelAndView modeloVista = null;
+
+        if(validarCategoria(partido.getCategoria()) && validarTipoPartido(partido.getTipo())){
+            model.put("msg", "El partido se creo con éxito");
+            //Se muestra en la vista de éxito estos dos datos:
+            model.put("categoria", partido.getCategoria());
+            model.put("horario", partido.getHorario());
+
+            modeloVista = new ModelAndView("partido-registrado", model);
+        }else{
+            if(!(validarCategoria(partido.getCategoria()))){
+                model.put("msg", "La categoría es incorrecta.");
+
+                modeloVista = new ModelAndView("registro-partido", model);
+            }
+            else{
+                if(!(validarTipoPartido(partido.getTipo()))){
+                    model.put("msg", "El tipo de partido ingresado es incorrecto.");
+                    modeloVista = new ModelAndView("registro-partido", model);
+                }
+            }
+
+        }
+        return modeloVista;
     }
+
+    public boolean validarCategoria (String categoria){
+        boolean esValido = false;
+        if(categoria.equals("Infantil") || categoria.equals("Juvenil") || categoria.equals("Adulto")){
+            esValido = true;
+        }
+        return esValido;
+    }
+
+    public boolean validarTipoPartido(String tipoPartido){
+        boolean esValido = false;
+        if(tipoPartido.equals("5") || tipoPartido.equals("11")){
+            esValido = true;
+        }
+        return esValido;
+    }
+
+
+
 
     public void validarDatos(Partido datosPartido) {
     }

@@ -2,6 +2,9 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCrearPartido;
 import org.junit.Test;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -12,14 +15,66 @@ public class ContoladorPartidoTest {
     private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido);
 
     private static final Partido PARTIDO = new Partido();
-    private Partido datosPartido = PARTIDO;
+    private Partido nuevoPartido = new Partido(5L, 6, "5", "Adulto", "21:00");
+    private Partido partidoConCategoriaInvalida = new Partido(5L, 6, "11", "Niños", "20:00");
+    private Partido partidoConTipoInvalido = new Partido(5L, 6, "3", "Infantil", "20:00");
+
+    //private Partido datosPartido = PARTIDO;
 
     @Test
     public void puedoCrearUnPartido(){
-        //Partido nuevoPartido = givenNuevoPartido(PARTIDO);
-        //Boolean registro = whenRegistroNuevoPartido(nuevoPartido);
-        //thenPartidoCreadoConExito(registro);
+        givenQueUnPartidoNoExiste(nuevoPartido);
+
+        ModelAndView modeloVistaPartido = whenCreoUnNuevoPartido(nuevoPartido);
+
+        thenElPartidoSeCreaExitosamente(modeloVistaPartido);
     }
+
+    @Test
+    public void noPuedoCrearPartidoPorCategoriaInvalida(){
+        givenQueUnPartidoNoExiste(partidoConCategoriaInvalida);
+
+        ModelAndView modeloVistaPartido = whenCreoUnNuevoPartido(partidoConCategoriaInvalida);
+
+        thenLaCreacionDelPartidoFalla(modeloVistaPartido);
+    }
+
+    @Test
+    public void noPuedoCrearPartidoPorTipoInvalido(){
+        givenQueUnPartidoNoExiste(partidoConTipoInvalido);
+
+        ModelAndView modeloVistaPartido = whenCreoUnNuevoPartido(partidoConTipoInvalido);
+
+        thenLaCreacionDelPartidoFallaPorTipoInvalido(modeloVistaPartido);
+    }
+
+
+    private void givenQueUnPartidoNoExiste(Partido partido) {
+    }
+    private ModelAndView whenCreoUnNuevoPartido(Partido nuevoPartido) {
+
+        return controladorPartido.registrarPartido(nuevoPartido);
+    }
+    private void thenElPartidoSeCreaExitosamente(ModelAndView modeloVistaPartido) {
+        assertThat(modeloVistaPartido.getViewName()).isEqualTo("partido-registrado");
+        assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El partido se creo con éxito");
+        assertThat(modeloVistaPartido.getModel().get("categoria")).isEqualTo(nuevoPartido.getCategoria());
+        assertThat(modeloVistaPartido.getModel().get("horario")).isEqualTo(nuevoPartido.getHorario());
+    }
+
+    private void thenLaCreacionDelPartidoFalla(ModelAndView modeloVistaPartido) {
+        assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
+        assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La categoría es incorrecta.");
+    }
+
+    private void thenLaCreacionDelPartidoFallaPorTipoInvalido(ModelAndView modeloVistaPartido) {
+        assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
+        assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El tipo de partido ingresado es incorrecto.");
+    }
+
+
+
+
 
     @Test
     public void unPartidoLeFaltanJugadores(){
@@ -57,9 +112,9 @@ public class ContoladorPartidoTest {
 
     }
 
-    private Boolean whenRegistroNuevoPartido(Partido partido) {
-        return controladorPartido.registrarPartido(partido);
-    }
+    //private Boolean whenRegistroNuevoPartido(Partido partido) {
+      //  return controladorPartido.registrarPartido(partido);
+    //}
 
     private void thenPartidoCreadoConExito(Boolean registro) {
         assertThat(registro).isEqualTo(true);
