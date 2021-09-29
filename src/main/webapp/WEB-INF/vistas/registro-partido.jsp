@@ -7,7 +7,6 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Registrar Partido</title>
@@ -18,24 +17,32 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-    <form:form action="registrarme" method="POST" modelAttribute="datos">
-        <h3 class="form-signin-heading">Registrar Partido </h3>
-        <hr class="colorgraph"><br>
+    <div id="registrarPartido" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <form:form action="registrar" method="POST" modelAttribute="partidoNuevo">
+            <h3 class="form-signin-heading">Registrar Partido </h3>
+            <hr class="colorgraph"><br>
 
-        <label for="">Ingrese la cantidad de juegadores</label>
-        <form:input path="cant_jugadores" id="cantidad" class="form-control" />
+            <label for="">Ingrese la cantidad de juegadores</label>
+            <form:input path="cant_jugadores" id="cantidad" class="form-control" />
 
-        <label for="">Ingrese tipo de partido</label>
-        <form:input path="tipo" id="tipo" class="form-control"/>
+            <label for="">Ingrese tipo de partido</label>
+            <form:input path="tipo" id="tipo" class="form-control"/>
 
-        <label for="">Ingrese la categoria</label>
-        <form:input path="categoria" id="categoria" class="form-control"/>
+            <label for="">Ingrese la categoria</label>
+            <form:input path="categoria" id="categoria" class="form-control"/>
 
-        <label for="">Ingrese el horario</label>
-        <form:input path="horario" id="horario" class="form-control"/>
+            <label for="">Ingrese el horario</label>
+            <form:input path="horario" id="horario" class="form-control"/>
 
-        <button id="btn-registrar" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Registrar partido</button>
-</form:form>
+            <button id="btn-registrar" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Registrar partido</button>
+        </form:form>
+
+        <c:if test="${not empty error}">
+            <h4><span>${error}</span></h4>
+            <br>
+        </c:if>
+        ${msg}
+    </div>
 
 
     <!-- Placed at the end of the document so the pages load faster -->
