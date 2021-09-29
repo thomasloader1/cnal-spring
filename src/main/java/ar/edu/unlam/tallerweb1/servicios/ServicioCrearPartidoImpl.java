@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ServicioCrearPartidoImpl implements ServicioCrearPartido {
 
-    private final RepositorioPartido repositorioPartidoImpl;
+    //private final RepositorioPartido repositorioPartidoImpl;
 
-    @Autowired
-    public ServicioCrearPartidoImpl(RepositorioPartido servicioCrearPartidoDao){
+   // @Autowired
+    //public ServicioCrearPartidoImpl(RepositorioPartido servicioCrearPartidoDao){
 
-        this.repositorioPartidoImpl = servicioCrearPartidoDao;
-    }
+       // this.repositorioPartidoImpl = servicioCrearPartidoDao;
+    //}
 
 
 }
