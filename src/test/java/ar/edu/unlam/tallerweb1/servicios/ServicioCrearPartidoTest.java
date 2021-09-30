@@ -25,7 +25,7 @@ public class ServicioCrearPartidoTest {
 
     private void givenPartidoYaExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(new Partido());
+            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class ServicioCrearPartidoTest {
 
     private void givenPartidoNoExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(new Partido());
+            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,11 +73,8 @@ public class ServicioCrearPartidoTest {
     }
 
     private void thenElPartidoSeGuarda() {
+
         verify(repositorioPartido, times(1)).guardar(any());
     }
-
-
-
-
 
 }

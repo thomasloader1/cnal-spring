@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +21,9 @@ public class Partido {
     private Boolean completo = false;
     private String horario;
 
+
     public Partido() {
-        this.id = 1L;
-        this.cant_jugadores = 5;
-        this.tipo = "11";
-        this.categoria = "Juvenil";
-        this.completo = false;
-        this.horario = "18:00";
+
     }
 
     public Partido(Long id, int cant_jugadores, String tipo, String categoria, String horario) {
@@ -37,6 +35,8 @@ public class Partido {
         this.horario = horario;
 
     }
+
+
 
     public Long getId() {
         return id;

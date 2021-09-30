@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<body>
-<footer class="text-center text-white" style="background-color: #f1f1f1;position: absolute;bottom: 0;width: 100%">
+
+<footer class="text-center text-white" style="background-color: #f1f1f1;position: relative;bottom: 0;width: 100%">
     <div class="container pt-4">
         <section class="mb-4">
             <a
@@ -58,5 +57,4 @@
         <a class="text-dark" href="https://mdbootstrap.com/">ClubNoAtleticoList.com</a>
     </div>
 </footer>
-</body>
-</html>
+

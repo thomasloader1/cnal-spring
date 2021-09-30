@@ -14,7 +14,7 @@ public class ContoladorPartidoTest {
     private ServicioCrearPartido servicioCrearPartido = mock(ServicioCrearPartido.class);
     private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido);
 
-    private static final Partido PARTIDO = new Partido();
+    private static final Partido PARTIDO = new Partido(5L, 6, "5", "Adulto", "21:00");
     private Partido nuevoPartido = new Partido(5L, 6, "5", "Adulto", "21:00");
     private Partido partidoConCategoriaInvalida = new Partido(5L, 6, "11", "Niños", "20:00");
     private Partido partidoConTipoInvalido = new Partido(5L, 6, "3", "Infantil", "20:00");

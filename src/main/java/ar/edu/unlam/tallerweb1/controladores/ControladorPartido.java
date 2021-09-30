@@ -38,28 +38,24 @@ public class ControladorPartido {
             //Se muestra en la vista de éxito estos dos datos:
             model.put("categoria", partido.getCategoria());
             model.put("horario", partido.getHorario());
+            servicioCrearPartido.registrar(partido);
 
             modeloVista = new ModelAndView("partido-registrado", model);
-        }else{
-            if(!(validarCategoria(partido.getCategoria().toUpperCase()))){
-                model.put("msg", "La categoría es incorrecta.");
+        }else if(!(validarCategoria(partido.getCategoria().toUpperCase()))){
+            model.put("msg", "La categoría es incorrecta.");
+            servicioCrearPartido.registrar(partido);
+            modeloVista = new ModelAndView("registro-partido", model);
 
-                modeloVista = new ModelAndView("registro-partido", model);
-            }
-            else{
-                if(!(validarTipoPartido(partido.getTipo()))){
-                    model.put("msg", "El tipo de partido ingresado es incorrecto.");
-                    modeloVista = new ModelAndView("registro-partido", model);
-                }
-                else{
-                    if(!(validarCantidadJugadores(partido))){
-                        model.put("msg", "La cantidad de jugadores es inválida para el tipo de partido elegido");
-                        modeloVista = new ModelAndView("registro-partido", model);
-                    }
-                }
-            }
-
+        }else if(!(validarTipoPartido(partido.getTipo()))){
+            model.put("msg", "El tipo de partido ingresado es incorrecto.");
+            servicioCrearPartido.registrar(partido);
+            modeloVista = new ModelAndView("registro-partido", model);
+        }else if(!(validarCantidadJugadores(partido))){
+            model.put("msg", "La cantidad de jugadores es inválida para el tipo de partido elegido");
+            servicioCrearPartido.registrar(partido);
+            modeloVista = new ModelAndView("registro-partido", model);
         }
+
         return modeloVista;
     }
 
