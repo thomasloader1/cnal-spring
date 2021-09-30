@@ -61,13 +61,11 @@ public class ControladorPartido {
 
     public boolean validarCantidadJugadores (Partido partido){
         boolean esValido = false;
+
         if(partido.getTipo().equals("5") && (partido.getCant_jugadores()>=1 && partido.getCant_jugadores()<=10)){
             esValido = true;
-        }
-        else{
-            if(partido.getTipo().equals("11") && (partido.getCant_jugadores()>=1 && partido.getCant_jugadores()<=22)){
-                esValido = true;
-            }
+        }else if(partido.getTipo().equals("11") && (partido.getCant_jugadores()>=1 && partido.getCant_jugadores()<=22)){
+            esValido = true;
         }
         return esValido;
     }

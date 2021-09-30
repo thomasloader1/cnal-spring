@@ -23,7 +23,7 @@
                     <hr class="colorgraph"><br>
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese la cantidad de jugadores</label>
-                        <input name="cantidad" id="defaultRegisterFormCantidad" class="form-control" />
+                        <input name="cant_jugadores" id="defaultRegisterFormCantidad" class="form-control" />
                     </div>
 
                     <div class="form-outline mb-4">
@@ -43,15 +43,15 @@
                     <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar partido</button>
                 </form:form>
 
+                        <c:if test="${not empty msg}">
                 <div class="col-12">
                     <div class="alert alert-danger" role="alert">
-                        <c:if test="${not empty error}">
-                            <h4><span>${error}</span></h4>
-                            <br>
-                        </c:if>
-                        ${msg}
+                            <h6>${msg}</h6>
+
                     </div>
                 </div>
+                        </c:if>
+
             </div>
         </div>
     </div>

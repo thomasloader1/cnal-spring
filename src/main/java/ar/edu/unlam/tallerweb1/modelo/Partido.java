@@ -55,7 +55,7 @@ public class Partido {
     }
 
     public int getCant_jugadores() {
-        return cant_jugadores;
+        return this.cant_jugadores;
     }
 
     public void setCant_jugadores(int cant_jugadores) {
