@@ -28,12 +28,12 @@ public class ControladorPartido {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
+    @RequestMapping(method = RequestMethod.POST , path = "/registrar-partido")
     public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") Partido partido) {
         ModelMap model = new ModelMap();
         ModelAndView modeloVista = null;
 
-        if(validarCategoria(partido.getCategoria()) && validarTipoPartido(partido.getTipo())){
+        if((validarCategoria(partido.getCategoria().toUpperCase())) && (validarTipoPartido(partido.getTipo())) && (validarCantidadJugadores(partido))){
             model.put("msg", "El partido se creo con éxito");
             //Se muestra en la vista de éxito estos dos datos:
             model.put("categoria", partido.getCategoria());
@@ -41,7 +41,7 @@ public class ControladorPartido {
 
             modeloVista = new ModelAndView("partido-registrado", model);
         }else{
-            if(!(validarCategoria(partido.getCategoria()))){
+            if(!(validarCategoria(partido.getCategoria().toUpperCase()))){
                 model.put("msg", "La categoría es incorrecta.");
 
                 modeloVista = new ModelAndView("registro-partido", model);
@@ -51,15 +51,34 @@ public class ControladorPartido {
                     model.put("msg", "El tipo de partido ingresado es incorrecto.");
                     modeloVista = new ModelAndView("registro-partido", model);
                 }
+                else{
+                    if(!(validarCantidadJugadores(partido))){
+                        model.put("msg", "La cantidad de jugadores es inválida para el tipo de partido elegido");
+                        modeloVista = new ModelAndView("registro-partido", model);
+                    }
+                }
             }
 
         }
         return modeloVista;
     }
 
+    public boolean validarCantidadJugadores (Partido partido){
+        boolean esValido = false;
+        if(partido.getTipo().equals("5") && (partido.getCant_jugadores()>=1 && partido.getCant_jugadores()<=10)){
+            esValido = true;
+        }
+        else{
+            if(partido.getTipo().equals("11") && (partido.getCant_jugadores()>=1 && partido.getCant_jugadores()<=22)){
+                esValido = true;
+            }
+        }
+        return esValido;
+    }
+
     public boolean validarCategoria (String categoria){
         boolean esValido = false;
-        if(categoria.equals("Infantil") || categoria.equals("Juvenil") || categoria.equals("Adulto")){
+        if(categoria.equals("INFANTIL") || categoria.equals("JUVENIL") || categoria.equals("ADULTO")){
             esValido = true;
         }
         return esValido;
@@ -72,6 +91,9 @@ public class ControladorPartido {
         }
         return esValido;
     }
+
+
+
 
     public void validarDatos(Partido datosPartido) {
     }

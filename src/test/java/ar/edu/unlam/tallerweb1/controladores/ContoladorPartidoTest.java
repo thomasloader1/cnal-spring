@@ -18,6 +18,7 @@ public class ContoladorPartidoTest {
     private Partido nuevoPartido = new Partido(5L, 6, "5", "Adulto", "21:00");
     private Partido partidoConCategoriaInvalida = new Partido(5L, 6, "11", "Niños", "20:00");
     private Partido partidoConTipoInvalido = new Partido(5L, 6, "3", "Infantil", "20:00");
+    private Partido partidoConCantidadJugadoresInvalida = new Partido(8L, 25, "11", "adulto", "22:00");
 
     //private Partido datosPartido = PARTIDO;
 
@@ -48,6 +49,15 @@ public class ContoladorPartidoTest {
         thenLaCreacionDelPartidoFallaPorTipoInvalido(modeloVistaPartido);
     }
 
+    @Test
+    public void noPuedoCrearPartidoPorCantidadJugadoresIncorrecta(){
+        givenQueUnPartidoNoExiste(partidoConCantidadJugadoresInvalida);
+
+        ModelAndView modeloVistaPartido = whenCreoUnNuevoPartido(partidoConCantidadJugadoresInvalida);
+
+        thenLaCreacionDelPartidoFallaPorCantidadJugadores(modeloVistaPartido);
+    }
+
 
     private void givenQueUnPartidoNoExiste(Partido partido) {
     }
@@ -70,6 +80,11 @@ public class ContoladorPartidoTest {
     private void thenLaCreacionDelPartidoFallaPorTipoInvalido(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El tipo de partido ingresado es incorrecto.");
+    }
+
+    private void thenLaCreacionDelPartidoFallaPorCantidadJugadores(ModelAndView modeloVistaPartido) {
+        assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
+        assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La cantidad de jugadores es inválida para el tipo de partido elegido");
     }
 
 
