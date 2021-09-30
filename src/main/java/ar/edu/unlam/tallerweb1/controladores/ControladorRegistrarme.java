@@ -23,7 +23,7 @@ public class ControladorRegistrarme {
         DatosRegistro datos = new DatosRegistro();
         datos.setEmail("ingrese su email...");
         model.put("datos", datos);
-        return new ModelAndView("registro-usuario", model);
+        return new ModelAndView("registro-usuario",model);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/registrarme")
