@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,15 @@ public class ServicioCrearPartidoImpl implements ServicioCrearPartido {
 
        // this.repositorioPartidoImpl = servicioCrearPartidoDao;
     //}
+    private final RepositorioPartido repositorioPartido;
 
+    @Autowired
+    public ServicioCrearPartidoImpl(RepositorioPartido repositorioCrearPartido){
+        this.repositorioPartido = repositorioCrearPartido;
+    }
+     @Override
+     public void crearPartido(Partido partido) {
+        repositorioPartido.crearPartido(partido);
+     }
 
 }

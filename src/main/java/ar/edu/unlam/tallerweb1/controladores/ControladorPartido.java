@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class ControladorPartido {
+
     private ServicioCrearPartido servicioCrearPartido;
 
     @Autowired
@@ -19,10 +21,15 @@ public class ControladorPartido {
         this.servicioCrearPartido = servicioCrearPartido;
     }
 
+    @RequestMapping(path = "/registro-partido", method = RequestMethod.GET)
+    public ModelAndView irARegistroPartido(){
+        return new ModelAndView("registro-partido");
+    }
+
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
-    public ModelAndView registrarPartido(@ModelAttribute("partidoNuevo") Partido partido) {
+    public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") Partido partido) {
         ModelMap model = new ModelMap();
         ModelAndView modeloVista = null;
 
