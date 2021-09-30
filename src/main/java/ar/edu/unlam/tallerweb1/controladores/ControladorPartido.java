@@ -28,7 +28,7 @@ public class ControladorPartido {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
+    @RequestMapping(method = RequestMethod.POST , path = "/registrar-partido")
     public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") Partido partido) {
         ModelMap model = new ModelMap();
         ModelAndView modeloVista = null;

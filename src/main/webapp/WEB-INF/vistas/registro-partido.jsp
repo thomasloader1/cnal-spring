@@ -8,6 +8,7 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file = "partial/header.jsp" %>
 <html>
 <head>
     <title>Registrar Partido</title>
@@ -51,13 +52,6 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
 
-<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Registrar partido</title>
-</head>
-<body>
-    <h1>Registrar partido</h1>
->>>>>>> 408be69cc4853079d748989307ec8c838f479062-->
+    <%@ include file = "partial/footer.jsp" %>
 </body>
 </html>
