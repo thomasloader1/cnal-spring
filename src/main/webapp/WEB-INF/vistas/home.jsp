@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+		<title>Inicio</title>
 	</head>
 	<body>
 	<div class="text-center p-5"  style="background-color: #67b168">

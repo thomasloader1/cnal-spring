@@ -68,13 +68,8 @@ public class ControladorPartido {
         return esValido;
     }
 
-
-
-
     public void validarDatos(Partido datosPartido) {
     }
-
-
 
     public Boolean veficarCantidadDeJugadores(int cant_jugadores) {
         if(cant_jugadores < 10){
@@ -82,5 +77,10 @@ public class ControladorPartido {
         }
 
         return false;
+    }
+
+    @RequestMapping(path = "/unirme-al-partido", method = RequestMethod.GET)
+    public ModelAndView irAUnirmeAlPartido(){
+        return new ModelAndView("unirme-al-partido");
     }
 }
