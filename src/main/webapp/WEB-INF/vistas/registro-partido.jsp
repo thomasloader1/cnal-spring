@@ -8,34 +8,36 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file = "partial/header.jsp" %>
 <html>
 <head>
     <title>Registrar Partido</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" >
-    <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="registrarPartido" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="registrarPartido" class="col-md-6  d-flex align-items-center justify-content-center">
         <form:form action="registrar-partido" method="POST" modelAttribute="partido-nuevo">
             <h3 class="form-signin-heading">Registrar Partido </h3>
             <hr class="colorgraph"><br>
+            <div class="form-outline mb-4">
+                <input name="cantidad" id="defaultRegisterFormCantidad" class="form-control" />
+                <label class="form-label">Ingrese la cantidad de juegadores</label>
+            </div>
 
-            <label for="">Ingrese la cantidad de juegadores</label>
-            <input name="cantidad" id="defaultRegisterFormCantidad" class="form-control" />
+            <div class="form-outline mb-4">
+                <input name="tipo" id="defaultRegisterFormTipo" class="form-control"/>
+                <label class="form-label">Ingrese tipo de partido</label>
+            </div>
 
-            <label for="">Ingrese tipo de partido</label>
-            <input name="tipo" id="defaultRegisterFormTipo" class="form-control"/>
+            <div class="form-outline mb-4">
+                <input name="categoria" id="defaultRegisterFormCategoria" class="form-control"/>
+                <label class="form-label">Ingrese la categoria</label>
+            </div>
 
-            <label for="">Ingrese la categoria</label>
-            <input name="categoria" id="defaultRegisterFormCategoria" class="form-control"/>
-
-            <label for="">Ingrese el horario</label>
-            <input name="horario" id="defaultRegisterFormCategoria" class="form-control"/>
-
-            <button id="btn-registrar" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Registrar partido</button>
+            <div class="form-outline mb-4">
+                <input name="horario" id="defaultRegisterFormCategoria" class="form-control"/>
+                <label class="form-label">Ingrese el horario</label>
+            </div>
+            <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar partido</button>
         </form:form>
 
         <c:if test="${not empty error}">
@@ -44,7 +46,6 @@
         </c:if>
         ${msg}
     </div>
-
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
