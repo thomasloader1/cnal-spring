@@ -11,6 +11,6 @@
     <title>Partido registrado</title>
 </head>
 <body>
-
+<H1>Partido Registrado exitosamente!</H1>
 </body>
 </html>
