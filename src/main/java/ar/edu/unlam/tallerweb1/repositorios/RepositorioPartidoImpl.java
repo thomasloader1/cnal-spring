@@ -23,7 +23,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .add(Restrictions.eq("categoria", categoria))
                 .uniqueResult();
     }
-
+    //asd
     @Override
     public void guardar(Partido partido) {
         sessionFactory.getCurrentSession().save(partido);
