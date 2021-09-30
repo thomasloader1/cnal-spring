@@ -4,6 +4,6 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 
 public interface RepositorioPartido {
 
-    void crearPartido(Partido partido);
-    void buscarPartido(Long id, String tipo);
+    Partido buscar(String hora, String categoria) throws Exception;
+    void guardar(Partido partido);
 }
