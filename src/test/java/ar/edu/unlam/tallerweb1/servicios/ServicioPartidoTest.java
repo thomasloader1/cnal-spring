@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
 
@@ -9,11 +8,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.never;
 
-public class ServicioCrearPartidoTest {
+public class ServicioPartidoTest {
 
     public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
-    private ServicioCrearPartido servicioPartido = new ServicioCrearPartidoImpl(repositorioPartido);
+    private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
     @Test(expected = Exception.class)
@@ -73,8 +72,34 @@ public class ServicioCrearPartidoTest {
     }
 
     private void thenElPartidoSeGuarda() {
-
         verify(repositorioPartido, times(1)).guardar(any());
     }
 
+    @Test
+    public void puedoUnirmeAUnPartido() throws Exception {
+        PARTIDO.setId(3L);
+        PARTIDO.setCant_jugadores(PARTIDO.getCant_jugadores() + 1);
+        givenPartidoCompleto(PARTIDO);
+        whenUnirmePartido(PARTIDO);
+        thenSeSumaUnJugador();
+    }
+
+    private void givenPartidoCompleto(Partido partido) {
+        try {
+            servicioPartido.partidoLleno(partido);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void whenUnirmePartido(Partido partido)throws Exception {
+        try {
+            servicioPartido.unirmeAlPartido(partido);
+        } catch (Exception e) {
+            throw new Exception("whenUnirmeAlPartidoException");
+        }
+    }
+    private void thenSeSumaUnJugador() {
+        verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
+    }
 }

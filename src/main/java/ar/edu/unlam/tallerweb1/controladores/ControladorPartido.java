@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.servicios.ServicioCrearPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class ControladorPartido {
 
-    private ServicioCrearPartido servicioCrearPartido;
+    private ServicioPartido servicioCrearPartido;
 
     @Autowired
-    public ControladorPartido(ServicioCrearPartido servicioCrearPartido) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido) {
         this.servicioCrearPartido = servicioCrearPartido;
     }
 
@@ -43,16 +42,13 @@ public class ControladorPartido {
             modeloVista = new ModelAndView("partido-registrado", model);
         }else if(!(validarCategoria(partido.getCategoria().toUpperCase()))){
             model.put("msg", "La categoría es incorrecta.");
-            servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("registro-partido", model);
 
         }else if(!(validarTipoPartido(partido.getTipo()))){
             model.put("msg", "El tipo de partido ingresado es incorrecto.");
-            servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("registro-partido", model);
         }else if(!(validarCantidadJugadores(partido))){
             model.put("msg", "La cantidad de jugadores es inválida para el tipo de partido elegido");
-            servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("registro-partido", model);
         }
 
@@ -85,9 +81,6 @@ public class ControladorPartido {
         }
         return esValido;
     }
-
-
-
 
     public void validarDatos(Partido datosPartido) {
     }

@@ -1,8 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.servicios.ServicioCrearPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import org.junit.Test;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +10,7 @@ import static org.mockito.Mockito.mock;
 
 public class ContoladorPartidoTest {
 
-    private ServicioCrearPartido servicioCrearPartido = mock(ServicioCrearPartido.class);
+    private ServicioPartido servicioCrearPartido = mock(ServicioPartido.class);
     private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido);
 
     private static final Partido PARTIDO = new Partido(5L, 6, "5", "Adulto", "21:00");
