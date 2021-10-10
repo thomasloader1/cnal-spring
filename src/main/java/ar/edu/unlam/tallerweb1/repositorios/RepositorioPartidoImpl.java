@@ -28,4 +28,11 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     public void guardar(Partido partido) {
         sessionFactory.getCurrentSession().save(partido);
     }
+
+    @Override
+    public void unirmeAlPartido(Partido partido) {
+        Partido partidoActualizado = this.sessionFactory.getCurrentSession().load(Partido.class, partido.getId());
+        partidoActualizado.setCant_jugadores(partido.getCant_jugadores() + 1);
+        this.sessionFactory.getCurrentSession().update(partidoActualizado);
+    }
 }
