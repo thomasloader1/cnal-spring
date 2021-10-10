@@ -6,8 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class ContoladorPartidoTest {
 
@@ -15,10 +14,11 @@ public class ContoladorPartidoTest {
     private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido);
 
     private static final Partido PARTIDO = new Partido(5L, 6, "5", "Adulto", "21:00");
-    private Partido nuevoPartido = new Partido(5L, 6, "5", "Adulto", "21:00");
-    private Partido partidoConCategoriaInvalida = new Partido(5L, 6, "11", "Niños", "20:00");
-    private Partido partidoConTipoInvalido = new Partido(5L, 6, "3", "Infantil", "20:00");
-    private Partido partidoConCantidadJugadoresInvalida = new Partido(8L, 25, "11", "adulto", "22:00");
+
+    private DatosCrearPartido nuevoPartido = new DatosCrearPartido(6, "5", "Adulto", "21:00");
+    private DatosCrearPartido partidoConCategoriaInvalida = new DatosCrearPartido(6, "11", "Niños", "20:00");
+    private DatosCrearPartido partidoConTipoInvalido = new DatosCrearPartido(6, "3", "Infantil", "20:00");
+    private DatosCrearPartido partidoConCantidadJugadoresInvalida = new DatosCrearPartido(25, "11", "adulto", "22:00");
 
     //private Partido datosPartido = PARTIDO;
 
@@ -59,9 +59,9 @@ public class ContoladorPartidoTest {
     }
 
 
-    private void givenQueUnPartidoNoExiste(Partido partido) {
+    private void givenQueUnPartidoNoExiste(DatosCrearPartido partido) {
     }
-    private ModelAndView whenCreoUnNuevoPartido(Partido nuevoPartido) {
+    private ModelAndView whenCreoUnNuevoPartido(DatosCrearPartido nuevoPartido) {
 
         return controladorPartido.registrarPartido(nuevoPartido);
     }
@@ -75,16 +75,19 @@ public class ContoladorPartidoTest {
     private void thenLaCreacionDelPartidoFalla(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La categoría es incorrecta.");
+        verify(servicioCrearPartido, never()).registrar(any());
     }
 
     private void thenLaCreacionDelPartidoFallaPorTipoInvalido(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El tipo de partido ingresado es incorrecto.");
+        verify(servicioCrearPartido, never()).registrar(any());
     }
 
     private void thenLaCreacionDelPartidoFallaPorCantidadJugadores(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("registro-partido");
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La cantidad de jugadores es inválida para el tipo de partido elegido");
+        verify(servicioCrearPartido, never()).registrar(any());
     }
 
 
