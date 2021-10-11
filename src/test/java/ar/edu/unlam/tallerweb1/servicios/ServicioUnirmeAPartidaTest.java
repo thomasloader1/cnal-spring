@@ -25,7 +25,7 @@ public class ServicioUnirmeAPartidaTest {
 
     private void givenPartidaInexistente(Partido partido) throws Exception{
         Mockito.when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenThrow(Exception.class);
-//        doThrow(Exception.class).when(repositorioPartido).buscar(partido.getHorario(), partido.getCategoria());
+
     }
 
     private void whenUnirme(Partido partido) throws Exception{
