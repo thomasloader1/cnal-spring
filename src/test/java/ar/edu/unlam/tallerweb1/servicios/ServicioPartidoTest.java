@@ -9,11 +9,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.never;
 
-public class ServicioCrearPartidoTest {
+public class ServicioPartidoTest {
 
     public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
-    private ServicioCrearPartido servicioPartido = new ServicioCrearPartidoImpl(repositorioPartido);
+    private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
     @Test(expected = Exception.class)
