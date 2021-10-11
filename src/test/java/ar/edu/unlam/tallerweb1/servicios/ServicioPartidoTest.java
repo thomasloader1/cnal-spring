@@ -1,9 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
+import org.mockito.exceptions.verification.NeverWantedButInvoked;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -16,7 +16,7 @@ public class ServicioPartidoTest {
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
-    @Test(expected = Exception.class)
+    @Test(expected = NeverWantedButInvoked.class)
     public void siRegistroConHoraOcupadaDaError() throws Exception {
         givenPartidoYaExiste(PARTIDO);
         whenResgistro(PARTIDO);
@@ -42,7 +42,7 @@ public class ServicioPartidoTest {
         }
     }
 
-    private void thenElPartidoNoSeGuarda() {
+    private void thenElPartidoNoSeGuarda(){
         verify(repositorioPartido, never()).guardar(any());
     }
 
@@ -74,5 +74,33 @@ public class ServicioPartidoTest {
 
     private void thenElPartidoSeGuarda() {
         verify(repositorioPartido, times(1)).guardar(any());
+    }
+
+    @Test
+    public void puedoUnirmeAUnPartido() throws Exception {
+        PARTIDO.setId(3L);
+        PARTIDO.setCant_jugadores(PARTIDO.getCant_jugadores() + 1);
+        givenPartidoCompleto(PARTIDO);
+        whenUnirmePartido(PARTIDO);
+        thenSeSumaUnJugador();
+    }
+
+    private void givenPartidoCompleto(Partido partido) {
+        try {
+            servicioPartido.partidoLleno(partido);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void whenUnirmePartido(Partido partido)throws Exception {
+        try {
+            servicioPartido.unirmeAlPartido(partido);
+        } catch (Exception e) {
+            throw new Exception("whenUnirmeAlPartidoException");
+        }
+    }
+    private void thenSeSumaUnJugador() {
+        verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
     }
 }
