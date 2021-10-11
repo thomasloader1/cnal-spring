@@ -1,35 +1,55 @@
-/*package ar.edu.unlam.tallerweb1.servicios;
+package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartidoImpl;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.mockito.Mockito.*;
 
 public class ServicioUnirmeAPartidaTest {
 
     public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00");
-    private RepositorioPartido repositorioUnirmeAPartida = mock(RepositorioPartido.class);
-    private ServicioCrearPartido servicioUnirmeAPartida = new ServicioCrearPartidoImpl(repositorioUnirmeAPartida);
+    private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
+    private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
     @Test(expected= Exception.class)
-        void puedoUnirmeAPartida() throws Exception{
+    public void noPuedoUnirmeAPartida() throws Exception{
         givenPartidaInexistente(PARTIDO);
         whenUnirme(PARTIDO);
 
     }
 
     private void givenPartidaInexistente(Partido partido) throws Exception{
-        Mockito.when(RepositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenThrow(Exception.class);
+        Mockito.when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenThrow(Exception.class);
+//        doThrow(Exception.class).when(repositorioPartido).buscar(partido.getHorario(), partido.getCategoria());
     }
 
     private void whenUnirme(Partido partido) throws Exception{
-
-        servicioUnirmeAPartida.consultarPartido(partido.getHorario(), partido.getCategoria());
-
+        servicioPartido.consultarPartido(partido.getHorario(), partido.getCategoria());
     }
 
-}*/
+    @Test
+    public void unirmeAPartida() throws Exception {
+        //givenPartidaExiste(PARTIDO);
+        ModelAndView mav= whenUnirmeAPartida(PARTIDO);
+        thenUnionExitosa(mav, "se unió con exito");
+    }
+
+    private void thenUnionExitosa(ModelAndView mav, String mensaje) {
+    }
+
+    private ModelAndView whenUnirmeAPartida(Partido partido) {
+        servicioPartido.unirmeAlPartido(partido);
+        return null;
+    }
+
+    /*private void givenPartidaExiste(Partido partido) {
+        when(repositorioPartido.unirmeAlPartido(partido))
+    }*/
+
+
+}

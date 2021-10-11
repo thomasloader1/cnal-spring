@@ -29,7 +29,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Partido buscado = repositorioPartidoImpl.buscar(hora, categoria);
         if (buscado == null){
             throw new Exception();
-    }
+      }
         return buscado;
     }
 
