@@ -52,6 +52,13 @@ public class ControladorPartido {
     }
 
 
+<<<<<<< HEAD
+=======
+
+
+
+/*
+>>>>>>> scarlet
     public void validarDatos(Partido datosPartido) {
     }
 
@@ -62,9 +69,60 @@ public class ControladorPartido {
 
         return false;
     }
+*/
 
     @RequestMapping(path = "/unirme-al-partido", method = RequestMethod.GET)
     public ModelAndView irAUnirmeAlPartido(){
         return new ModelAndView("unirme-al-partido");
     }
+
+
+    @RequestMapping(path = "/union-partido", method = RequestMethod.POST)
+    public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido) {
+
+        ModelMap modelo = new ModelMap();
+
+        modelo.put("msg", "¡Te uniste al partido correctamente!");
+
+        return new ModelAndView("union-a-partido", modelo);
+    }
+
+
+
+
+
+
+/*
+    @RequestMapping(method = RequestMethod.POST, path = "/union-partido")
+    public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido datosPartido) {
+
+        ModelMap modelo = new ModelMap();
+        ModelAndView modeloVista = null;
+
+        if(validarLugaresDisponibles(datosPartido)){
+            modelo.put("msg", "¡Te uniste al partido correctamente!");
+            modeloVista = new ModelAndView("union-a-partido", modelo);
+        }
+        else{
+            modelo.put("msg", "El partido seleccionado ya esta completo");
+            modeloVista = new ModelAndView("unirme-al-partido", modelo);
+        }
+
+        return modeloVista;
+    }
+
+
+
+    public boolean validarLugaresDisponibles(DatosCrearPartido datosPartido){
+        boolean hayLugar = false;
+        if(datosPartido.getTipo().equals("5") && datosPartido.getCant_jugadores()<10){
+            hayLugar = true;
+        }
+        else if(datosPartido.getTipo().equals("11") && datosPartido.getCant_jugadores()<22){
+            hayLugar = true;
+        }
+        return hayLugar;
+    }
+*/
+
 }
