@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.servicios.ServicioCrearPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class ControladorPartido {
 
-    private ServicioCrearPartido servicioCrearPartido;
+    private ServicioPartido servicioCrearPartido;
 
     @Autowired
-    public ControladorPartido(ServicioCrearPartido servicioCrearPartido) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido) {
         this.servicioCrearPartido = servicioCrearPartido;
     }
 
