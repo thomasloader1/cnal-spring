@@ -27,9 +27,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Override
     public Partido consultarPartido(String hora, String categoria) throws Exception {
         Partido buscado = repositorioPartidoImpl.buscar(hora, categoria);
-        if (buscado != null){
+        if (buscado == null){
             throw new Exception();
-        }
+      }
         return buscado;
     }
 

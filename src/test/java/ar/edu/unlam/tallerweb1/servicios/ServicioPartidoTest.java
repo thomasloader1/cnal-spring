@@ -73,8 +73,6 @@ public class ServicioPartidoTest {
     }
 
     private void thenElPartidoSeGuarda() {
-
         verify(repositorioPartido, times(1)).guardar(any());
     }
-
 }
