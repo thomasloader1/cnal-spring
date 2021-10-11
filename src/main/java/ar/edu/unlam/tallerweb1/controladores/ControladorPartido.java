@@ -52,9 +52,6 @@ public class ControladorPartido {
     }
 
 
-<<<<<<< HEAD
-=======
-
 
 
 /*
