@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("servicioCrearPartido")
 @Transactional
 public class ServicioPartidoImpl implements ServicioPartido {
@@ -46,6 +48,11 @@ public class ServicioPartidoImpl implements ServicioPartido {
             esValido = true;
         }
         return esValido;
+    }
+
+    @Override
+    public List<Partido> todosLosPartidos() {
+        return repositorioPartidoImpl.partidos();
     }
 
 }

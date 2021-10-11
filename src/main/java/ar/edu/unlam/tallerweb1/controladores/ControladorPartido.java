@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Controller
 public class ControladorPartido {
 
@@ -49,6 +52,25 @@ public class ControladorPartido {
         }
 
         return modeloVista;
+    }
+
+    @RequestMapping(path = "listar-partidos" , method = RequestMethod.GET)
+    public ModelAndView listarPartidos(){
+        ModelMap model = new ModelMap();
+        model.put("PARTIDOS",servicioCrearPartido.todosLosPartidos());
+
+        List<Partido> listPartidos = new LinkedList<>();
+
+        for (Partido partidos : listPartidos){
+            model.put("cant_jugadores",partidos.getCant_jugadores());
+            model.put("categoria",partidos.getCategoria());
+            model.put("horario",partidos.getHorario());
+            model.put("tipo",partidos.getTipo());
+            model.put("completo",partidos.getCompleto());
+            model.put("id",partidos.getId());
+        }
+
+        return new  ModelAndView("home",model);
     }
 
 
