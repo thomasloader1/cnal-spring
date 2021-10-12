@@ -12,4 +12,6 @@ public interface ServicioPartido {
     void unirmeAlPartido(Partido partido);
     Boolean partidoLleno(Partido partido);
     List<Partido> todosLosPartidos();
+    Boolean partidoConFiltros(Partido partido);
+    List<Partido> filtrarPartidos(String localidad, String categoria);
 }

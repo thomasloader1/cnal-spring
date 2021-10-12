@@ -6,16 +6,18 @@ public class DatosCrearPartido {
     private String tipo;
     private String categoria;
     private String horario;
+    private String localidad;
 
 
     public DatosCrearPartido() {
     }
 
-    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario) {
+    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
         this.cant_jugadores = cant_jugadores;
         this.tipo = tipo;
         this.categoria = categoria;
         this.horario = horario;
+        this.localidad = localidad;
     }
 
     public int getCant_jugadores() {
@@ -50,6 +52,9 @@ public class DatosCrearPartido {
         this.horario = horario;
     }
 
+    public void setLocalidad(String locaclidad){this.localidad = localidad;}
+
+    public String getLocalidad(){return localidad;}
 
     public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido){
         String mensaje = "";

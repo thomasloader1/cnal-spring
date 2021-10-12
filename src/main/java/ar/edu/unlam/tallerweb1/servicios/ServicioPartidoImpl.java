@@ -21,7 +21,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
 
     @Override
     public Partido registrar(Partido partido)  {
-        Partido nuevo = new Partido(partido.getId(),partido.getCant_jugadores(),partido.getTipo(),partido.getCategoria(),partido.getHorario());
+        Partido nuevo = new Partido(partido.getId(),partido.getCant_jugadores(),partido.getTipo(),partido.getCategoria(),partido.getHorario(),partido.getLocalidad());
         repositorioPartidoImpl.guardar(nuevo);
         return nuevo;
     }
@@ -54,5 +54,23 @@ public class ServicioPartidoImpl implements ServicioPartido {
     public List<Partido> todosLosPartidos() {
         return repositorioPartidoImpl.partidos();
     }
+
+    @Override
+    public Boolean partidoConFiltros(Partido partido){
+
+        try{
+            if(partido.getLocalidad() != null && partido.getCategoria() != null){
+                return true;
+            }
+            return false;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    @Override
+    public List<Partido> filtrarPartidos(String localidad, String categoria){
+            return repositorioPartidoImpl.partidosFiltrados(localidad,categoria);
+        }
 
 }

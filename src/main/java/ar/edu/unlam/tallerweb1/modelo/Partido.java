@@ -20,19 +20,21 @@ public class Partido {
     private String categoria;
     private Boolean completo = false;
     private String horario;
+    private String localidad;
 
 
     public Partido() {
 
     }
 
-    public Partido(Long id, int cant_jugadores, String tipo, String categoria, String horario) {
+    public Partido(Long id, int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
         this.id = id;
         this.cant_jugadores = cant_jugadores;
         this.tipo = tipo;
         this.categoria = categoria;
         this.completo = this.getCompleto();
         this.horario = horario;
+        this.localidad = localidad;
 
     }
 
@@ -85,4 +87,8 @@ public class Partido {
     public void setCompleto(Boolean completo) {
         this.completo = completo;
     }
+
+    public void setLocalidad(String localidad){this.localidad = localidad;}
+
+    public String getLocalidad(){return localidad;}
 }

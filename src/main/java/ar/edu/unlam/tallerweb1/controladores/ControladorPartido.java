@@ -41,8 +41,9 @@ public class ControladorPartido {
 
             model.put("categoria", datosPartido.getCategoria());
             model.put("horario", datosPartido.getHorario());
+            model.put("localidad", datosPartido.getLocalidad());
 
-            Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario());
+            Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
             servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("partido-registrado", model);
         }
@@ -74,7 +75,24 @@ public class ControladorPartido {
     }
 
 
+    @RequestMapping(path = "listar-partidos-filtrados" , method = RequestMethod.GET)
+    public ModelAndView listarPartidosConFiltro(@ModelAttribute("filtros-partido") DatosCrearPartido datosPartido){
+        ModelMap model = new ModelMap();
+        model.put("PARTIDOS",servicioCrearPartido.filtrarPartidos(datosPartido.getLocalidad() , datosPartido.getCategoria()));
 
+        List<Partido> listPartidos = new LinkedList<>();
+
+        for (Partido partidos : listPartidos){
+            model.put("cant_jugadores",partidos.getCant_jugadores());
+            model.put("categoria",partidos.getCategoria());
+            model.put("horario",partidos.getHorario());
+            model.put("tipo",partidos.getTipo());
+            model.put("completo",partidos.getCompleto());
+            model.put("id",partidos.getId());
+        }
+
+        return new  ModelAndView("home",model);
+    }
 
 /*
 >>>>>>> scarlet
@@ -143,5 +161,7 @@ public class ControladorPartido {
         return hayLugar;
     }
 */
+
+
 
 }

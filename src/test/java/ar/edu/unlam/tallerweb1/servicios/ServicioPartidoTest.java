@@ -10,7 +10,7 @@ import static org.mockito.Mockito.never;
 
 public class ServicioPartidoTest {
 
-    public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00");
+    public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -102,4 +102,20 @@ public class ServicioPartidoTest {
     private void thenSeSumaUnJugador() {
         verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
     }
+
+
+    @Test
+    public void puedoFiltrarUnPartido(){
+        givenPartidoConFiltros(PARTIDO);
+        whenFiltarPartido(PARTIDO);
+    }
+
+    private void givenPartidoConFiltros(Partido partido) {
+        servicioPartido.partidoConFiltros(partido);
+    }
+
+    private void whenFiltarPartido(Partido partido) {
+        servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
+    }
+
 }

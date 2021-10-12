@@ -44,4 +44,27 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
         final Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Partido.class).list();
     }
+
+    @Override
+    public List<Partido> partidosFiltrados(String localidad, String categoria){
+
+        if(localidad != null || localidad != "" && categoria == null || categoria == "") {
+            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
+                    .add(Restrictions.eq("localidad", localidad))
+                    .uniqueResult();
+        }
+        else if(localidad == null || localidad == "" && categoria != null || categoria != ""){
+            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
+                    .add(Restrictions.eq("categoria", categoria))
+                    .uniqueResult();
+        }
+        else if(localidad != null || localidad != "" && categoria != null || categoria != "") {
+            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
+                    .add(Restrictions.eq("localidad", localidad))
+                    .add(Restrictions.eq("categoria", categoria))
+                    .uniqueResult();
+        }
+        return null;
+    }
 }
+
