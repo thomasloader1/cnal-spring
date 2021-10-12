@@ -107,8 +107,6 @@ public class ServicioPartidoTest {
         verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
     }
 
-<<<<<<< HEAD
-
     @Test
     public void puedoFiltrarUnPartido(){
         givenPartidoConFiltros(PARTIDO);
@@ -123,6 +121,4 @@ public class ServicioPartidoTest {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
 
-=======
->>>>>>> fc1b273d7db66cecad1c23952ec42a14f067a0d1
 }

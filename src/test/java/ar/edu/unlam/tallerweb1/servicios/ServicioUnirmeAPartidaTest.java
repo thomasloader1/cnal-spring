@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 public class ServicioUnirmeAPartidaTest {
 
-    public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00");
+    public static final Partido PARTIDO = new Partido(1L,5,"11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
