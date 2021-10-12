@@ -17,8 +17,7 @@ public class ServicioPartidoTest {
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
-
-    @Test(expected = NeverWantedButInvoked.class)
+    @Test(expected = Exception.class)
 
     public void siRegistroConHoraOcupadaDaError() throws Exception {
         givenPartidoYaExiste(PARTIDO);
