@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.LinkedList;
 import java.util.List;
 
+
 @Controller
 public class ControladorPartido {
 
@@ -77,7 +78,6 @@ public class ControladorPartido {
 
 
 /*
->>>>>>> scarlet
     public void validarDatos(Partido datosPartido) {
     }
 

@@ -11,5 +11,7 @@ public interface ServicioPartido {
     Partido consultarPartido(String hora, String categoria) throws Exception;
     void unirmeAlPartido(Partido partido);
     Boolean partidoLleno(Partido partido);
+
     List<Partido> todosLosPartidos();
+
 }
