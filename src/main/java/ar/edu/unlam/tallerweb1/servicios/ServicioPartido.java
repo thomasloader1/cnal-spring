@@ -11,7 +11,12 @@ public interface ServicioPartido {
     Partido consultarPartido(String hora, String categoria) throws Exception;
     void unirmeAlPartido(Partido partido);
     Boolean partidoLleno(Partido partido);
+
     List<Partido> todosLosPartidos();
+<<<<<<< HEAD
     Boolean partidoConFiltros(Partido partido);
     List<Partido> filtrarPartidos(String localidad, String categoria);
+=======
+
+>>>>>>> fc1b273d7db66cecad1c23952ec42a14f067a0d1
 }

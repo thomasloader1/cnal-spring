@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
+import org.mockito.exceptions.verification.NeverWantedButInvoked;
+
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -16,6 +18,7 @@ public class ServicioPartidoTest {
 
 
     @Test(expected = Exception.class)
+
     public void siRegistroConHoraOcupadaDaError() throws Exception {
         givenPartidoYaExiste(PARTIDO);
         whenResgistro(PARTIDO);
@@ -40,6 +43,7 @@ public class ServicioPartidoTest {
             throw new Exception();
         }
     }
+
 
     private void thenElPartidoNoSeGuarda() {
         verify(repositorioPartido, never()).guardar(any());
@@ -103,6 +107,7 @@ public class ServicioPartidoTest {
         verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
     }
 
+<<<<<<< HEAD
 
     @Test
     public void puedoFiltrarUnPartido(){
@@ -118,4 +123,6 @@ public class ServicioPartidoTest {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
 
+=======
+>>>>>>> fc1b273d7db66cecad1c23952ec42a14f067a0d1
 }
