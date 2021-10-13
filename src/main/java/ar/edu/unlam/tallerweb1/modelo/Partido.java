@@ -23,9 +23,7 @@ public class Partido {
     private String localidad;
 
 
-    public Partido() {
-
-    }
+    public Partido() {}
 
     public Partido(Long id, int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
         this.id = id;
@@ -37,8 +35,6 @@ public class Partido {
         this.localidad = localidad;
 
     }
-
-
 
     public Long getId() {
         return id;

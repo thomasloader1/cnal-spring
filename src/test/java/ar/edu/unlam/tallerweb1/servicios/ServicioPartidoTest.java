@@ -18,7 +18,6 @@ public class ServicioPartidoTest {
 
 
     @Test(expected = Exception.class)
-
     public void siRegistroConHoraOcupadaDaError() throws Exception {
         givenPartidoYaExiste(PARTIDO);
         whenResgistro(PARTIDO);
@@ -43,7 +42,6 @@ public class ServicioPartidoTest {
             throw new Exception();
         }
     }
-
 
     private void thenElPartidoNoSeGuarda() {
         verify(repositorioPartido, never()).guardar(any());
@@ -106,6 +104,14 @@ public class ServicioPartidoTest {
     private void thenSeSumaUnJugador() {
         verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
     }
+
+    @Test
+    public void puedoListarTodosLosPartidos(){
+        givenListarPartidos();
+        thenListarPartidos();
+    }
+    private void givenListarPartidos(){servicioPartido.todosLosPartidos();}
+    private void thenListarPartidos() {verify(repositorioPartido,times(1)).todosLosPartidos();}
 
     @Test
     public void puedoFiltrarUnPartido(){

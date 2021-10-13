@@ -40,7 +40,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     }
 
     @Override
-    public List<Partido> partidos() {
+    public List<Partido> todosLosPartidos() {
         final Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Partido.class).list();
     }

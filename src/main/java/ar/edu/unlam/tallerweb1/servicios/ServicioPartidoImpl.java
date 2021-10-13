@@ -53,7 +53,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
 
     @Override
     public List<Partido> todosLosPartidos() {
-        return repositorioPartidoImpl.partidos();
+        return repositorioPartidoImpl.todosLosPartidos();
     }
 
     @Override

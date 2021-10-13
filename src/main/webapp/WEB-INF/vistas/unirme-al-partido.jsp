@@ -25,11 +25,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${PARTIDOS}" var="PARTIDO">
                     <tr class="table-active">
                         <th scope="row">Calle 123</th>
-                        <td>Juvenil</td>
-                        <td>5</td>
-                        <td>18:00</td>
+                        <td>${PARTIDO.categoria}</td>
+                        <td>${PARTIDO.tipo}</td>
+                        <td>${PARTIDO.horario}</td>
                         <td>2</td>
                         <td>
                             <form:form action="union-partido" method="post" modelAttribute="unirse-a-partido">
@@ -38,30 +39,7 @@
                         </td>
 
                     </tr>
-                    <tr>
-                        <th scope="row">Calle 123</th>
-                        <td>Juvenil</td>
-                        <td>11</td>
-                        <td>18:00</td>
-                        <td>10</td>
-                        <td>
-                            <form:form action="union-partido" method="post" modelAttribute="unirse-a-partido">
-                                <button class="btn text-white" style="background-color: #67b168" type="submit">Unirme</button>
-                            </form:form>
-                        </td>
-                    </tr>
-                    <tr class="table-active">
-                        <th scope="row">Calle 123</th>
-                        <td>Juvenil</td>
-                        <td> 5</td>
-                        <td>18:00</td>
-                        <td>10</td>
-                        <td>
-                            <form:form action="union-partido" method="post" modelAttribute="unirse-a-partido">
-                                <button class="btn text-white" style="background-color: #67b168" type="submit">Unirme</button>
-                            </form:form>
-                        </td>
-                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

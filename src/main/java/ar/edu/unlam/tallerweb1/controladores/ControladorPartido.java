@@ -14,6 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ControladorPartido {
 
@@ -58,24 +60,10 @@ public class ControladorPartido {
 
     @RequestMapping(path = "listar-partidos" , method = RequestMethod.GET)
     public ModelAndView listarPartidos(){
-        ModelMap model = new ModelMap();
-        model.put("PARTIDOS",servicioCrearPartido.todosLosPartidos());
-
-        List<Partido> listPartidos = new LinkedList<>();
-
-        for (Partido partidos : listPartidos){
-            model.put("cant_jugadores",partidos.getCant_jugadores());
-            model.put("categoria",partidos.getCategoria());
-            model.put("horario",partidos.getHorario());
-            model.put("tipo",partidos.getTipo());
-            model.put("completo",partidos.getCompleto());
-            model.put("id",partidos.getId());
-        }
-
+        ModelMap model = listarPartidosMethod();
         return new  ModelAndView("home",model);
     }
-
-
+    
     @RequestMapping(path = "listar-partidos-filtrados" , method = RequestMethod.GET)
     public ModelAndView listarPartidosConFiltro(@ModelAttribute("filtros-partido") DatosCrearPartido datosPartido){
         ModelMap model = new ModelMap();
@@ -110,9 +98,25 @@ public class ControladorPartido {
 
     @RequestMapping(path = "/unirme-al-partido", method = RequestMethod.GET)
     public ModelAndView irAUnirmeAlPartido(){
-        return new ModelAndView("unirme-al-partido");
+        ModelMap model = listarPartidosMethod();
+        return new  ModelAndView("unirme-al-partido",model);
     }
+    private ModelMap listarPartidosMethod(){
+        ModelMap model = new ModelMap();
+        model.put("PARTIDOS",servicioCrearPartido.todosLosPartidos());
 
+        List<Partido> listPartidos = new LinkedList<>();
+
+        for (Partido partidos : listPartidos){
+            model.put("cant_jugadores",partidos.getCant_jugadores());
+            model.put("categoria",partidos.getCategoria());
+            model.put("horario",partidos.getHorario());
+            model.put("tipo",partidos.getTipo());
+            model.put("completo",partidos.getCompleto());
+            model.put("id",partidos.getId());
+        }
+        return model;
+    }
 
     @RequestMapping(path = "/union-partido", method = RequestMethod.POST)
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido) {
@@ -123,12 +127,6 @@ public class ControladorPartido {
 
         return new ModelAndView("union-a-partido", modelo);
     }
-
-
-
-
-
-
 /*
     @RequestMapping(method = RequestMethod.POST, path = "/union-partido")
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido datosPartido) {
