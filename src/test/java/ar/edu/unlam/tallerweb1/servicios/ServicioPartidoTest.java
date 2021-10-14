@@ -126,5 +126,4 @@ public class ServicioPartidoTest {
     private void whenFiltarPartido(Partido partido) {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
-
 }
