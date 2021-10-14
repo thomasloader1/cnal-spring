@@ -63,7 +63,7 @@ public class ControladorPartido {
         ModelMap model = listarPartidosMethod();
         return new  ModelAndView("home",model);
     }
-    
+
     @RequestMapping(path = "listar-partidos-filtrados" , method = RequestMethod.GET)
     public ModelAndView listarPartidosConFiltro(@ModelAttribute("filtros-partido") DatosCrearPartido datosPartido){
         ModelMap model = new ModelMap();
@@ -118,13 +118,12 @@ public class ControladorPartido {
         return model;
     }
 
-    @RequestMapping(path = "/union-partido", method = RequestMethod.POST)
-    public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido) {
-
+    @RequestMapping(path = "union-partido/{id}", method = RequestMethod.GET)
+    public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
         ModelMap modelo = new ModelMap();
-
+        Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
+        servicioCrearPartido.unirmeAlPartido(partidoPorId);
         modelo.put("msg", "¡Te uniste al partido correctamente!");
-
         return new ModelAndView("union-a-partido", modelo);
     }
 /*

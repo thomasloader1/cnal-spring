@@ -33,7 +33,7 @@
                         <td>${PARTIDO.horario}</td>
                         <td>2</td>
                         <td>
-                            <form:form action="union-partido" method="post" modelAttribute="unirse-a-partido">
+                           <form:form action="union-partido/${PARTIDO.id}" method="get" modelAttribute="unirse-a-partido">
                                 <button class="btn text-white" style="background-color: #67b168" type="submit">Unirme</button>
                             </form:form>
                         </td>

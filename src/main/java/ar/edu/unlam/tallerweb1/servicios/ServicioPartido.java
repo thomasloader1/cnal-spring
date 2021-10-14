@@ -14,5 +14,5 @@ public interface ServicioPartido {
     List<Partido> todosLosPartidos();
     Boolean partidoConFiltros(Partido partido);
     List<Partido> filtrarPartidos(String localidad, String categoria);
-
+    Partido buscarPartidoPorID(Long id);
 }

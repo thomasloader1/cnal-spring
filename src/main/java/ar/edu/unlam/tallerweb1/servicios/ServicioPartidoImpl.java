@@ -74,4 +74,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
             return repositorioPartidoImpl.partidosFiltrados(localidad,categoria);
         }
 
+    @Override
+    public Partido buscarPartidoPorID(Long id) {
+        Partido partidoPorID = repositorioPartidoImpl.buscarPartidoPorID(id);
+        return partidoPorID;
+    }
+
 }
