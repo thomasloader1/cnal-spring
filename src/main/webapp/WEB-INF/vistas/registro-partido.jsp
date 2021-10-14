@@ -37,8 +37,13 @@
                     </div>
 
                     <div class="form-outline mb-4">
+                        <label class="form-label">Ingrese la localidad</label>
+                        <input name="localidad" id="defaultRegisterFormLocalidad" class="form-control"/>
+                    </div>
+
+                    <div class="form-outline mb-4">
                         <label class="form-label">Ingrese el horario</label>
-                        <input name="horario" id="defaultRegisterFormCategoria" class="form-control"/>
+                        <input name="horario" id="defaultRegisterFormHorario" class="form-control"/>
                     </div>
                     <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar partido</button>
                 </form:form>

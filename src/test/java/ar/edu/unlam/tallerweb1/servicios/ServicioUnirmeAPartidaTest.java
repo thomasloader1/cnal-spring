@@ -34,11 +34,13 @@ public class ServicioUnirmeAPartidaTest {
 
     @Test
     public void unirmeAPartida() throws Exception {
-        //givenPartidaExiste(PARTIDO);
+        givenPartidaExiste(PARTIDO);
         ModelAndView mav= whenUnirmeAPartida(PARTIDO);
         thenUnionExitosa(mav, "se unió con exito");
     }
-
+    private void givenPartidaExiste(Partido partido) {
+        //Mockito.when(repositorioPartido.unirmeAlPartido(partido));
+    }
     private void thenUnionExitosa(ModelAndView mav, String mensaje) {
     }
 
@@ -46,10 +48,6 @@ public class ServicioUnirmeAPartidaTest {
         servicioPartido.unirmeAlPartido(partido);
         return null;
     }
-
-    /*private void givenPartidaExiste(Partido partido) {
-        when(repositorioPartido.unirmeAlPartido(partido))
-    }*/
 
 
 }

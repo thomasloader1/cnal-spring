@@ -34,14 +34,15 @@ public class ControladorPartido {
     public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido) {
         ModelMap model = new ModelMap();
         ModelAndView modeloVista = null;
-
         if(datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")){
             model.put("msg", "El partido se creo con éxito");
             //Se muestra en la vista de éxito estos dos datos:
+            model.put("cant_jugadores",datosPartido.getCant_jugadores());
+            model.put("categoria",datosPartido.getCategoria());
+            model.put("horario",datosPartido.getHorario());
+            model.put("tipo",datosPartido.getTipo());
+            model.put("localidad",datosPartido.getLocalidad());
 
-            model.put("categoria", datosPartido.getCategoria());
-            model.put("horario", datosPartido.getHorario());
-            model.put("localidad", datosPartido.getLocalidad());
 
             Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getCant_lugaresDisp(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
             servicioCrearPartido.registrar(partido);
@@ -116,9 +117,24 @@ public class ControladorPartido {
         return model;
     }
 
+    private ModelMap listarUnPartidoMethod(Long id){
+        ModelMap model = new ModelMap();
+        Partido partido = servicioCrearPartido.buscarPartidoPorID(id);
+        model.put("PARTIDO", partido);
+
+        model.put("cant_jugadores",partido.getCant_jugadores());
+        model.put("cant_lugaresDisp", partido.getCant_lugaresDisp());
+        model.put("categoria",partido.getCategoria());
+        model.put("horario",partido.getHorario());
+        model.put("tipo",partido.getTipo());
+        model.put("completo",partido.getCompleto());
+        model.put("id",partido.getId());
+
+        return model;
+    }
+
     @RequestMapping(path = "union-partido/{id}", method = RequestMethod.GET)
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
-
         Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
         servicioCrearPartido.unirmeAlPartido(partidoPorId);
         ModelMap modelo = new ModelMap();
