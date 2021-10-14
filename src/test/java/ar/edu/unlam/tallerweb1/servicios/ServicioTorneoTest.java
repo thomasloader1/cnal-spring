@@ -12,6 +12,7 @@ import static org.mockito.Mockito.*;
 public class ServicioTorneoTest {
 
     public static final Torneo TORNEO = new Torneo(1L,"11", "Juvenil", "18:00", "Ciudad Evita", "NombreDelTorneo");
+    public static final Torneo TORNEO_NO_EXISTENTE = new Torneo(2L,"11", "Juvenil", "18:00", "Ciudad Evita", "NombreDelTorneo2");
     public static final List<Torneo> TORNEOS = new ArrayList<Torneo>(10);
 
     private RepositorioTorneo repositorioTorneo = mock(RepositorioTorneo.class);
@@ -57,11 +58,19 @@ public class ServicioTorneoTest {
         }
     }
 
-/*    @Test (expected = Exception.class)
-    public void buscoUnTorneoQueNoExiste(){
-        givenTorneoQueNoExiste(TORNEO);
-        thenTorneo();
-    }*/
+    @Test (expected = Exception.class)
+    public void buscoUnTorneoQueNoExiste() {
+        givenTorneoQueNoExiste();
+        thenTorneoQueNoExiste(TORNEO_NO_EXISTENTE);
+    }
+
+    private void thenTorneoQueNoExiste(Torneo torneoNoExistente) {
+        verify(repositorioTorneo,never()).buscarTorneo(torneoNoExistente);
+    }
+
+    private void givenTorneoQueNoExiste()  {
+        when(repositorioTorneo.buscarTorneo(any())).thenThrow(new Exception());
+    }
 
 
 }

@@ -26,7 +26,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     }
 
     @Override
-    public Torneo buscarTorneo(Torneo torneo) {
+    public Torneo buscarTorneo(Torneo torneo){
         return repositorioTorneoImpl.buscarTorneo(torneo);
     }
 }
