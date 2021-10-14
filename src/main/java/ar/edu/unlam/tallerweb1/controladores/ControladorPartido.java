@@ -13,9 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.LinkedList;
 import java.util.List;
 
-
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 public class ControladorPartido {
 
@@ -46,7 +43,7 @@ public class ControladorPartido {
             model.put("horario", datosPartido.getHorario());
             model.put("localidad", datosPartido.getLocalidad());
 
-            Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
+            Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getCant_lugaresDisp(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
             servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("partido-registrado", model);
         }
@@ -109,6 +106,7 @@ public class ControladorPartido {
 
         for (Partido partidos : listPartidos){
             model.put("cant_jugadores",partidos.getCant_jugadores());
+            model.put("cant_lugaresDisp", partidos.getCant_lugaresDisp());
             model.put("categoria",partidos.getCategoria());
             model.put("horario",partidos.getHorario());
             model.put("tipo",partidos.getTipo());
@@ -120,9 +118,10 @@ public class ControladorPartido {
 
     @RequestMapping(path = "union-partido/{id}", method = RequestMethod.GET)
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
-        ModelMap modelo = new ModelMap();
+
         Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
         servicioCrearPartido.unirmeAlPartido(partidoPorId);
+        ModelMap modelo = new ModelMap();
         modelo.put("msg", "¡Te uniste al partido correctamente!");
         return new ModelAndView("union-a-partido", modelo);
     }
