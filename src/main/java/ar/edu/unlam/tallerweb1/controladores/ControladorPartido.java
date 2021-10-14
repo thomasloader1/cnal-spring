@@ -141,6 +141,13 @@ public class ControladorPartido {
         modelo.put("msg", "¡Te uniste al partido correctamente!");
         return new ModelAndView("union-a-partido", modelo);
     }
+
+    public Boolean veficarCantidadDeJugadores(Partido partido) {
+        Boolean cantidadDeJugadoresCorrecta = partido.getCompleto();
+        return cantidadDeJugadoresCorrecta;
+    }
+
+
 /*
     @RequestMapping(method = RequestMethod.POST, path = "/union-partido")
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido datosPartido) {
