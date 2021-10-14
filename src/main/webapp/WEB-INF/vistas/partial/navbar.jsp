@@ -22,6 +22,9 @@
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear partido</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Buscar cancha</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-al-partido">Unirme a un partido</a>
                     </li>
                 </ul>

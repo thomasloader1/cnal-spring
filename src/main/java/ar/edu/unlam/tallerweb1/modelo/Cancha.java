@@ -13,15 +13,17 @@ public class Cancha {
     private Long id;
     private String nombre;
     private String localidad;
+    private String domicilio;
 
 
 
     public Cancha(){}
 
-    public Cancha(Long Id, String nombre, String localidad){
+    public Cancha(Long Id, String nombre, String localidad, String domicilio){
         this.id = id;
         this.nombre = nombre;
         this.localidad = localidad;
+        this.domicilio = domicilio;
     }
 
     public void setId(Long id) {
@@ -47,4 +49,8 @@ public class Cancha {
     public String getLocalidad(){
         return localidad;
     }
+
+    public void setDomicilio(String domicilio){this.domicilio = domicilio;}
+
+    public String getDomicilio(){return domicilio;}
 }
