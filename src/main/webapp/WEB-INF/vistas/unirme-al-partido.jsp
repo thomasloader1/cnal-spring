@@ -31,10 +31,17 @@
                         <td>${PARTIDO.categoria}</td>
                         <td>${PARTIDO.tipo}</td>
                         <td>${PARTIDO.horario}</td>
-                        <td>2</td>
+                        <td>${PARTIDO.cant_lugaresDisp}</td>
                         <td>
                            <form:form action="union-partido/${PARTIDO.id}" method="get" modelAttribute="unirse-a-partido">
-                                <button class="btn text-white" style="background-color: #67b168" type="submit">Unirme</button>
+                               <c:choose>
+                                   <c:when test="${PARTIDO.cant_lugaresDisp  == 0}">
+                                       <button class="btn text-white" style="background-color: #67b168" type="submit" disabled>Unirme</button>
+                                   </c:when>
+                                   <c:otherwise>
+                                       <button class="btn text-white" style="background-color: #67b168" type="submit" >Unirme</button>
+                                   </c:otherwise>
+                               </c:choose>
                             </form:form>
                         </td>
 

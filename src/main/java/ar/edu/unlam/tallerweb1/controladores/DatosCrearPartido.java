@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 public class DatosCrearPartido {
 
     private int cant_jugadores;
+    private int cant_lugaresDisp;
     private String tipo;
     private String categoria;
     private String horario;
@@ -14,6 +15,7 @@ public class DatosCrearPartido {
 
     public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
         this.cant_jugadores = cant_jugadores;
+        this.cant_lugaresDisp = 0;
         this.tipo = tipo;
         this.categoria = categoria;
         this.horario = horario;
@@ -26,6 +28,10 @@ public class DatosCrearPartido {
 
     public void setCant_jugadores(int cant_jugadores) {
         this.cant_jugadores = cant_jugadores;
+    }
+
+    public Integer getCant_lugaresDisp(){
+        return this.cant_lugaresDisp;
     }
 
     public String getTipo() {
