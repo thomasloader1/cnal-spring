@@ -7,4 +7,6 @@ import java.util.List;
 public interface RepositorioCancha {
 
     List<Cancha> todasLasCanchas();
+
+    List<Cancha> buscarCanchaPorLocalidad(String localidad);
 }
