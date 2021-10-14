@@ -58,7 +58,7 @@ public class DatosCrearPartido {
         this.horario = horario;
     }
 
-    public void setLocalidad(String locaclidad){this.localidad = localidad;}
+    public void setLocalidad(String localidad){this.localidad = localidad;}
 
     public String getLocalidad(){return localidad;}
 

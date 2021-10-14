@@ -7,4 +7,8 @@ import java.util.List;
 public interface ServicioCancha {
 
     List<Cancha> todasLasCanchas();
+
+    Boolean canchaConFiltro(Cancha cancha);
+
+    List<Cancha> filtrarCanchasPorLocalidad(String localidad);
 }
