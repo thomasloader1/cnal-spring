@@ -27,7 +27,7 @@
                     <tbody>
                     <c:forEach items="${PARTIDOS}" var="PARTIDO">
                     <tr class="table-active">
-                        <th scope="row">Calle 123</th>
+                        <th scope="row">Calle 124</th>
                         <td>${PARTIDO.categoria}</td>
                         <td>${PARTIDO.tipo}</td>
                         <td>${PARTIDO.horario}</td>
