@@ -34,7 +34,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
 
     @Override
     public void unirmeAlPartido(Partido partido) {
-        Partido partidoActualizado = this.sessionFactory.getCurrentSession().load(Partido.class, partido.getId());
+        Partido partidoActualizado = buscarPartidoPorID(partido.getId());
         partidoActualizado.setCant_jugadores(partido.getCant_jugadores() + 1);
         this.sessionFactory.getCurrentSession().update(partidoActualizado);
     }
@@ -65,6 +65,13 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                     .uniqueResult();
         }
         return null;
+    }
+
+    @Override
+    public Partido buscarPartidoPorID(Long id) {
+        return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
     }
 }
 
