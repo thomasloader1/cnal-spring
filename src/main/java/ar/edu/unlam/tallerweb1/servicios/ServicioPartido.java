@@ -7,7 +7,7 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import java.util.List;
 
 public interface ServicioPartido {
-    Partido registrar(Partido partido) ;
+    Partido registrarPartido(Partido partido) ;
     Partido consultarPartido(String hora, String categoria) throws Exception;
     void unirmeAlPartido(Partido partido);
     Boolean partidoLleno(Partido partido);

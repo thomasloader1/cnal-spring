@@ -20,15 +20,15 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     }
 
     @Override
-    public Partido buscar(String hora, String categoria) {
+    public Partido buscarPartido(String hora, String categoria) {
         return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)
                 .add(Restrictions.eq("hora", hora))
                 .add(Restrictions.eq("categoria", categoria))
                 .uniqueResult();
     }
-    //asd
+
     @Override
-    public void guardar(Partido partido) {
+    public void guardarPartido(Partido partido) {
         sessionFactory.getCurrentSession().save(partido);
     }
 

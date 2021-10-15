@@ -12,5 +12,5 @@ public interface ServicioCancha {
 
     List<Cancha> filtrarCanchasPorLocalidad(String localidad);
 
-    Cancha registrar(Cancha cancha);
+    Cancha registrarCancha(Cancha cancha) throws Exception;
 }

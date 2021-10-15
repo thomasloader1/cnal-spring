@@ -21,31 +21,21 @@ public class ControladorRegistrarme {
     public ModelAndView irARegistrarme(){
         ModelMap model = new ModelMap();
         DatosRegistro datos = new DatosRegistro();
-        datos.setEmail("ingrese su email...");
         model.put("datos", datos);
         return new ModelAndView("registro-usuario",model);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/registrarme")
     public ModelAndView registrarUsuario(@ModelAttribute("datos") DatosRegistro datos) {
-
         ModelMap model = new ModelMap();
-
         if (esValido(datos.getEmail())) {
-
             try {
-                servicioLogin.registrar(datos.getEmail(), datos.getClave());
+                servicioLogin.registrar(datos.crearUsuario());
             } catch (Exception e) {
                 model.put("msg", "El usuario ya existe");
                 return new ModelAndView("registro-usuario", model);
             }
-
-            model.put("email", datos.getEmail());
-            model.put("msg", "Registro Exitoso");
-
-            DatosLogin datosLogin = new DatosLogin();
-            datosLogin.setEmail(datos.getEmail());
-            model.put("datosLogin", datosLogin);
+            model.put("datosLogin", datos);
             return new ModelAndView("redirect:/login", model);
         }
 

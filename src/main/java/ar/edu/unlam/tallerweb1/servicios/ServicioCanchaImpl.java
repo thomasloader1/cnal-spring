@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
-import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCancha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +44,11 @@ public class ServicioCanchaImpl implements ServicioCancha{
     }
 
     @Override
-    public Cancha registrar(Cancha cancha) {
-        Cancha nuevo = new Cancha(cancha.getId(),cancha.getNombre(),cancha.getLocalidad(),cancha.getDomicilio());
-        repositorioCanchaImpl.guardar(nuevo);
-        return nuevo;
+    public Cancha registrarCancha(Cancha cancha) throws Exception {
+        Cancha canchaBuscada = repositorioCanchaImpl.buscarCancha(cancha.getNombre(),cancha.getDomicilio());
+        if(canchaBuscada != null)
+            throw new Exception();
+        repositorioCanchaImpl.guardarCancha(cancha);
+        return cancha;
     }
 }

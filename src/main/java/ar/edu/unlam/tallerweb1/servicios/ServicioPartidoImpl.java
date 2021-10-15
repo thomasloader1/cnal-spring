@@ -21,7 +21,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public Partido registrar(Partido partido)  {
+    public Partido registrarPartido(Partido partido)  {
         String tipo= partido.getTipo();
         Integer jugadores = Integer.parseInt(tipo);
         Integer jugadores_totales = jugadores * 2;
@@ -29,14 +29,13 @@ public class ServicioPartidoImpl implements ServicioPartido {
         if (partido.getCant_jugadores() < jugadores_totales){
             lugares= jugadores_totales - partido.getCant_jugadores();
         }
-        Partido nuevo = new Partido(partido.getId(),partido.getCant_jugadores(), lugares, partido.getTipo(),partido.getCategoria(),partido.getHorario(),partido.getLocalidad());
-        repositorioPartidoImpl.guardar(nuevo);
-        return nuevo;
+        repositorioPartidoImpl.guardarPartido(partido);
+        return partido;
     }
 
     @Override
     public Partido consultarPartido(String hora, String categoria) throws Exception {
-        Partido buscado = repositorioPartidoImpl.buscar(hora, categoria);
+        Partido buscado = repositorioPartidoImpl.buscarPartido(hora, categoria);
         if (buscado != null){
             throw new Exception();
     }

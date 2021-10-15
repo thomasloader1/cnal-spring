@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface RepositorioPartido {
 
-    Partido buscar(String hora, String categoria) throws Exception;
-    void guardar(Partido partido);
+    Partido buscarPartido(String hora, String categoria) throws Exception;
+    void guardarPartido(Partido partido);
     void unirmeAlPartido(Partido partido);
     List<Partido> todosLosPartidos();
     List<Partido> partidosFiltrados(String localidad, String categoria);

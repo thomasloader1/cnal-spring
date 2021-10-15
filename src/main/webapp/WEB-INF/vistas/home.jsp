@@ -21,7 +21,7 @@
 					<div class="card-body">
 						<h5 class="card-title">${PARTIDO.categoria}</h5>
 						<p class="card-text">
-							Calle 123
+							${PARTIDO.localidad}
 						</p>
 						<p class="card-text">
 							<strong>${PARTIDO.horario}</strong>
