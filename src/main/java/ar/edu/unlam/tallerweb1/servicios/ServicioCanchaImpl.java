@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCancha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,12 @@ public class ServicioCanchaImpl implements ServicioCancha{
     public List<Cancha> filtrarCanchasPorLocalidad(String localidad) {
         return repositorioCanchaImpl.buscarCanchaPorLocalidad(localidad);
 
+    }
+
+    @Override
+    public Cancha registrar(Cancha cancha) {
+        Cancha nuevo = new Cancha(cancha.getId(),cancha.getNombre(),cancha.getLocalidad(),cancha.getDomicilio());
+        repositorioCanchaImpl.guardar(nuevo);
+        return nuevo;
     }
 }

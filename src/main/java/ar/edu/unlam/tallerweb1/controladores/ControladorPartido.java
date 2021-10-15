@@ -43,7 +43,6 @@ public class ControladorPartido {
             model.put("tipo",datosPartido.getTipo());
             model.put("localidad",datosPartido.getLocalidad());
 
-
             Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getCant_lugaresDisp(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
             servicioCrearPartido.registrar(partido);
             modeloVista = new ModelAndView("partido-registrado", model);
@@ -114,22 +113,6 @@ public class ControladorPartido {
             model.put("completo",partidos.getCompleto());
             model.put("id",partidos.getId());
         }
-        return model;
-    }
-
-    private ModelMap listarUnPartidoMethod(Long id){
-        ModelMap model = new ModelMap();
-        Partido partido = servicioCrearPartido.buscarPartidoPorID(id);
-        model.put("PARTIDO", partido);
-
-        model.put("cant_jugadores",partido.getCant_jugadores());
-        model.put("cant_lugaresDisp", partido.getCant_lugaresDisp());
-        model.put("categoria",partido.getCategoria());
-        model.put("horario",partido.getHorario());
-        model.put("tipo",partido.getTipo());
-        model.put("completo",partido.getCompleto());
-        model.put("id",partido.getId());
-
         return model;
     }
 
