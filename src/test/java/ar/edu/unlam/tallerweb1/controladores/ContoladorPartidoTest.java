@@ -43,8 +43,9 @@ public class ContoladorPartidoTest {
     private void thenElPartidoSeCreaExitosamente(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("partido-registrado");
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El partido se creo con éxito");
+        //TODO testear que el modelo que ingresa es de la misma categoria
+        //EJemplo: assertThat(modeloVistaPartido.getModel().get("partido.categoria")).isEqualTo(partido.getCategoria());
         assertThat(modeloVistaPartido.getModel().get("categoria")).isEqualTo(partido.getCategoria());
-        assertThat(modeloVistaPartido.getModel().get("horario")).isEqualTo(partido.getHorario());
     }
 
 
