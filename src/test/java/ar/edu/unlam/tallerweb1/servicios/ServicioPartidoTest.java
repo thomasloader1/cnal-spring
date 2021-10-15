@@ -3,16 +3,16 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
-import org.mockito.exceptions.verification.NeverWantedButInvoked;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.never;
 
 public class ServicioPartidoTest {
 
-    public static final Partido PARTIDO = new Partido(1L,5, 0, "11","Juvenil","18:00","San Justo");
+    public static final Partido PARTIDO = new Partido(1L,5, 17, "11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -126,4 +126,23 @@ public class ServicioPartidoTest {
     private void whenFiltarPartido(Partido partido) {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
+//
+//    @Test
+//    public void queResteUnLugar(){
+//        PARTIDO.setId(2L);
+//        givenUnirmePartido(PARTIDO);
+//        thenSeResta();
+//    }
+//
+//    private void givenUnirmePartido(Partido partido) {
+//        servicioPartido.unirmeAlPartido(PARTIDO);
+//    }
+//
+//    private void thenSeResta() {
+//        Integer expected=16;
+//        Integer actual = PARTIDO.getCant_lugaresDisp();
+//        assertEquals(expected, actual);
+//    }
+
 }
+

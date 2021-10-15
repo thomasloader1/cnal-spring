@@ -16,7 +16,7 @@ public class Partido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int cant_jugadores;
-    private int cant_lugaresDisp;
+    private Integer cant_lugaresDisp;
     private String tipo;
     private String categoria;
     private Boolean completo = false;
@@ -90,11 +90,11 @@ public class Partido {
 
     public String getLocalidad(){return localidad;}
 
-    public int getCant_lugaresDisp() {
+    public Integer getCant_lugaresDisp() {
         return cant_lugaresDisp;
     }
 
-    public void setCant_lugaresDisp(int cant_lugaresDisp) {
+    public void setCant_lugaresDisp(Integer cant_lugaresDisp) {
         this.cant_lugaresDisp = cant_lugaresDisp;
     }
 }
