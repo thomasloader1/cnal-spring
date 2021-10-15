@@ -47,6 +47,7 @@ public class ContoladorPartidoTest {
         assertThat(modeloVistaPartido.getModel().get("horario")).isEqualTo(partido.getHorario());
     }
 
+
     @Test
     public void noPuedoCrearPartidoPorCategoriaInvalida() throws Exception {
         givenQueUnPartidoNoExiste(partidoConCategoriaInvalida);
@@ -58,6 +59,7 @@ public class ContoladorPartidoTest {
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La categoría es incorrecta.");
         verify(servicioCrearPartido, never()).registrar(any());
     }
+
 
     @Test
     public void noPuedoCrearPartidoPorTipoInvalido() throws Exception {
@@ -71,6 +73,7 @@ public class ContoladorPartidoTest {
         verify(servicioCrearPartido, never()).registrar(any());
     }
 
+
     @Test
     public void noPuedoCrearPartidoPorCantidadJugadoresIncorrecta() throws Exception {
         givenQueUnPartidoNoExiste(partidoConCantidadJugadoresInvalida);
@@ -83,6 +86,7 @@ public class ContoladorPartidoTest {
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("La cantidad de jugadores es inválida para el tipo de partido elegido");
         verify(servicioCrearPartido, never()).registrar(any());
     }
+
 
     @Test
     public void puedoUnirmeAUnPartido() throws Exception {
@@ -107,6 +111,7 @@ public class ContoladorPartidoTest {
         assertThat(modeloVistaUnirmePartido.getModel().get("msg")).isEqualTo("¡Te uniste al partido correctamente!");
     }
 
+
     @Test
     public void noPuedoUnirmeAUnPartidoLleno() throws Exception {
         givenUnPartidoLleno(partidoLleno);
@@ -127,7 +132,8 @@ public class ContoladorPartidoTest {
     private void thenLaUnionAlPartidoFalla(ModelAndView modeloVista) {
         assertThat(modeloVista.getViewName()).isNotEqualTo("unirme-al-partido");
     }
-/*
+
+
     @Test
     public void unPartidoLeFaltanJugadores(){
         //givenPartidoExistente(PARTIDO);
@@ -136,48 +142,11 @@ public class ContoladorPartidoTest {
     }
 
     private void thenElPartidoLeFaltanJugadores(Boolean resultado) {
-
-        assertThat(resultado).isTrue();
+        assertThat(resultado).isFalse();
     }
 
     private Boolean whenElPartidoTieneEquipoIncompleto(Partido partido) {
-        return controladorPartido.veficarCantidadDeJugadores(partido.getCant_jugadores());
-    }
-*/
-
-   /* @Test
-    public void puedoUnirmeAUnaPartida(){
-        givenPartidoExistente();
-        whenCargoDatosDelPartido(datosPartido);
-        thenPartidoConDatosCargados();
-    }*/
-
-/*
-    private void givenPartidoExistente() {
-
+        return controladorPartido.veficarCantidadDeJugadores(partido);
     }
 
-
-    private void whenCargoDatosDelPartido(Partido datosPartido) {
-        controladorPartido.validarDatos(datosPartido);
-    }
-
-    private void thenPartidoConDatosCargados() {
-
-    }
-*/
-
-    //private Boolean whenRegistroNuevoPartido(Partido partido) {
-      //  return controladorPartido.registrarPartido(partido);
-    //}
-
-/*
-    private void thenPartidoCreadoConExito(Boolean registro) {
-        assertThat(registro).isEqualTo(true);
-    }
-*/
-
-    //private Partido givenNuevoPartido(Partido partido) {
-        //return new Partido(partido.getId(),partido.getCant_jugadores(),partido.getTipo(), partido.getHorario());
-   // }
 }
