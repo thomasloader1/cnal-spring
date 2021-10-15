@@ -35,4 +35,9 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
         }
         return null;
     }
+
+    @Override
+    public void guardar(Cancha cancha) {
+        sessionFactory.getCurrentSession().save(cancha);
+    }
 }

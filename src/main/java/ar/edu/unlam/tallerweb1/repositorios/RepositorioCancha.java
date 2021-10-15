@@ -9,4 +9,6 @@ public interface RepositorioCancha {
     List<Cancha> todasLasCanchas();
 
     List<Cancha> buscarCanchaPorLocalidad(String localidad);
+
+    void guardar(Cancha nuevo);
 }

@@ -11,4 +11,6 @@ public interface ServicioCancha {
     Boolean canchaConFiltro(Cancha cancha);
 
     List<Cancha> filtrarCanchasPorLocalidad(String localidad);
+
+    Cancha registrar(Cancha cancha);
 }
