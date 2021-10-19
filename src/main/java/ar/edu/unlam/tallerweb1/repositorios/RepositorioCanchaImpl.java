@@ -25,16 +25,17 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
         return session.createCriteria(Cancha.class).list();
     }
 
+
     @Override
     public List<Cancha> buscarCanchaPorLocalidad(String localidad) {
 
-        if(localidad!=null || localidad!=""){
-            return (List<Cancha>) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
-                    .add(Restrictions.eq("localidad", localidad))
-                    .uniqueResult();
-        }
-        return null;
+        final Session session = sessionFactory.getCurrentSession();
+
+        return session.createCriteria(Cancha.class)
+                .add(Restrictions.eq("localidad", localidad))
+                .list();
     }
+
 
     @Override
     public void guardar(Cancha cancha) {

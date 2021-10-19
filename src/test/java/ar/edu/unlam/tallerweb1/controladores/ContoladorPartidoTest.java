@@ -25,7 +25,9 @@ public class ContoladorPartidoTest {
 
     @Test
     public void puedoCrearUnPartido() throws Exception {
+/*
         givenQueUnPartidoNoExiste(partido);
+*/
         ModelAndView modeloVistaPartido = whenCreoUnNuevoPartido(nuevoPartido);
         thenElPartidoSeCreaExitosamente(modeloVistaPartido);
     }
