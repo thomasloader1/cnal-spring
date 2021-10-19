@@ -8,7 +8,7 @@ public interface RepositorioPartido {
 
     Partido buscarPartido(String hora, String categoria) throws Exception;
     void guardarPartido(Partido partido);
-    void unirmeAlPartido(Partido partido);
+    void actualizar(Partido partido);
     List<Partido> todosLosPartidos();
     List<Partido> partidosFiltrados(String localidad, String categoria);
     Partido buscarPartidoPorID(Long id);
