@@ -13,7 +13,7 @@ import static org.mockito.Mockito.never;
 
 public class ServicioPartidoTest {
 
-    public static final Partido PARTIDO = new Partido(1L,5, 17, "11","Juvenil","18:00","San Justo");
+    public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -27,7 +27,7 @@ public class ServicioPartidoTest {
 
     private void givenPartidoYaExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
+            when(repositorioPartido.buscarPartido(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class ServicioPartidoTest {
     private void whenResgistro(Partido partido)  throws Exception{
         try {
             servicioPartido.consultarPartido(partido.getHorario(), partido.getCategoria());
-            servicioPartido.registrar(partido);
+            servicioPartido.registrarPartido(partido);
 
         } catch (Exception e) {
             throw new Exception();
@@ -45,7 +45,7 @@ public class ServicioPartidoTest {
     }
 
     private void thenElPartidoNoSeGuarda() {
-        verify(repositorioPartido, never()).guardar(any());
+        verify(repositorioPartido, never()).guardarPartido(any());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ServicioPartidoTest {
 
     private void givenPartidoNoExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
+            when(repositorioPartido.buscarPartido(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,7 +67,7 @@ public class ServicioPartidoTest {
 
     private void whenResgistroPartido(Partido partido) throws Exception {
         try {
-            servicioPartido.registrar(partido);
+            servicioPartido.registrarPartido(partido);
 
         } catch (Exception e) {
             throw new Exception("whenResgistroPartidoException");
@@ -75,7 +75,7 @@ public class ServicioPartidoTest {
     }
 
     private void thenElPartidoSeGuarda() {
-        verify(repositorioPartido, times(1)).guardar(any());
+        verify(repositorioPartido, times(1)).guardarPartido(any());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -27,7 +28,6 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 
     @Override
     public List<Cancha> buscarCanchaPorLocalidad(String localidad) {
-
         if(localidad!=null || localidad!=""){
             return (List<Cancha>) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
                     .add(Restrictions.eq("localidad", localidad))
@@ -37,7 +37,15 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
     }
 
     @Override
-    public void guardar(Cancha cancha) {
+    public void guardarCancha(Cancha cancha) {
         sessionFactory.getCurrentSession().save(cancha);
+    }
+
+    @Override
+    public Cancha buscarCancha(String nombre, String domicilio) {
+        return (Cancha) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
+                .add(Restrictions.eq("nombre", nombre))
+                .add(Restrictions.eq("domicilio", domicilio))
+                .uniqueResult();
     }
 }

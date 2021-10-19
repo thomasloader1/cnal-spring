@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-<<<<<<< HEAD
-  User: Fede
-  Date: 9/28/2021
-  Time: 10:09 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file = "partial/header.jsp" %>

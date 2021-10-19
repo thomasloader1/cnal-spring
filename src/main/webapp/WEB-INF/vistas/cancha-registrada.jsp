@@ -13,11 +13,11 @@
             <div class="card">
                 <img class="card-img-top" src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80" alt="Card image cap" style="height: 300px">
                 <div class="card-body">
-                    <h5 class="card-title">Nombre ${nombre}</h5>
+                    <h5 class="card-title">Nombre ${cancha.nombre}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Domicilio: ${domicilio}</li>
-                    <li class="list-group-item">Localidad: ${localidad}</li>
+                    <li class="list-group-item">Domicilio: ${cancha.domicilio}</li>
+                    <li class="list-group-item">Localidad: ${cancha.localidad}</li>
                 </ul>
             </div>
         </div>

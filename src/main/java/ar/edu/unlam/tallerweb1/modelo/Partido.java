@@ -26,7 +26,7 @@ public class Partido {
 
     public Partido() {}
 
-    public Partido(Long id, int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad) {
+    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad) {
         this.id = id;
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = lugares;
@@ -35,7 +35,6 @@ public class Partido {
         this.completo = this.getCompleto();
         this.horario = horario;
         this.localidad = localidad;
-
     }
 
     public Long getId() {

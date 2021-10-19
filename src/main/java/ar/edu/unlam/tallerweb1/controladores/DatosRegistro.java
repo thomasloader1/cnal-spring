@@ -1,16 +1,18 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+
 public class DatosRegistro {
     private String email;
-    private String clave;
-    private String repiteClave;
+    private String password;
+    private String repeatPassword;
 
     public DatosRegistro(){}
 
     public DatosRegistro(String email, String clave, String repiteClave) {
         this.email = email;
-        this.clave = clave;
-        this.repiteClave = repiteClave;
+        this.password = clave;
+        this.repeatPassword = repiteClave;
     }
 
     public String getEmail() {
@@ -21,19 +23,23 @@ public class DatosRegistro {
         this.email = email;
     }
 
-    public String getClave() {
-        return clave;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRepiteClave() {
-        return repiteClave;
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 
-    public void setRepiteClave(String repiteClave) {
-        this.repiteClave = repiteClave;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+
+    public Usuario crearUsuario() {
+        return new Usuario(this.getEmail(),this.getPassword());
     }
 }
