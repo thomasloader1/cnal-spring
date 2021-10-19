@@ -44,8 +44,17 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public void unirmeAlPartido(Partido partido){
-        repositorioPartidoImpl.unirmeAlPartido(partido);
+    public void unirmeAlPartido(Partido partido) {
+        Partido partidoActualizado = repositorioPartidoImpl.buscarPartidoPorID(partido.getId());
+        String tipo= partidoActualizado.getTipo();
+        Integer jugadores = Integer.parseInt(tipo);
+        Integer jugadores_totales = jugadores * 2;
+
+        if (partidoActualizado.getCant_jugadores() < jugadores_totales){
+            partidoActualizado.setCant_jugadores(partido.getCant_jugadores() + 1);
+            partidoActualizado.setCant_lugaresDisp(partido.getCant_lugaresDisp() - 1);
+        }
+        repositorioPartidoImpl.actualizar(partidoActualizado);
     }
     @Override
     public Boolean partidoLleno(Partido partido){

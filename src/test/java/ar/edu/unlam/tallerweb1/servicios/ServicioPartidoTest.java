@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 
 import static org.junit.Assert.assertEquals;
@@ -89,6 +90,7 @@ public class ServicioPartidoTest {
     private void givenPartidoCompleto(Partido partido) {
         try {
             servicioPartido.partidoLleno(partido);
+            when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +104,7 @@ public class ServicioPartidoTest {
         }
     }
     private void thenSeSumaUnJugador() {
-        verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
+        verify(repositorioPartido,times(1)).actualizar(PARTIDO);
     }
 
     @Test
@@ -126,23 +128,28 @@ public class ServicioPartidoTest {
     private void whenFiltarPartido(Partido partido) {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
-//
-//    @Test
-//    public void queResteUnLugar(){
-//        PARTIDO.setId(2L);
-//        givenUnirmePartido(PARTIDO);
-//        thenSeResta();
-//    }
-//
-//    private void givenUnirmePartido(Partido partido) {
-//        servicioPartido.unirmeAlPartido(PARTIDO);
-//    }
-//
-//    private void thenSeResta() {
-//        Integer expected=16;
-//        Integer actual = PARTIDO.getCant_lugaresDisp();
-//        assertEquals(expected, actual);
-//    }
+
+    @Test
+    public void queResteUnLugar(){
+        PARTIDO.setId(2L);
+        givenRepo(PARTIDO);
+        whenUnirmePartida(PARTIDO);
+        thenSeResta();
+    }
+
+    private void whenUnirmePartida(Partido partido){
+        servicioPartido.unirmeAlPartido(PARTIDO);
+    }
+
+    private void givenRepo(Partido partido){
+        when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO);
+    }
+
+    private void thenSeResta() {
+        Integer expected=16;
+        Integer actual = PARTIDO.getCant_lugaresDisp();
+        assertEquals(expected, actual);
+    }
 
 }
 

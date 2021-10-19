@@ -33,17 +33,17 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     }
 
     @Override
-    public void unirmeAlPartido(Partido partido) {
-        Partido partidoActualizado = buscarPartidoPorID(partido.getId());
-        String tipo= partidoActualizado.getTipo();
-        Integer jugadores = Integer.parseInt(tipo);
-        Integer jugadores_totales = jugadores * 2;
-
-        if (partidoActualizado.getCant_jugadores() < jugadores_totales){
-            partidoActualizado.setCant_jugadores(partido.getCant_jugadores() + 1);
-            partidoActualizado.setCant_lugaresDisp(partido.getCant_lugaresDisp() - 1);
-        }
-        this.sessionFactory.getCurrentSession().update(partidoActualizado);
+    public void actualizar(Partido partido) {
+//        Partido partidoActualizado = buscarPartidoPorID(partido.getId());
+//        String tipo= partidoActualizado.getTipo();
+//        Integer jugadores = Integer.parseInt(tipo);
+//        Integer jugadores_totales = jugadores * 2;
+//
+//        if (partidoActualizado.getCant_jugadores() < jugadores_totales){
+//            partidoActualizado.setCant_jugadores(partido.getCant_jugadores() + 1);
+//            partidoActualizado.setCant_lugaresDisp(partido.getCant_lugaresDisp() - 1);
+//        }
+        this.sessionFactory.getCurrentSession().update(partido);
     }
 
     @Override
