@@ -14,6 +14,7 @@ import static org.mockito.Mockito.never;
 public class ServicioPartidoTest {
 
     public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo");
+    public static final Partido PARTIDO2 = new Partido(5, 17, "11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -131,23 +132,23 @@ public class ServicioPartidoTest {
 
     @Test
     public void queResteUnLugar(){
-        PARTIDO.setId(2L);
-        givenRepo(PARTIDO);
-        whenUnirmePartida(PARTIDO);
+        PARTIDO2.setId(2L);
+        givenRepo(PARTIDO2);
+        whenUnirmePartida(PARTIDO2);
         thenSeResta();
     }
 
     private void whenUnirmePartida(Partido partido){
-        servicioPartido.unirmeAlPartido(PARTIDO);
+        servicioPartido.unirmeAlPartido(PARTIDO2);
     }
 
     private void givenRepo(Partido partido){
-        when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO);
+        when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO2);
     }
 
     private void thenSeResta() {
         Integer expected=16;
-        Integer actual = PARTIDO.getCant_lugaresDisp();
+        Integer actual = PARTIDO2.getCant_lugaresDisp();
         assertEquals(expected, actual);
     }
 
