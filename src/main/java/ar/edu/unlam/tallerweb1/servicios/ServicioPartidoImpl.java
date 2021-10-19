@@ -86,5 +86,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return partidoPorID;
     }
 
+    @Override
+    public void vincularJugadorAPartido(Long idUsuario, Long idPartido){
+        //repositorioPartidoImpl.registrarUsuarioAPartido(UsuarioPartido);
+    }
 
 }

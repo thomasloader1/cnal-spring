@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ControladorPartido {
 
@@ -66,6 +68,7 @@ public class ControladorPartido {
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
         Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
         servicioCrearPartido.unirmeAlPartido(partidoPorId);
+        //this.vincularJugadorAPartido(HttpServletRequest request, partidoPorId);
         ModelMap modelo = new ModelMap();
         modelo.put("msg", "¡Te uniste al partido correctamente!");
         return new ModelAndView("union-a-partido", modelo);
@@ -75,4 +78,11 @@ public class ControladorPartido {
         Boolean cantidadDeJugadoresCorrecta = partido.getCompleto();
         return cantidadDeJugadoresCorrecta;
     }
+
+    public Boolean vincularJugadorAPartido(HttpServletRequest request, Partido partido){
+        Long idUsuario = (Long) request.getSession().getAttribute("id");
+        servicioCrearPartido.vincularJugadorAPartido(idUsuario, partido.getId());
+        return true;
+    }
+
 }

@@ -103,9 +103,8 @@ public class ContoladorPartidoTest {
             throw new Exception("givenUnPartidoConLugaresDisponibles");
         }
     }
-    private ModelAndView whenMeUnoAlPartido(DatosCrearPartido partido) {
-    return controladorPartido.unirseAUnPartido(partido , PARTIDO.getId());
-    }
+    private ModelAndView whenMeUnoAlPartido(DatosCrearPartido partido) {return controladorPartido.unirseAUnPartido(partido , PARTIDO.getId());}
+
     private void thenLaUnionAlPartidoEsExitosa(ModelAndView modeloVistaUnirmePartido) {
         assertThat(modeloVistaUnirmePartido.getViewName()).isEqualTo("union-a-partido");
         assertThat(modeloVistaUnirmePartido.getModel().get("msg")).isEqualTo("¡Te uniste al partido correctamente!");

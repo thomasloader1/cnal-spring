@@ -30,8 +30,7 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
     public List<Cancha> buscarCanchaPorLocalidad(String localidad) {
         if(localidad!=null || localidad!=""){
             return (List<Cancha>) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
-                    .add(Restrictions.eq("localidad", localidad))
-                    .uniqueResult();
+                    .add(Restrictions.eq("localidad", localidad)).list();
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -55,23 +56,15 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     @Override
     public List<Partido> partidosFiltrados(String localidad, String categoria){
 
-        if(localidad != null || localidad != "" && categoria == null || categoria == "") {
-            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
-                    .add(Restrictions.eq("localidad", localidad))
-                    .uniqueResult();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Partido.class);
+        if(localidad != null){
+            criteria.add(Restrictions.eq("localidad", localidad));
         }
-        else if(localidad == null || localidad == "" && categoria != null || categoria != ""){
-            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
-                    .add(Restrictions.eq("categoria", categoria))
-                    .uniqueResult();
+        if(categoria!=null){
+            criteria.add(Restrictions.eq("categoria", categoria));
         }
-        else if(localidad != null || localidad != "" && categoria != null || categoria != "") {
-            return (List<Partido>) sessionFactory.getCurrentSession().createCriteria(Partido.class)
-                    .add(Restrictions.eq("localidad", localidad))
-                    .add(Restrictions.eq("categoria", categoria))
-                    .uniqueResult();
-        }
-        return null;
+        return criteria.list();
+
     }
 
     @Override
@@ -80,5 +73,10 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
     }
+
+    /*@Override
+    public void registrarUsuarioAPartido(UsuarioPartido usuarioPartido) {
+        //sessionFactory.getCurrentSession().save(usuarioPartido);
+    }*/
 }
 

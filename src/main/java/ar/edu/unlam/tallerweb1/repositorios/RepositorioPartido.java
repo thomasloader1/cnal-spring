@@ -12,4 +12,5 @@ public interface RepositorioPartido {
     List<Partido> todosLosPartidos();
     List<Partido> partidosFiltrados(String localidad, String categoria);
     Partido buscarPartidoPorID(Long id);
+    //void registrarUsuarioAPartido(UsuarioPartido usuarioPartido);
 }
