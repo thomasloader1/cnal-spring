@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
+
 public class DatosCrearPartido {
 
     private int cant_jugadores;
@@ -10,8 +13,7 @@ public class DatosCrearPartido {
     private String localidad;
 
 
-    public DatosCrearPartido() {
-    }
+    public DatosCrearPartido() {}
 
     public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
         this.cant_jugadores = cant_jugadores;
@@ -30,7 +32,7 @@ public class DatosCrearPartido {
         this.cant_jugadores = cant_jugadores;
     }
 
-    public Integer getCant_lugaresDisp(){
+    public Integer getCant_lugaresDisp() {
         return this.cant_lugaresDisp;
     }
 
@@ -58,57 +60,57 @@ public class DatosCrearPartido {
         this.horario = horario;
     }
 
-    public void setLocalidad(String localidad){this.localidad = localidad;}
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
 
-    public String getLocalidad(){return localidad;}
+    public String getLocalidad() {
+        return localidad;
+    }
 
-    public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido){
+    public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido) {
         String mensaje = "";
-        if((validarCantidadJugadores(datosPartido)) && (validarCategoria(datosPartido)) && (validarTipoPartido(datosPartido))){
+        if ((validarCantidadJugadores(datosPartido)) && (validarCategoria(datosPartido)) && (validarTipoPartido(datosPartido))) {
             mensaje = "exito";
-        }
-        else if(!(validarTipoPartido(datosPartido))){
+        } else if (!(validarTipoPartido(datosPartido))) {
             mensaje = "El tipo de partido ingresado es incorrecto.";
-        }
-        else if(!(validarCantidadJugadores(datosPartido))) {
+        } else if (!(validarCantidadJugadores(datosPartido))) {
             mensaje = "La cantidad de jugadores es inválida para el tipo de partido elegido";
-        }
-        else if(!(validarCategoria(datosPartido))){
+        } else if (!(validarCategoria(datosPartido))) {
             mensaje = "La categoría es incorrecta.";
         }
 
         return mensaje;
     }
 
-
-    public boolean validarCantidadJugadores (DatosCrearPartido datosPartido){
+    public boolean validarCantidadJugadores(DatosCrearPartido datosPartido) {
         boolean esValido = false;
 
-        if(datosPartido.getTipo().equals("5") && (datosPartido.getCant_jugadores()>=1 && datosPartido.getCant_jugadores()<=10)){
+        if (datosPartido.getTipo().equals("5") && (datosPartido.getCant_jugadores() >= 1 && datosPartido.getCant_jugadores() <= 10)) {
             esValido = true;
-        }else if(datosPartido.getTipo().equals("11") && (datosPartido.getCant_jugadores()>=1 && datosPartido.getCant_jugadores()<=22)){
+        } else if (datosPartido.getTipo().equals("11") && (datosPartido.getCant_jugadores() >= 1 && datosPartido.getCant_jugadores() <= 22)) {
             esValido = true;
         }
         return esValido;
     }
 
-    public boolean validarCategoria (DatosCrearPartido datosPartido){
+    public boolean validarCategoria(DatosCrearPartido datosPartido) {
         boolean esValido = false;
-        if(datosPartido.getCategoria().toUpperCase().equals("INFANTIL") || datosPartido.getCategoria().toUpperCase().equals("JUVENIL") || datosPartido.getCategoria().toUpperCase().equals("ADULTO")){
+        if (datosPartido.getCategoria().toUpperCase().equals("INFANTIL") || datosPartido.getCategoria().toUpperCase().equals("JUVENIL") || datosPartido.getCategoria().toUpperCase().equals("ADULTO")) {
             esValido = true;
         }
         return esValido;
     }
 
-    public boolean validarTipoPartido(DatosCrearPartido datosPartido){
+    public boolean validarTipoPartido(DatosCrearPartido datosPartido) {
         boolean esValido = false;
-        if(datosPartido.getTipo().equals("5") || datosPartido.getTipo().equals("11")){
+        if (datosPartido.getTipo().equals("5") || datosPartido.getTipo().equals("11")) {
             esValido = true;
         }
         return esValido;
     }
 
-
-
-
+    public Partido crearPartido() {
+        return new Partido(this.getCant_jugadores(), this.getCant_lugaresDisp(), this.getTipo(), this.getCategoria(), this.getHorario(), this.getLocalidad());
+    }
 }

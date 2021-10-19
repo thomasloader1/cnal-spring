@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosRegistro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,15 +31,12 @@ public class ServicioLoginImpl implements ServicioLogin {
 	}
 
 	@Override
-	public Usuario registrar(String email, String password) throws Exception{
-		Usuario buscado = repositorioUsuario.buscar(email);
+	public Usuario registrar(Usuario usuario) throws Exception{
+		Usuario buscado = repositorioUsuario.buscar(usuario.getEmail());
 		if(buscado != null)
 			throw new Exception();
-		Usuario nuevo = new Usuario();
-		nuevo.setEmail(email);
-		nuevo.setPassword(password);
-		repositorioUsuario.guardar(nuevo);
-		return nuevo;
+		repositorioUsuario.guardar(usuario);
+		return usuario;
 	}
 
 

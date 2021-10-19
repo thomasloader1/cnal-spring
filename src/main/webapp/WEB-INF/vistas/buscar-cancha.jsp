@@ -25,6 +25,25 @@
     </div>
 
     <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <h5>Filtros</h5>
+            </div>
+            <div class="col-11">
+                <form:form action="listar-canchas-filtradas" method="get">
+                    <select name="localidad" id="">
+                        <option>Localidad</option>
+                            <c:forEach items="${LOCALIDAD}" var="LOCALIDAD">
+                                <option scope="row" name="localidad">${LOCALIDAD.descripcion}</option>
+                            </c:forEach>
+                    </select>
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                </form:form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="row my-5">
             <div class="col-12">
                 <table class="table text-center">
@@ -43,12 +62,11 @@
                             <td>${CANCHA.domicilio}</td>
                             <td>${CANCHA.localidad}</td>
                             <td>
-                                <form:form action="" method="get" modelAttribute="">
+                                <form:form action="" method="get">
                                     <!--TODO EN VEZ DE IR A LA VISTA COMO TAL DEBERIA OBTENER EL DOMICILIO DE LA CANCHA Y PONERLO EN LA FORM DE CREAR PARTIDO-->
-                                    <button class="btn text-white" style="background-color: #67b168" type="submit"><a class="nav-link" style="text-decoration: none; color:white" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear partido</a></button>
+                                    <button class="btn text-white" style="background-color: #67b168" type="submit"><a class="nav-link" style="text-decoration: none; color:white" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear partido en esta cancha</a></button>
                                 </form:form>
                             </td>
-
                         </tr>
                     </c:forEach>
                     </tbody>

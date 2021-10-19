@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
+
 public class DatosCrearCancha {
     private String nombre;
     private String localidad;
@@ -35,5 +37,9 @@ public class DatosCrearCancha {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public Cancha crearCancha(){
+        return new Cancha(this.getNombre(), this.getLocalidad(), this.getDomicilio());
     }
 }

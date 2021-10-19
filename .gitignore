@@ -16,4 +16,5 @@ hs_err_pid*
 .idea/*
 *.iml
 *.DS_Store
-/.java-version
+/.java-version`
+/src/main/resources/hibernateContext.xml

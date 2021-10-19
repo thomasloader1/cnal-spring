@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.LinkedList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ControladorPartido {
@@ -24,102 +23,52 @@ public class ControladorPartido {
     }
 
     @RequestMapping(path = "/registro-partido", method = RequestMethod.GET)
-    public ModelAndView irARegistroPartido(){
+    public ModelAndView irARegistroPartido() {
         return new ModelAndView("registro-partido");
     }
 
-
-
-    @RequestMapping(method = RequestMethod.POST , path = "/registrar-partido")
+    @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
     public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido) {
         ModelMap model = new ModelMap();
         ModelAndView modeloVista = null;
-        if(datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")){
+        if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
             model.put("msg", "El partido se creo con éxito");
-            //Se muestra en la vista de éxito estos dos datos:
-            model.put("cant_jugadores",datosPartido.getCant_jugadores());
-            model.put("categoria",datosPartido.getCategoria());
-            model.put("horario",datosPartido.getHorario());
-            model.put("tipo",datosPartido.getTipo());
-            model.put("localidad",datosPartido.getLocalidad());
-
-            Partido partido = new Partido(5L, datosPartido.getCant_jugadores(), datosPartido.getCant_lugaresDisp(), datosPartido.getTipo(), datosPartido.getCategoria(), datosPartido.getHorario(), datosPartido.getLocalidad());
-            servicioCrearPartido.registrar(partido);
+            model.put("partido", datosPartido);
+            servicioCrearPartido.registrarPartido(datosPartido.crearPartido());
             modeloVista = new ModelAndView("partido-registrado", model);
-        }
-        else{
+        } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
             modeloVista = new ModelAndView("registro-partido", model);
         }
-
         return modeloVista;
     }
 
-    @RequestMapping(path = "listar-partidos" , method = RequestMethod.GET)
-    public ModelAndView listarPartidos(){
-        ModelMap model = listarPartidosMethod();
-        return new  ModelAndView("home",model);
-    }
-
-    @RequestMapping(path = "listar-partidos-filtrados" , method = RequestMethod.GET)
-    public ModelAndView listarPartidosConFiltro(@ModelAttribute("filtros-partido") DatosCrearPartido datosPartido){
+    @RequestMapping(path = "listar-partidos", method = RequestMethod.GET)
+    public ModelAndView listarPartidos() {
         ModelMap model = new ModelMap();
-        model.put("PARTIDOS",servicioCrearPartido.filtrarPartidos(datosPartido.getLocalidad() , datosPartido.getCategoria()));
-
-        List<Partido> listPartidos = new LinkedList<>();
-
-        for (Partido partidos : listPartidos){
-            model.put("cant_jugadores",partidos.getCant_jugadores());
-            model.put("categoria",partidos.getCategoria());
-            model.put("horario",partidos.getHorario());
-            model.put("tipo",partidos.getTipo());
-            model.put("completo",partidos.getCompleto());
-            model.put("id",partidos.getId());
-        }
-
-        return new  ModelAndView("home",model);
+        model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+        return new ModelAndView("home", model);
     }
 
-/*
-    public void validarDatos(Partido datosPartido) {
+    @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)
+    public ModelAndView listarPartidosConFiltro(@ModelAttribute("filtros-partido") DatosCrearPartido datosPartido) {
+        ModelMap model = new ModelMap();
+        model.put("PARTIDOS", servicioCrearPartido.filtrarPartidos(datosPartido.getLocalidad(), datosPartido.getCategoria()));
+        return new ModelAndView("home", model);
     }
-
-    public Boolean veficarCantidadDeJugadores(int cant_jugadores) {
-        if(cant_jugadores < 10){
-            return true;
-        }
-
-        return false;
-    }
-*/
 
     @RequestMapping(path = "/unirme-al-partido", method = RequestMethod.GET)
-    public ModelAndView irAUnirmeAlPartido(){
-        ModelMap model = listarPartidosMethod();
-        return new  ModelAndView("unirme-al-partido",model);
-    }
-    private ModelMap listarPartidosMethod(){
+    public ModelAndView irAUnirmeAlPartido() {
         ModelMap model = new ModelMap();
-        model.put("PARTIDOS",servicioCrearPartido.todosLosPartidos());
-
-        List<Partido> listPartidos = new LinkedList<>();
-
-        for (Partido partidos : listPartidos){
-            model.put("cant_jugadores",partidos.getCant_jugadores());
-            model.put("cant_lugaresDisp", partidos.getCant_lugaresDisp());
-            model.put("categoria",partidos.getCategoria());
-            model.put("horario",partidos.getHorario());
-            model.put("tipo",partidos.getTipo());
-            model.put("completo",partidos.getCompleto());
-            model.put("id",partidos.getId());
-        }
-        return model;
+        model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+        return new ModelAndView("unirme-al-partido", model);
     }
 
     @RequestMapping(path = "union-partido/{id}", method = RequestMethod.GET)
     public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
         Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
         servicioCrearPartido.unirmeAlPartido(partidoPorId);
+        //this.vincularJugadorAPartido(HttpServletRequest request, partidoPorId);
         ModelMap modelo = new ModelMap();
         modelo.put("msg", "¡Te uniste al partido correctamente!");
         return new ModelAndView("union-a-partido", modelo);
@@ -130,40 +79,10 @@ public class ControladorPartido {
         return cantidadDeJugadoresCorrecta;
     }
 
-
-/*
-    @RequestMapping(method = RequestMethod.POST, path = "/union-partido")
-    public ModelAndView unirseAUnPartido(@ModelAttribute("unirse-a-partido") DatosCrearPartido datosPartido) {
-
-        ModelMap modelo = new ModelMap();
-        ModelAndView modeloVista = null;
-
-        if(validarLugaresDisponibles(datosPartido)){
-            modelo.put("msg", "¡Te uniste al partido correctamente!");
-            modeloVista = new ModelAndView("union-a-partido", modelo);
-        }
-        else{
-            modelo.put("msg", "El partido seleccionado ya esta completo");
-            modeloVista = new ModelAndView("unirme-al-partido", modelo);
-        }
-
-        return modeloVista;
+    public Boolean vincularJugadorAPartido(HttpServletRequest request, Partido partido){
+        Long idUsuario = (Long) request.getSession().getAttribute("id");
+        servicioCrearPartido.vincularJugadorAPartido(idUsuario, partido.getId());
+        return true;
     }
-
-
-
-    public boolean validarLugaresDisponibles(DatosCrearPartido datosPartido){
-        boolean hayLugar = false;
-        if(datosPartido.getTipo().equals("5") && datosPartido.getCant_jugadores()<10){
-            hayLugar = true;
-        }
-        else if(datosPartido.getTipo().equals("11") && datosPartido.getCant_jugadores()<22){
-            hayLugar = true;
-        }
-        return hayLugar;
-    }
-*/
-
-
 
 }

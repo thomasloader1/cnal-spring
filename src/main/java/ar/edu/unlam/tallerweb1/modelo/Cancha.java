@@ -19,8 +19,7 @@ public class Cancha {
 
     public Cancha(){}
 
-    public Cancha(Long Id, String nombre, String localidad, String domicilio){
-        this.id = id;
+    public Cancha(String nombre, String localidad, String domicilio){
         this.nombre = nombre;
         this.localidad = localidad;
         this.domicilio = domicilio;

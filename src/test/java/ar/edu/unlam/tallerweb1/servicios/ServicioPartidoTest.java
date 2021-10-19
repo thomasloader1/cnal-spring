@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,8 @@ import static org.mockito.Mockito.never;
 
 public class ServicioPartidoTest {
 
-    public static final Partido PARTIDO = new Partido(1L,5, 17, "11","Juvenil","18:00","San Justo");
+    public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo");
+    public static final Partido PARTIDO2 = new Partido(5, 17, "11","Juvenil","18:00","San Justo");
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -26,7 +28,7 @@ public class ServicioPartidoTest {
 
     private void givenPartidoYaExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
+            when(repositorioPartido.buscarPartido(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +38,7 @@ public class ServicioPartidoTest {
     private void whenResgistro(Partido partido)  throws Exception{
         try {
             servicioPartido.consultarPartido(partido.getHorario(), partido.getCategoria());
-            servicioPartido.registrar(partido);
+            servicioPartido.registrarPartido(partido);
 
         } catch (Exception e) {
             throw new Exception();
@@ -44,7 +46,7 @@ public class ServicioPartidoTest {
     }
 
     private void thenElPartidoNoSeGuarda() {
-        verify(repositorioPartido, never()).guardar(any());
+        verify(repositorioPartido, never()).guardarPartido(any());
     }
 
     @Test
@@ -58,7 +60,7 @@ public class ServicioPartidoTest {
 
     private void givenPartidoNoExiste(Partido partido) {
         try {
-            when(repositorioPartido.buscar(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
+            when(repositorioPartido.buscarPartido(partido.getHorario(), partido.getCategoria())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +68,7 @@ public class ServicioPartidoTest {
 
     private void whenResgistroPartido(Partido partido) throws Exception {
         try {
-            servicioPartido.registrar(partido);
+            servicioPartido.registrarPartido(partido);
 
         } catch (Exception e) {
             throw new Exception("whenResgistroPartidoException");
@@ -74,7 +76,7 @@ public class ServicioPartidoTest {
     }
 
     private void thenElPartidoSeGuarda() {
-        verify(repositorioPartido, times(1)).guardar(any());
+        verify(repositorioPartido, times(1)).guardarPartido(any());
     }
 
     @Test
@@ -89,6 +91,7 @@ public class ServicioPartidoTest {
     private void givenPartidoCompleto(Partido partido) {
         try {
             servicioPartido.partidoLleno(partido);
+            when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +105,7 @@ public class ServicioPartidoTest {
         }
     }
     private void thenSeSumaUnJugador() {
-        verify(repositorioPartido,times(1)).unirmeAlPartido(PARTIDO);
+        verify(repositorioPartido,times(1)).actualizar(PARTIDO);
     }
 
     @Test
@@ -126,23 +129,28 @@ public class ServicioPartidoTest {
     private void whenFiltarPartido(Partido partido) {
         servicioPartido.filtrarPartidos(partido.getLocalidad(), partido.getCategoria());
     }
-//
-//    @Test
-//    public void queResteUnLugar(){
-//        PARTIDO.setId(2L);
-//        givenUnirmePartido(PARTIDO);
-//        thenSeResta();
-//    }
-//
-//    private void givenUnirmePartido(Partido partido) {
-//        servicioPartido.unirmeAlPartido(PARTIDO);
-//    }
-//
-//    private void thenSeResta() {
-//        Integer expected=16;
-//        Integer actual = PARTIDO.getCant_lugaresDisp();
-//        assertEquals(expected, actual);
-//    }
+
+    @Test
+    public void queResteUnLugar(){
+        PARTIDO2.setId(2L);
+        givenRepo(PARTIDO2);
+        whenUnirmePartida(PARTIDO2);
+        thenSeResta();
+    }
+
+    private void whenUnirmePartida(Partido partido){
+        servicioPartido.unirmeAlPartido(PARTIDO2);
+    }
+
+    private void givenRepo(Partido partido){
+        when(repositorioPartido.buscarPartidoPorID(partido.getId())).thenReturn(PARTIDO2);
+    }
+
+    private void thenSeResta() {
+        Integer expected=16;
+        Integer actual = PARTIDO2.getCant_lugaresDisp();
+        assertEquals(expected, actual);
+    }
 
 }
 
