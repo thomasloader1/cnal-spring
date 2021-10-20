@@ -18,5 +18,5 @@ public interface ServicioPartido {
     Partido buscarPartidoPorID(Long id);
     void vincularJugadorAPartido(Long idUsuario, Long idPartido);
     UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
-
+    List<Partido> buscarPartidosPorUsuario(Long idUsuario);
 }

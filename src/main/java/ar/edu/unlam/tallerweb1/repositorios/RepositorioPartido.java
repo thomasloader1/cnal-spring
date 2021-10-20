@@ -16,4 +16,5 @@ public interface RepositorioPartido {
     Partido buscarPartidoPorID(Long id);
     void registrarUsuarioAPartido(UsuarioPartido registro);
     UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
+    List<Partido> todosLosPartidosPorUsuario(Long idUsuario);
 }

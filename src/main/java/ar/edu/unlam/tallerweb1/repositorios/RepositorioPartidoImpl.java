@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -79,6 +80,25 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .add(Restrictions.eq("idUsuario", idUsuario))
                 .add(Restrictions.eq("idPartido", idPartido))
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Partido> todosLosPartidosPorUsuario(Long idUsuario) {
+
+        List<Partido> partidosList = new LinkedList<>();
+
+        final Session session = sessionFactory.getCurrentSession();
+        List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("idUsuario", idUsuario)).list();
+
+        if(usuarioPartidos != null) {
+            for (UsuarioPartido usuario : usuarioPartidos) {
+                Partido partido = this.buscarPartidoPorID(usuario.getIdPartido());
+
+                partidosList.add(partido);
+
+            }
+        }
+        return partidosList;
     }
 
 

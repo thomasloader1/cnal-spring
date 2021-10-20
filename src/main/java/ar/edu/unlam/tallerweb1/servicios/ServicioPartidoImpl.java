@@ -121,4 +121,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return usuarioPartido;
     }
 
+    @Override
+    public List<Partido> buscarPartidosPorUsuario(Long idUsuario) {
+        return repositorioPartidoImpl.todosLosPartidosPorUsuario(idUsuario);
+    }
+
+
 }

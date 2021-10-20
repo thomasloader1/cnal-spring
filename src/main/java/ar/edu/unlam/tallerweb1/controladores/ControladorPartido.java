@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -52,9 +53,20 @@ public class ControladorPartido {
     }
 
     @RequestMapping(path = "listar-partidos", method = RequestMethod.GET)
-    public ModelAndView listarPartidos() {
+    public ModelAndView listarPartidos(HttpServletRequest request) {
         ModelMap model = new ModelMap();
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+
+        if(idUsuario != null) {
+
+            List<Partido> partidosList = servicioCrearPartido.buscarPartidosPorUsuario(idUsuario);
+
+            if(partidosList != null){
+                model.put("MIS_PARTIDOS", partidosList);
+            }
+        }
+
         return new ModelAndView("home", model);
     }
 
