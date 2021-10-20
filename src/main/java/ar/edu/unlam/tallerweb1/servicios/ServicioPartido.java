@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.controladores.DatosCrearPartido;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface ServicioPartido {
     List<Partido> filtrarPartidos(String localidad, String categoria);
     Partido buscarPartidoPorID(Long id);
     void vincularJugadorAPartido(Long idUsuario, Long idPartido);
+    UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
 
 }
