@@ -9,4 +9,6 @@ public interface RepositorioTorneo {
     public List<Torneo> todosLosTorneos();
 
     Torneo buscarTorneo(Torneo torneo);
+
+    void guardarTorneo(Torneo torneo);
 }

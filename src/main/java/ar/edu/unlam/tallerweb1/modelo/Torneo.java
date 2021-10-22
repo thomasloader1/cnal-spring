@@ -10,18 +10,18 @@ public class Torneo {
     private Long id;
     private String tipo;
     private String categoria;
-    private String horario;
+    private String cantidadEquipos;
+    private String fecha;
     private String localidad;
     private String nombre;
 
-
     public Torneo() {}
 
-    public Torneo(Long id, String tipo, String categoria, String horario, String localidad, String nombre) {
-        this.id = id;
+    public Torneo(String tipo, String categoria, String cantidadEquipos, String fecha, String localidad, String nombre) {
         this.tipo = tipo;
         this.categoria = categoria;
-        this.horario = horario;
+        this.cantidadEquipos = cantidadEquipos;
+        this.fecha = fecha;
         this.localidad = localidad;
         this.nombre = nombre;
     }
@@ -50,12 +50,20 @@ public class Torneo {
         this.categoria = categoria;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getCantidadEquipos() {
+        return cantidadEquipos;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setCantidadEquipos(String cantidadEquipos) {
+        this.cantidadEquipos = cantidadEquipos;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getLocalidad() {
@@ -73,4 +81,5 @@ public class Torneo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 }

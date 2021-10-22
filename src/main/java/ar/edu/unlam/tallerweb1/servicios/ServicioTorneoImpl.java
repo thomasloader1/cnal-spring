@@ -29,4 +29,9 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     public Torneo buscarTorneo(Torneo torneo){
         return repositorioTorneoImpl.buscarTorneo(torneo);
     }
+
+    @Override
+    public void registrarTorneo(Torneo torneo) {
+        repositorioTorneoImpl.guardarTorneo(torneo);
+    }
 }
