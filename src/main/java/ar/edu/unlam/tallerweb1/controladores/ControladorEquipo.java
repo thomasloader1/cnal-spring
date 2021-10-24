@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -15,13 +16,13 @@ public class ControladorEquipo {
     }
 
 
-    public ModelAndView unirmeAUnEquipo(DatosEquipo equipo) {
+    public ModelAndView unirmeAUnEquipo(DatosEquipo equipo, Usuario usuario) {
 
         ModelMap model = new ModelMap();
         ModelAndView modeloVista;
 
         try{
-            servicioEquipo.registrarEnEquipo(equipo.getNombre());
+            servicioEquipo.registrarEnEquipo(equipo.getNombre(), usuario);
             model.put("msg", "Te uniste correctamente");
             modeloVista = new ModelAndView("union-equipo-exitosa", model);
         }

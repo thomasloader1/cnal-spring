@@ -6,7 +6,25 @@ public class Equipo {
 
     private String nombre;
     private int cantidadJugadores;
+    private int tipoPartido;
+    private boolean habilitado = false;
     private List<Usuario> jugadores;
+
+    public int getTipoPartido() {
+        return tipoPartido;
+    }
+
+    public void setTipoPartido(int tipoPartido) {
+        this.tipoPartido = tipoPartido;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
 
     public List<Usuario> getJugadores() {
         return jugadores;

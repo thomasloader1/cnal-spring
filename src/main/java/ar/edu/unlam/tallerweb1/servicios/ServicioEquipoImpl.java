@@ -18,22 +18,18 @@ public class ServicioEquipoImpl implements ServicioEquipo{
     }
 
     @Override
-    public Boolean registrarEnEquipo(String nombreEquipo) throws Exception {
+    public Boolean registrarEnEquipo(String nombreEquipo, Usuario usuario) throws Exception {
         Boolean registroExitoso = false;
 
         Equipo equipoBuscado = repositorioEquipo.buscarEquipo(nombreEquipo);
 
-        if(equipoBuscado!= null && equipoBuscado.getCantidadJugadores()<11){
-
-            Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setEmail("scortes@email.com");
-            nuevoUsuario.setPassword("123");
-            nuevoUsuario.setRol("Jugador");
-
-            equipoBuscado.setJugadores(nuevoUsuario);
+        if(equipoBuscado!= null && hayLugaresDisponibles(equipoBuscado)){
+            equipoBuscado.setJugadores(usuario);
             repositorioEquipo.actualizarEquipo(equipoBuscado); //esto haría un update del equipo con el nuevo jugador agregado
 
             registroExitoso = true;
+
+
         }
         else{
             throw new Exception();
@@ -41,4 +37,21 @@ public class ServicioEquipoImpl implements ServicioEquipo{
 
         return registroExitoso;
     }
+
+
+    public boolean hayLugaresDisponibles(Equipo equipo){
+        boolean hayLugar = false;
+
+        if(equipo.getTipoPartido()==5 && equipo.getCantidadJugadores()<5){
+            hayLugar = true;
+        }
+        else if(equipo.getTipoPartido()==11 && equipo.getCantidadJugadores()<11){
+            hayLugar = true;
+        }
+        else{
+            equipo.setHabilitado(true); //ya esta completo y habilitado para jugar en un partido ese equipo
+        }
+        return hayLugar;
+    }
+
 }

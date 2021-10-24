@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,24 +14,29 @@ public class ControladorEquipoTest {
     private ServicioEquipo servicioEquipo = mock(ServicioEquipo.class);
     private ControladorEquipo controladorEquipo = new ControladorEquipo(servicioEquipo);
 
-    private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11);
-    private static final DatosEquipo EQUIPO_INCOMPLETO = new DatosEquipo("Pirulo", 3);
+    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123");
+    private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11, 11);
+    private static final DatosEquipo EQUIPO_INCOMPLETO = new DatosEquipo("Pirulo", 3, 5);
 
     @Test
     public void puedoUnirmeAUnEquipoConLugaresDisponibles(){
+        givenUnUsuario(USUARIO);
         givenUnEquipoIncompleto(EQUIPO_INCOMPLETO);
 
-        ModelAndView modeloVista = whenMeUnoAlEquipo(EQUIPO_INCOMPLETO);
+        ModelAndView modeloVista = whenMeUnoAlEquipo(EQUIPO_INCOMPLETO, USUARIO);
 
         thenMeUnoCorrectamente(modeloVista);
+    }
+
+    private void givenUnUsuario(Usuario usuario) {
     }
 
     private void givenUnEquipoIncompleto(DatosEquipo equipo) {
 
     }
 
-    private ModelAndView whenMeUnoAlEquipo(DatosEquipo equipo) {
-        return controladorEquipo.unirmeAUnEquipo(equipo);
+    private ModelAndView whenMeUnoAlEquipo(DatosEquipo equipo, Usuario usuario) {
+        return controladorEquipo.unirmeAUnEquipo(equipo, usuario);
     }
 
     private void thenMeUnoCorrectamente(ModelAndView modeloVista) {
@@ -41,16 +47,17 @@ public class ControladorEquipoTest {
 
     @Test
     public void noPuedoUnirmeAUnEquipoCompleto() throws Exception {
+        givenUnUsuario(USUARIO);
         givenUnEquipoCompleto(EQUIPO_COMPLETO);
 
-        ModelAndView modeloVista = whenMeUnoAlEquipo(EQUIPO_COMPLETO);
+        ModelAndView modeloVista = whenMeUnoAlEquipo(EQUIPO_COMPLETO, USUARIO);
 
         thenNoMePuedoUnirAlEquipo(modeloVista);
     }
 
 
     private void givenUnEquipoCompleto(DatosEquipo equipoCompleto) throws Exception {
-        doThrow(Exception.class).when(servicioEquipo).registrarEnEquipo(EQUIPO_COMPLETO.getNombre());
+        doThrow(Exception.class).when(servicioEquipo).registrarEnEquipo(EQUIPO_COMPLETO.getNombre(), USUARIO);
     }
 
     private void thenNoMePuedoUnirAlEquipo(ModelAndView modeloVista) {
