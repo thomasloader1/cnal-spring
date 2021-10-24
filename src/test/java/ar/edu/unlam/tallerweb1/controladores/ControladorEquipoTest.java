@@ -15,8 +15,8 @@ public class ControladorEquipoTest {
     private ControladorEquipo controladorEquipo = new ControladorEquipo(servicioEquipo);
 
     private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123");
-    private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11, 11);
-    private static final DatosEquipo EQUIPO_INCOMPLETO = new DatosEquipo("Pirulo", 3, 5);
+    private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11, 11, "Juvenil");
+    private static final DatosEquipo EQUIPO_INCOMPLETO = new DatosEquipo("Pirulo", 3, 5, "Juvenil");
 
     @Test
     public void puedoUnirmeAUnEquipoConLugaresDisponibles(){

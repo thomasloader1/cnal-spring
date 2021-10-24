@@ -5,15 +5,20 @@ import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEquipo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service("sevicioEquipo")
+@Transactional
 public class ServicioEquipoImpl implements ServicioEquipo{
 
     private RepositorioEquipo repositorioEquipo;
 
     @Autowired
     public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
+
         this.repositorioEquipo = repositorioEquipo;
     }
 
@@ -24,7 +29,7 @@ public class ServicioEquipoImpl implements ServicioEquipo{
         Equipo equipoBuscado = repositorioEquipo.buscarEquipo(nombreEquipo);
 
         if(equipoBuscado!= null && hayLugaresDisponibles(equipoBuscado)){
-            equipoBuscado.setJugadores(usuario);
+            //equipoBuscado.setJugadores(usuario);
             repositorioEquipo.actualizarEquipo(equipoBuscado); //esto haría un update del equipo con el nuevo jugador agregado
 
             registroExitoso = true;
@@ -36,6 +41,12 @@ public class ServicioEquipoImpl implements ServicioEquipo{
         }
 
         return registroExitoso;
+    }
+
+    @Override
+    public Equipo registrarEquipo(Equipo equipo) {
+        repositorioEquipo.guardarEquipo(equipo);
+        return equipo;
     }
 
 

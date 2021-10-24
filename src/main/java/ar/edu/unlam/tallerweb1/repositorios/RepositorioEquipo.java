@@ -8,4 +8,6 @@ public interface RepositorioEquipo {
 
 
     void actualizarEquipo(Equipo equipoBuscado);
+
+    void guardarEquipo(Equipo equipo);
 }
