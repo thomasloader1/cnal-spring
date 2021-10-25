@@ -20,7 +20,11 @@ public class Equipo {
     private boolean habilitado = false;
     //private List<Usuario> jugadores;
 
-    public Equipo( String nombre, int cantidadJugadores, int tipoPartido) {
+
+    public Equipo() {
+    }
+
+    public Equipo(String nombre, int cantidadJugadores, int tipoPartido) {
         this.nombre = nombre;
         this.cantidadJugadores = cantidadJugadores;
         this.tipoPartido = tipoPartido;
