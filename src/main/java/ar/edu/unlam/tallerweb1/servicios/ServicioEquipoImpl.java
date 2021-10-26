@@ -23,21 +23,24 @@ public class ServicioEquipoImpl implements ServicioEquipo{
     }
 
     @Override
-    public Boolean registrarEnEquipo(String nombreEquipo, Usuario usuario) throws Exception {
+    public Boolean registrarEnEquipo(Long iDEquipo, Usuario usuario) throws Exception {
         Boolean registroExitoso = false;
 
-        Equipo equipoBuscado = repositorioEquipo.buscarEquipo(nombreEquipo);
+        Equipo equipoBuscado = repositorioEquipo.buscarEquipo(iDEquipo);
+        int cantJugadoresActuales = equipoBuscado.getCantidadJugadores();
+
+        if(equipoBuscado==null)
+            throw new Exception();
 
         if(equipoBuscado!= null && hayLugaresDisponibles(equipoBuscado)){
+
+            equipoBuscado.setCantidadJugadores(cantJugadoresActuales + 1);
+
             //equipoBuscado.setJugadores(usuario);
-            repositorioEquipo.actualizarEquipo(equipoBuscado); //esto haría un update del equipo con el nuevo jugador agregado
+            repositorioEquipo.actualizarEquipo(equipoBuscado);
 
             registroExitoso = true;
 
-
-        }
-        else{
-            throw new Exception();
         }
 
         return registroExitoso;
@@ -47,6 +50,11 @@ public class ServicioEquipoImpl implements ServicioEquipo{
     public Equipo registrarEquipo(Equipo equipo) {
         repositorioEquipo.guardarEquipo(equipo);
         return equipo;
+    }
+
+    @Override
+    public List<Equipo> buscarTodosLosEquipos() {
+        return repositorioEquipo.traerListaDeEquipos();
     }
 
 

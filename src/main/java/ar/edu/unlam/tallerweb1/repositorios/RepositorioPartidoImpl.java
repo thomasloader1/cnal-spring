@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +10,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 @Repository("repositorioPartido")
 public class RepositorioPartidoImpl implements RepositorioPartido{
@@ -48,10 +52,10 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     public List<Partido> partidosFiltrados(String localidad, String categoria){
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Partido.class);
-        if(localidad != null){
+        if(!localidad.toLowerCase(Locale.ROOT).equals("localidad")){
             criteria.add(Restrictions.eq("localidad", localidad));
         }
-        if(categoria!=null){
+        if(!categoria.toLowerCase(Locale.ROOT).equals("categoria")){
             criteria.add(Restrictions.eq("categoria", categoria));
         }
         return criteria.list();
@@ -65,9 +69,38 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .uniqueResult();
     }
 
-    /*@Override
-    public void registrarUsuarioAPartido(UsuarioPartido usuarioPartido) {
-        //sessionFactory.getCurrentSession().save(usuarioPartido);
-    }*/
+    @Override
+    public void registrarUsuarioAPartido(UsuarioPartido registro) {
+        sessionFactory.getCurrentSession().save(registro);
+    }
+
+    @Override
+    public UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido) {
+        return (UsuarioPartido) sessionFactory.getCurrentSession().createCriteria(UsuarioPartido.class)
+                .add(Restrictions.eq("idUsuario", idUsuario))
+                .add(Restrictions.eq("idPartido", idPartido))
+                .uniqueResult();
+    }
+
+    @Override
+    public List<Partido> todosLosPartidosPorUsuario(Long idUsuario) {
+
+        List<Partido> partidosList = new LinkedList<>();
+
+        final Session session = sessionFactory.getCurrentSession();
+        List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("idUsuario", idUsuario)).list();
+
+        if(usuarioPartidos != null) {
+            for (UsuarioPartido usuario : usuarioPartidos) {
+                Partido partido = this.buscarPartidoPorID(usuario.getIdPartido());
+
+                partidosList.add(partido);
+
+            }
+        }
+        return partidosList;
+    }
+
+
 }
 

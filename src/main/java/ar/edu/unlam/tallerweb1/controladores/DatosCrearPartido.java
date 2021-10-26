@@ -11,17 +11,19 @@ public class DatosCrearPartido {
     private String categoria;
     private String horario;
     private String localidad;
+    private String direccion;
 
 
     public DatosCrearPartido() {}
 
-    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad) {
+    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad, String direccion) {
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = 0;
         this.tipo = tipo;
         this.categoria = categoria;
         this.horario = horario;
         this.localidad = localidad;
+        this.direccion = direccion;
     }
 
     public int getCant_jugadores() {
@@ -68,6 +70,10 @@ public class DatosCrearPartido {
         return localidad;
     }
 
+    public void setDireccion(String direccion){this.direccion = direccion;}
+
+    public String getDireccion(){return direccion;}
+
     public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido) {
         String mensaje = "";
         if ((validarCantidadJugadores(datosPartido)) && (validarCategoria(datosPartido)) && (validarTipoPartido(datosPartido))) {
@@ -111,6 +117,6 @@ public class DatosCrearPartido {
     }
 
     public Partido crearPartido() {
-        return new Partido(this.getCant_jugadores(), this.getCant_lugaresDisp(), this.getTipo(), this.getCategoria(), this.getHorario(), this.getLocalidad());
+        return new Partido(this.getCant_jugadores(), this.getCant_lugaresDisp(), this.getTipo(), this.getCategoria(), this.getHorario(), this.getLocalidad(), this.getDireccion());
     }
 }

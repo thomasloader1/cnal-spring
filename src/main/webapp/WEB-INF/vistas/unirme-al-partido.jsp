@@ -10,6 +10,52 @@
 <body>
 <%@ include file = "partial/navbar.jsp" %>
 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 style="text-align: center; margin-top: 5%">Partidos</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <h5>Filtros</h5>
+            </div>
+            <div class="col-11">
+                <form:form action="listar-partidos-filtrados" method="get">
+                    <select name="localidad" id="">
+                            <option>Localidad</option>
+                        <c:forEach items="${LOCALIDAD}" var="LOCALIDAD">
+                            <option scope="row" name="localidad">${LOCALIDAD.descripcion}</option>
+                        </c:forEach>
+                    </select>
+
+                    <select name="categoria">
+                        <option>Categoria</option>
+                        <option>Juvenil</option>
+                        <option>Adulto</option>
+                    </select>
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                </form:form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <c:if test="${not empty msg}">
+                <div class="col-12">
+                    <div class="alert text-danger" role="alert">
+                        <h6>${msg}</h6>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row my-5">
             <div class="col-12">
@@ -17,6 +63,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Ubicacion</th>
+                        <th scope="col">Localidad</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Horario</th>
@@ -27,7 +74,8 @@
                     <tbody>
                     <c:forEach items="${PARTIDOS}" var="PARTIDO">
                     <tr class="table-active">
-                        <th scope="row">Calle 124</th>
+                        <th scope="row">${PARTIDO.direccion}</th>
+                        <td>${PARTIDO.localidad}</td>
                         <td>${PARTIDO.categoria}</td>
                         <td>${PARTIDO.tipo}</td>
                         <td>${PARTIDO.horario}</td>
@@ -51,13 +99,6 @@
                 </table>
             </div>
         </div>
-        <c:if test="${not empty msg}">
-            <div class="col-12">
-                <div class="alert alert-danger" role="alert">
-                    <h6>${msg}</h6>
-                </div>
-            </div>
-        </c:if>
 
     </div>
 
