@@ -2,10 +2,9 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -21,12 +20,14 @@ public class Partido {
     private String categoria;
     private Boolean completo = false;
     private String horario;
+    private String direccion;
     private String localidad;
+
 
 
     public Partido() {}
 
-    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad) {
+    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad, String direccion) {
         this.id = id;
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = lugares;
@@ -35,6 +36,7 @@ public class Partido {
         this.completo = this.getCompleto();
         this.horario = horario;
         this.localidad = localidad;
+        this.direccion = direccion;
     }
 
     public Long getId() {
@@ -96,4 +98,10 @@ public class Partido {
     public void setCant_lugaresDisp(Integer cant_lugaresDisp) {
         this.cant_lugaresDisp = cant_lugaresDisp;
     }
+
+    //TODO TIENE QUE TENER MISMA DIRECCION Y LOCALIDAD QUE LA CANCHA DONDE SE GENERA EL PARTIDO
+    public void setDireccion(String direccion){this.direccion = direccion;}
+
+    public String getDireccion(){return direccion;}
+
 }

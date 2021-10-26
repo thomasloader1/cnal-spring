@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,7 +99,32 @@ public class ServicioPartidoImpl implements ServicioPartido {
 
     @Override
     public void vincularJugadorAPartido(Long idUsuario, Long idPartido){
-        //repositorioPartidoImpl.registrarUsuarioAPartido(UsuarioPartido);
+        try {
+            UsuarioPartido registro = new UsuarioPartido();
+
+            registro.setIdUsuario(idUsuario);
+
+            registro.setIdPartido(idPartido);
+
+            repositorioPartidoImpl.registrarUsuarioAPartido(registro);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
+
+    @Override
+    public UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido) {
+
+        UsuarioPartido usuarioPartido = repositorioPartidoImpl.buscarUsuarioPartido(idUsuario, idPartido);
+
+        return usuarioPartido;
+    }
+
+    @Override
+    public List<Partido> buscarPartidosPorUsuario(Long idUsuario) {
+        return repositorioPartidoImpl.todosLosPartidosPorUsuario(idUsuario);
+    }
+
 
 }
