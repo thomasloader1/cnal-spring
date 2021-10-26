@@ -133,9 +133,9 @@ public class RepositorioPartidoTest extends SpringTest {
 
             UsuarioPartido usuarioPartido = new UsuarioPartido();
 
-            usuarioPartido.setIdUsuario(idUsuario);
+            usuarioPartido.setPrimaryOne(idUsuario);
 
-            usuarioPartido.setIdPartido(idPartido);
+            usuarioPartido.setPrimaryTwo(idPartido);
 
             session().save(usuarioPartido);
     }
