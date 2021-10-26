@@ -25,9 +25,9 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     }
 
     @Override
-    public Partido buscarPartido(String hora, String categoria) {
+    public Partido buscarPartido(String horario, String categoria) {
         return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)
-                .add(Restrictions.eq("hora", hora))
+                .add(Restrictions.eq("horario", horario))
                 .add(Restrictions.eq("categoria", categoria))
                 .uniqueResult();
     }

@@ -32,4 +32,9 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
                 .add(Restrictions.eq("id", torneo.getId()))
                 .uniqueResult();
     }
+
+    @Override
+    public void guardarTorneo(Torneo torneo) {
+        sessionFactory.getCurrentSession().save(torneo);
+    }
 }

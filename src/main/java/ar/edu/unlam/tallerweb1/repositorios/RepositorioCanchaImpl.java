@@ -29,24 +29,12 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 
     @Override
     public List<Cancha> buscarCanchaPorLocalidad(String localidad) {
-/*
-<<<<<<< HEAD
-*/
 
         final Session session = sessionFactory.getCurrentSession();
 
         return session.createCriteria(Cancha.class)
                 .add(Restrictions.eq("localidad", localidad))
                 .list();
-/*
-=======
-        if(localidad!=null || localidad!=""){
-            return (List<Cancha>) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
-                    .add(Restrictions.eq("localidad", localidad)).list();
-        }
-        return null;
->>>>>>> db59fbb7ea85785ee0836ab0ec283dca589c9e05
-*/
     }
 
 

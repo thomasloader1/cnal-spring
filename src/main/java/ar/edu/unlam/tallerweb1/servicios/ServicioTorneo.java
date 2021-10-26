@@ -8,4 +8,6 @@ public interface ServicioTorneo {
     List<Torneo> todosLosTorneos();
 
     Torneo buscarTorneo(Torneo torneo) throws Exception;
+
+    void registrarTorneo(Torneo crearTorneo);
 }
