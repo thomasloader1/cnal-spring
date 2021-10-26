@@ -82,7 +82,7 @@ public class ServicioTorneoTest {
     }
 
     private void givenTorneoExiste(Torneo torneo) {
-        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(TORNEO);
+        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(null);
     }
 
     private void whenRegistroTorneo(Torneo torneo) {

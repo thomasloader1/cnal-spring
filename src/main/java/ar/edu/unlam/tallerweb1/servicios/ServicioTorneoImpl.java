@@ -32,7 +32,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
     @Override
     public void registrarTorneo(Torneo torneo) throws ExceptionYaExiste{
-        if (buscarTorneo(torneo) == null){
+        if (repositorioTorneoImpl.buscarTorneo(torneo) == null){
             repositorioTorneoImpl.guardarTorneo(torneo);
         }
     }
