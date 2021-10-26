@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -44,5 +45,15 @@ public class RepositorioEquipoImpl implements RepositorioEquipo{
         final Session session = sessionFactory.getCurrentSession();
 
         return session.createCriteria(Equipo.class).list();
+    }
+
+    @Override
+    public List<Usuario> buscarJugadoresDeUnEquipo(Equipo equipo) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return session.createCriteria(Usuario.class)
+                .add(Restrictions.eq("equipo", equipo))
+                .list();
+
     }
 }

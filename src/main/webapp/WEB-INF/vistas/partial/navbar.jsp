@@ -30,6 +30,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-al-partido">Unirme a un partido</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-equipo">Crear equipo</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-equipo">Unirme a un equipo</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
