@@ -20,9 +20,8 @@ public class ServicioEquipoTest {
     private static final Equipo SAN_LORENZO = new Equipo("San Lorenzo", 6, 11, "Juvenil");
     private static final Equipo BOCA = new Equipo("Boca", 2, 5, "Juvenil");
 
-    /*
+
     @Test
-*/
     public void queMePuedaUnirAUnEquipo() throws Exception {
         givenUnUsuarioExistente(USUARIO);
         EQUIPO.setId(2L);
@@ -51,10 +50,7 @@ public class ServicioEquipoTest {
 
 
 
-
-/*
     @Test
-*/
     public void queNoMePuedaUnirAUnEquipoCompleto() throws Exception {
         givenUnUsuarioExistente(USUARIO);
         EQUIPO_LLENO.setId(3L);
@@ -67,7 +63,7 @@ public class ServicioEquipoTest {
 
 
     private void givenUnEquipoLleno(Equipo equipo) {
-        doThrow(Exception.class).when(repositorioEquipo).buscarEquipo(equipo.getId());
+        when(repositorioEquipo.buscarEquipo(equipo.getId())).thenReturn(EQUIPO_LLENO);
     }
 
     private void thenNoSeAgregaUnJugadorMasAlEquipo() {

@@ -35,7 +35,7 @@
                         <td>${EQUIPO.tipoPartido}</td>
                         <td>${EQUIPO.cantidadJugadores}</td>
                         <td>
-                            <form:form action="unirme-a-equipo/${EQUIPO.id}" method="get" modelAttribute="unirse-a-equipo">
+                            <form:form action="unirse-a-equipo/${EQUIPO.id}" method="get" modelAttribute="unirse-a-equipo">
                                 <c:choose>
                                     <c:when test="${EQUIPO.cantidadJugadores == EQUIPO.tipoPartido}">
                                         <button class="btn text-white" style="background-color: #67b168" type="submit" disabled>Unirme</button>

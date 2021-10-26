@@ -19,6 +19,9 @@ public class Usuario {
 	private String password;
 	private String rol;
 
+	@ManyToOne
+	private Equipo equipo;
+
 	public Usuario(){}
 
 	public Usuario(String email, String password) {
@@ -76,5 +79,11 @@ public class Usuario {
 		activo = true;
     }
 
+	public Equipo getEquipo() {
+		return equipo;
+	}
 
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
 }
