@@ -77,8 +77,8 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     @Override
     public UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido) {
         return (UsuarioPartido) sessionFactory.getCurrentSession().createCriteria(UsuarioPartido.class)
-                .add(Restrictions.eq("idUsuario", idUsuario))
-                .add(Restrictions.eq("idPartido", idPartido))
+                .add(Restrictions.eq("primaryOne", idUsuario))
+                .add(Restrictions.eq("primaryTwo", idPartido))
                 .uniqueResult();
     }
 
@@ -88,11 +88,11 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
         List<Partido> partidosList = new LinkedList<>();
 
         final Session session = sessionFactory.getCurrentSession();
-        List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("idUsuario", idUsuario)).list();
+        List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("primaryOne", idUsuario)).list();
 
         if(usuarioPartidos != null) {
             for (UsuarioPartido usuario : usuarioPartidos) {
-                Partido partido = this.buscarPartidoPorID(usuario.getIdPartido());
+                Partido partido = this.buscarPartidoPorID(usuario.getPrimaryOne());
 
                 partidosList.add(partido);
 

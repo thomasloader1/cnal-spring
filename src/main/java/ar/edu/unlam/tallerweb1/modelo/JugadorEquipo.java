@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @IdClass(TimePk.class)
-public class UsuarioPartido {
+public class JugadorEquipo {
 
     @Id
     private Long primaryOne;
@@ -12,9 +12,9 @@ public class UsuarioPartido {
     @Id
     private Long primaryTwo;
 
-    public UsuarioPartido(){}
+    public JugadorEquipo(){}
 
-    public UsuarioPartido(Long primaryOne, Long primaryTwo){
+    public JugadorEquipo(Long primaryOne, Long primaryTwo){
         this.primaryOne = primaryOne;
         this.primaryTwo = primaryTwo;
     }
@@ -35,5 +35,3 @@ public class UsuarioPartido {
         this.primaryTwo = primaryTwo;
     }
 }
-
-

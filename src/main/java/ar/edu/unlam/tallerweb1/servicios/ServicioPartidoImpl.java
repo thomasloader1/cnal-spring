@@ -102,9 +102,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
         try {
             UsuarioPartido registro = new UsuarioPartido();
 
-            registro.setIdUsuario(idUsuario);
+            registro.setPrimaryOne(idUsuario);
 
-            registro.setIdPartido(idPartido);
+            registro.setPrimaryTwo(idPartido);
 
             repositorioPartidoImpl.registrarUsuarioAPartido(registro);
         }
