@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTorneo;
 import org.junit.Test;
@@ -73,8 +74,27 @@ public class ServicioTorneoTest {
     }
 
     @Test
-    public void queSePuedaRegistrarUnTorneoo(){
+    public void queSePuedaRegistrarUnTorneo(){
+        TORNEO.setId(2L);
+        givenTorneoExiste(TORNEO);
+        whenRegistroTorneo(TORNEO);
+        thenElTorneoSeGuarda(TORNEO);
+    }
 
+    private void givenTorneoExiste(Torneo torneo) {
+        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(null);
+    }
+
+    private void whenRegistroTorneo(Torneo torneo) {
+        try {
+            servicioTorneo.registrarTorneo(torneo);
+        } catch (ExceptionYaExiste e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void thenElTorneoSeGuarda(Torneo torneo){
+        verify(repositorioTorneo,times(1)).guardarTorneo(torneo);
     }
 
 }

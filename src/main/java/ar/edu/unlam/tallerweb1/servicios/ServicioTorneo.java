@@ -9,5 +9,5 @@ public interface ServicioTorneo {
 
     Torneo buscarTorneo(Torneo torneo) throws Exception;
 
-    void registrarTorneo(Torneo crearTorneo);
+    void registrarTorneo(Torneo crearTorneo) throws ExceptionYaExiste;
 }
