@@ -10,6 +10,7 @@ public class DatosEquipo {
     private Integer tipoPartido;
     private Boolean habilitado;
 
+    public DatosEquipo(){}
 
     public DatosEquipo(String nombre, int cantidadJugadores, int tipoPartido, String categoria) {
         this.nombre = nombre;

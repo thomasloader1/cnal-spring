@@ -17,6 +17,7 @@ public class Equipo {
     private String nombre;
     private int cantidadJugadores;
     private int tipoPartido;
+    private String categoria;
     private boolean habilitado = false;
     //private List<Usuario> jugadores;
 
@@ -27,7 +28,10 @@ public class Equipo {
     }
 
     public Equipo(String nombre, int cantidadJugadores, int tipoPartido, String categoria) {
-
+        this.nombre = nombre;
+        this.cantidadJugadores = cantidadJugadores;
+        this.tipoPartido = tipoPartido;
+        this.categoria = categoria;
     }
 
     public Long getId() {
