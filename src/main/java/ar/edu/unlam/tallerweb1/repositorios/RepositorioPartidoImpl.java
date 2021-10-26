@@ -90,7 +90,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
         final Session session = sessionFactory.getCurrentSession();
         List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("idUsuario", idUsuario)).list();
 
-        if(usuarioPartidos != null) {
+        if(usuarioPartidos.size() > 0) {
             for (UsuarioPartido usuario : usuarioPartidos) {
                 Partido partido = this.buscarPartidoPorID(usuario.getIdPartido());
 
