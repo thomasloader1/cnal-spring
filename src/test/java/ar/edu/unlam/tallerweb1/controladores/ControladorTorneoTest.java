@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
+import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +19,7 @@ public class ControladorTorneoTest {
     private DatosTorneo torneo= new DatosTorneo("11", "Juvenil", "4", "18/11/2021", "Ciudad Evita", "Corre Forest, corre!");
 
     @Test
-    public void puedoCrearUnTorneo(){
+    public void puedoCrearUnTorneo() throws ExceptionYaExiste {
         ModelAndView modeloVistaTorneo = whenCreoUnNuevoTorneo(torneo);
         thenElTorneoSeCreóConExito(modeloVistaTorneo);
     }
@@ -28,7 +29,7 @@ public class ControladorTorneoTest {
         assertThat(modeloVistaTorneo.getModel().get("msg")).isEqualTo("El torneo se creo con éxito");
     }
 
-    private ModelAndView whenCreoUnNuevoTorneo(DatosTorneo torneo) {
+    private ModelAndView whenCreoUnNuevoTorneo(DatosTorneo torneo) throws ExceptionYaExiste {
         return controladorTorneo.registrarTorneo(torneo);
     }
 
