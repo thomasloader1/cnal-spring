@@ -37,8 +37,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-equipo">Unirme a un equipo</a>
                     </li>
-
                 </ul>
+            </div>
+            <div class="d-flex">
+                <a class="btn btn-outline-success" href="/proyecto_limpio_spring_war_exploded/login">Login</a>
             </div>
         </div>
     </nav>

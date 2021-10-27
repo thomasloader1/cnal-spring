@@ -12,7 +12,7 @@ public class ServicioEquipoTest {
     private RepositorioEquipo repositorioEquipo = mock(RepositorioEquipo.class);
     private ServicioEquipo servicioEquipo = new ServicioEquipoImpl(repositorioEquipo);
 
-    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123");
+    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123","admin");
     private static final Equipo EQUIPO = new Equipo("El Mejor", 3, 5, "Juvenil");
     private static final Equipo EQUIPO_LLENO = new Equipo("El Mejor", 11, 11, "Juvenil");
 

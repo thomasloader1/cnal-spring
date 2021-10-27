@@ -24,9 +24,10 @@ public class Usuario {
 
 	public Usuario(){}
 
-	public Usuario(String email, String password) {
+	public Usuario(String email, String password, String rol) {
 		this.email = email;
 		this.password = password;
+		this.rol = rol;
 	}
 
 	private Boolean activo = false;

@@ -21,6 +21,13 @@
                 <label for="repeatPassword" class="form-label">Repeat Password</label>
                 <input name="repeatPassword" id="repeatPassword" type="password" class="form-control" aria-describedby="passwordHelp">
             </div>
+            <div class="mb-3">
+                <select class="form-control" name="rol">
+                    <option selected>Seleccione su rol</option>
+                    <option value="Jugador">Jugador</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
 
         </form:form>

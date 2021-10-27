@@ -6,13 +6,14 @@ public class DatosRegistro {
     private String email;
     private String password;
     private String repeatPassword;
-
+    private String rol;
     public DatosRegistro(){}
 
-    public DatosRegistro(String email, String clave, String repiteClave) {
+    public DatosRegistro(String email, String clave, String repiteClave, String rol) {
         this.email = email;
         this.password = clave;
         this.repeatPassword = repiteClave;
+        this.rol = rol;
     }
 
     public String getEmail() {
@@ -39,7 +40,11 @@ public class DatosRegistro {
         this.repeatPassword = repeatPassword;
     }
 
+    public String getRol() { return rol; }
+
+    public void setRol(String rol) { this.rol = rol; }
+
     public Usuario crearUsuario() {
-        return new Usuario(this.getEmail(),this.getPassword());
+        return new Usuario(this.getEmail(),this.getPassword(),this.getRol());
     }
 }

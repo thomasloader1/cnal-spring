@@ -92,7 +92,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
 
         if(usuarioPartidos.size() > 0) {
             for (UsuarioPartido usuario : usuarioPartidos) {
-                Partido partido = this.buscarPartidoPorID(usuario.getPrimaryOne());
+                Partido partido = this.buscarPartidoPorID(usuario.getPrimaryTwo());
 
                 partidosList.add(partido);
 
