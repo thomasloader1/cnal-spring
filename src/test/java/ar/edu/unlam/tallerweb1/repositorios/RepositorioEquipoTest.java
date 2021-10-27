@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -21,7 +22,8 @@ public class RepositorioEquipoTest extends SpringTest {
     private static final Equipo EQUIPO = new Equipo();
 
     @Test
-    @Rollback @Transactional
+    @Rollback
+    @Transactional
     public void obtenerLosJugadoresDeUnEquipo(){
         List<Usuario> jugadores = new LinkedList<>();
         jugadores.add(new Usuario());
