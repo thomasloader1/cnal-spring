@@ -21,10 +21,10 @@ public class ControladorTorneoTest {
     @Test
     public void puedoCrearUnTorneo() throws ExceptionYaExiste {
         ModelAndView modeloVistaTorneo = whenCreoUnNuevoTorneo(torneo);
-        thenElTorneoSeCreóConExito(modeloVistaTorneo);
+        thenElTorneoSeCreoConExito(modeloVistaTorneo);
     }
 
-    private void thenElTorneoSeCreóConExito(ModelAndView modeloVistaTorneo) {
+    private void thenElTorneoSeCreoConExito(ModelAndView modeloVistaTorneo) {
         assertThat(modeloVistaTorneo.getViewName()).isEqualTo("torneo-registrado");
         assertThat(modeloVistaTorneo.getModel().get("msg")).isEqualTo("El torneo se creo con éxito");
     }

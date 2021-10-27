@@ -59,7 +59,7 @@ public class ServicioEquipoImpl implements ServicioEquipo{
 
 
     public boolean hayLugaresDisponibles(Equipo equipo){
-        boolean hayLugar = false;
+        boolean hayLugar = false; // repositorioEquipo.getEquipoHabilitado(EQUIPO)
 
         if(equipo.getTipoPartido()==5 && equipo.getCantidadJugadores()<5){
             hayLugar = true;
