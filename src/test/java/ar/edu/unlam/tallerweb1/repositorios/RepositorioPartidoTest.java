@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +10,6 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.annotation.Rollback;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
