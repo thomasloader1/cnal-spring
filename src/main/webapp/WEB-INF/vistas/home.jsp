@@ -23,7 +23,7 @@
 					<div class="card-body">
 						<h5 class="card-title">Categoria: ${PARTIDO.categoria}</h5>
 						<p class="card-text">
-							<strong>Ubicacion:</strong> ${PARTIDO.direccion}
+							<strong>Futbol:</strong> ${PARTIDO.tipo}
 						</p>
 						<p class="card-text">
 							<strong>Localidad:</strong> ${PARTIDO.localidad}

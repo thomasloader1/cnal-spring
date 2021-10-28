@@ -75,15 +75,11 @@ public class RepositorioPartidoTest extends SpringTest {
     @Transactional
     @Rollback
     public void traerPartidosFiltradosPorCategoriaYLocalidad(){
-
         givenQueExistenPartidosConLocalidadYCategoria(SANJUSTO, Categoria, 3);
-
-        givenQueExistenPartidosConLocalidadYCategoria(CIUDADELA, Categoria,2);
 
         List<Partido> partido = whenBuscoPartidoPorCategoriaYLocalidad(SANJUSTO, Categoria);
 
         thenEncuentroLosPartidosFiltrados(partido, 3);
-
     }
 
     private void givenQueExistenPartidosConLocalidadYCategoria(String localidad, String categoria, int cantidadPartidos) {
@@ -96,7 +92,6 @@ public class RepositorioPartidoTest extends SpringTest {
             partidoNuevo.setLocalidad(localidad);
             partidoNuevo.setHorario("18:00");
             partidoNuevo.setDireccion("Calle "+i);
-
 
             session().save(partidoNuevo);
         }

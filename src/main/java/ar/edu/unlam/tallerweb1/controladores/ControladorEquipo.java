@@ -6,11 +6,10 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Locale;
 
 @Controller
 public class ControladorEquipo {
@@ -71,5 +70,18 @@ public class ControladorEquipo {
         }
 
         return modeloVista;
+    }
+
+    @RequestMapping(path = "listar-equipos-filtrados", method = RequestMethod.GET)
+    public ModelAndView listarEquiposConFiltro(@RequestParam("tipoPartido") Integer tipoPartido) {
+        ModelMap model = new ModelMap();
+        model.put("EQUIPOS", servicioEquipo.filtrarEquipos(tipoPartido));
+
+        if(tipoPartido.toString().toLowerCase(Locale.ROOT).equals("0") ){
+            model.put("msg", "¡Debe seleccionar un tipo de partido para filtrar!");
+            model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
+            return new ModelAndView("unirme-a-equipo", model);
+        }
+        return new ModelAndView("unirme-a-equipo", model);
     }
 }

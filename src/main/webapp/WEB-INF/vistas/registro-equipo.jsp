@@ -11,7 +11,7 @@
     <div class="row my-5">
         <div id="registrarEquipo" class="col-md-12">
             <form:form action="registrar-equipo" method="POST" modelAttribute="equipo-nuevo">
-                <h3 class="form-signin-heading">Registrar Cancha </h3>
+                <h3 class="form-signin-heading">Registrar Equipo </h3>
                 <hr class="colorgraph"><br>
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese el nombre </label>

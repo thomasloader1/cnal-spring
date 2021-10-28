@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface RepositorioEquipo {
     List<Equipo> traerListaDeEquipos();
 
     List<Usuario> buscarJugadoresDeUnEquipo(Equipo equipo);
+
+    List<Equipo> equiposFiltrados(Integer tipo);
 }

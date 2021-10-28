@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ControladorLogin {
@@ -21,10 +23,12 @@ public class ControladorLogin {
 	// dicha clase debe estar anotada como @Service o @Repository y debe estar en un paquete de los indicados en
 	// applicationContext.xml
 	private ServicioLogin servicioLogin;
+	private ServicioUsuario servicioUsuario;
 
 	@Autowired
-	public ControladorLogin(ServicioLogin servicioLogin){
+	public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario){
 		this.servicioLogin = servicioLogin;
+		this.servicioUsuario = servicioUsuario;
 	}
 
 	@RequestMapping("/login")
@@ -62,7 +66,13 @@ public class ControladorLogin {
 	public ModelAndView redirectPorRol(String rol){
 		switch (rol) {
 			case "Admin":
-				return new ModelAndView("admin/index-admin");
+				List<Usuario> usuarioList = servicioUsuario.todosLosUsuarios();
+				ModelMap model = new ModelMap();
+				if(usuarioList != null)
+				{
+					model.put("USUARIOS", usuarioList);
+				}
+				return new ModelAndView("admin/index-admin", model);
 
 			case "Jugador":
 				return new ModelAndView("redirect:/listar-partidos");

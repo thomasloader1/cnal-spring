@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Locale;
 
 @Repository("repositorioEquipo")
 public class RepositorioEquipoImpl implements RepositorioEquipo{
@@ -54,6 +57,15 @@ public class RepositorioEquipoImpl implements RepositorioEquipo{
         return session.createCriteria(Usuario.class)
                 .add(Restrictions.eq("equipo", equipo))
                 .list();
+
+    }
+
+    @Override
+    public List<Equipo> equiposFiltrados(Integer tipo){
+
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Equipo.class);
+            criteria.add(Restrictions.eq("tipoPartido", tipo));
+        return criteria.list();
 
     }
 }

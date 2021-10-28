@@ -85,4 +85,8 @@ public class Equipo {
     public void setCantidadJugadores(int cantidadJugadores) {
         this.cantidadJugadores = cantidadJugadores;
     }
+
+    public void setCategoria(String categoria){this.categoria = categoria;}
+
+    public String getCategoria(){return categoria;}
 }

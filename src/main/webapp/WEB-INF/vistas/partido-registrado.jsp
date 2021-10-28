@@ -20,13 +20,13 @@
             <div class="card">
                 <img class="card-img-top" src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80" alt="Card image cap" style="height: 300px">
                 <div class="card-body">
-                    <h5 class="card-title">Categoria ${partido.categoria}</h5>
+                    <h5 class="card-title"><strong>Categoria: </strong>${partido.categoria}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Horario: ${partido.horario}</li>
-                    <li class="list-group-item">Cantidad de jugadores: ${partido.cant_jugadores}</li>
-                    <li class="list-group-item">Tipo de partido: ${partido.tipo}</li>
-                    <li class="list-group-item">Localidad: ${partido.localidad}</li>
+                    <li class="list-group-item"><strong>Horario: </strong>${partido.horario}</li>
+                    <li class="list-group-item"><strong>Cantidad de jugadores: </strong>${partido.cant_jugadores}</li>
+                    <li class="list-group-item"><strong>Tipo de partido: </strong>${partido.tipo}</li>
+                    <li class="list-group-item"><strong>Localidad:</strong> ${partido.localidad}</li>
                 </ul>
             </div>
         </div>

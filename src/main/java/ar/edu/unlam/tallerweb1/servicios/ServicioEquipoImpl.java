@@ -57,6 +57,11 @@ public class ServicioEquipoImpl implements ServicioEquipo{
         return repositorioEquipo.traerListaDeEquipos();
     }
 
+    @Override
+    public List<Equipo> filtrarEquipos(Integer tipo) {
+        return repositorioEquipo.equiposFiltrados(tipo);
+    }
+
 
     public boolean hayLugaresDisponibles(Equipo equipo){
         boolean hayLugar = false; // repositorioEquipo.getEquipoHabilitado(EQUIPO)

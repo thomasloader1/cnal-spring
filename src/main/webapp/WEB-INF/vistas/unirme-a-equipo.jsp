@@ -17,6 +17,37 @@
 <%@ include file = "partial/navbar.jsp" %>
 
 <div class="container">
+    <div class="row">
+        <div class="col-1">
+            <h5>Filtros</h5>
+        </div>
+        <div class="col-11">
+            <form:form action="listar-equipos-filtrados" method="get">
+
+                <select name="tipoPartido">
+                    <option value="0">Tipo de Partido</option>
+                    <option value="5">Futbol 5</option>
+                    <option value="11">Futbol 11</option>
+                </select>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form:form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <c:if test="${not empty msg}">
+            <div class="col-12">
+                <div class="alert text-danger" role="alert">
+                    <h6>${msg}</h6>
+                </div>
+            </div>
+        </c:if>
+    </div>
+</div>
+
+<div class="container">
     <div class="row my-5">
         <div class="col-12">
             <table class="table text-center">

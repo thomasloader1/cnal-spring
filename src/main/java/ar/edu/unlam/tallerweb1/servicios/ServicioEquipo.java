@@ -13,4 +13,6 @@ public interface ServicioEquipo {
     Equipo registrarEquipo(Equipo equipo);
 
     List<Equipo> buscarTodosLosEquipos();
+
+    List<Equipo> filtrarEquipos(Integer tipo);
 }
