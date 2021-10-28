@@ -14,7 +14,7 @@
     <%@ include file = "partial/header.jsp" %>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarJugador.jsp" %>
 
 <div class="container">
     <div class="row">
@@ -23,13 +23,14 @@
         </div>
         <div class="col-11">
             <form:form action="listar-equipos-filtrados" method="get">
-
-                <select name="tipoPartido">
+                <div class="d-flex">
+                <select name="tipoPartido" class="form-control col-3">
                     <option value="0">Tipo de Partido</option>
                     <option value="5">Futbol 5</option>
                     <option value="11">Futbol 11</option>
                 </select>
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                </div>
             </form:form>
         </div>
     </div>

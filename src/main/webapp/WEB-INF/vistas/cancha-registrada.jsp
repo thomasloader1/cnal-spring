@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarAdmin.jsp" %>
 <div class="container">
     <div class="row my-5">
         <div class="col-12 d-flex justify-content-center">

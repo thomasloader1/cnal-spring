@@ -18,24 +18,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/home">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear Partido</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-cancha">Crear Cancha</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-equipo">Crear Equipo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Buscar Cancha</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-al-partido">Unirme a un Partido</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-equipo">Unirme a un Equipo</a>
-                    </li>
                 </ul>
             </div>
             <div class="d-flex">

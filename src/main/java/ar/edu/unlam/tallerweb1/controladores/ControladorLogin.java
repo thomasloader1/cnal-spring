@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ControladorLogin {
@@ -57,6 +58,27 @@ public class ControladorLogin {
 		return new ModelAndView("redirect:/listar-partidos");
 	}
 
+	@RequestMapping(path = "/index-admin", method = RequestMethod.GET)
+	public ModelAndView irAHomeAdmin() {
+		List<Usuario> usuarioList = servicioUsuario.todosLosUsuarios();
+		ModelMap model = new ModelMap();
+		if(usuarioList != null)
+		{
+			model.put("USUARIOS", usuarioList);
+		}
+		return new ModelAndView("admin/index-admin",model);
+	}
+
+	@RequestMapping(path = "/index-jugador", method = RequestMethod.GET)
+	public ModelAndView irAHomeJugador() {
+		return new ModelAndView("redirect:/listar-mis-partidos");
+	}
+
+	@RequestMapping(path = "/index-jugador-partidos", method = RequestMethod.GET)
+	public ModelAndView irAHomeJugadorConPartidos() {
+		return new ModelAndView("jugador/index-jugador");
+	}
+
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
@@ -66,17 +88,17 @@ public class ControladorLogin {
 	public ModelAndView redirectPorRol(String rol){
 		switch (rol) {
 			case "Admin":
-				List<Usuario> usuarioList = servicioUsuario.todosLosUsuarios();
-				ModelMap model = new ModelMap();
-				if(usuarioList != null)
-				{
-					model.put("USUARIOS", usuarioList);
-				}
-				return new ModelAndView("admin/index-admin", model);
+				return new ModelAndView("redirect:/index-admin");
 
 			case "Jugador":
-				return new ModelAndView("redirect:/listar-partidos");
+				return new ModelAndView("redirect:/index-jugador");
 		}
 		return new ModelAndView("redirect:/home");
+	}
+	@RequestMapping(path = "/cerrarSesion")
+	public ModelAndView cerrarSesion(HttpServletRequest request) {
+		request.getSession().removeAttribute("ROL");
+		request.getSession().removeAttribute("ID");
+		return new ModelAndView("redirect:/login");
 	}
 }

@@ -6,7 +6,7 @@
     <title>Registrar Cancha</title>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarAdmin.jsp" %>
 <div class="container">
     <div class="row my-5">
         <div id="registrarCancha" class="col-md-12">

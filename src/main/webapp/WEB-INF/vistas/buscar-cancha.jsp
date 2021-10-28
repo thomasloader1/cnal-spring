@@ -14,7 +14,7 @@
     <%@ include file = "partial/header.jsp" %>
 </head>
 <body>
-    <%@ include file = "partial/navbar.jsp" %>
+    <%@ include file = "partial/navbarJugador.jsp" %>
 
     <div class="container">
         <div class="row">
@@ -29,15 +29,17 @@
             <div class="col-1">
                 <h5>Filtros</h5>
             </div>
-            <div class="col-11">
+            <div class="col-11 ">
                 <form:form action="listar-canchas-filtradas" method="get">
-                    <select name="localidad" id="">
+                    <div class="d-flex">
+                    <select class="form-control col-3" name="localidad" id="">
                         <option>Localidad</option>
                             <c:forEach items="${LOCALIDAD}" var="LOCALIDAD">
                                 <option scope="row" name="localidad">${LOCALIDAD.descripcion}</option>
                             </c:forEach>
                     </select>
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                    <button class="btn btn-primary my-2 my-sm-0 " type="submit">Buscar</button>
+                    </div>
                 </form:form>
             </div>
         </div>
