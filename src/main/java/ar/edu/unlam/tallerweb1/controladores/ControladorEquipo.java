@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ControladorEquipo {
+
+    //HttpServletRequest request;
 
     private ServicioEquipo servicioEquipo;
 
@@ -55,14 +59,18 @@ public class ControladorEquipo {
 
 
     @RequestMapping(path = "/unirse-a-equipo/{id}", method = RequestMethod.GET)
-    public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") Equipo equipo, Usuario usuario, @PathVariable Long id) {
+    public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") HttpServletRequest request, @PathVariable Long id) {
+
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+        //Long idUsuario = iDUsuario;
 
         ModelMap model = new ModelMap();
         ModelAndView modeloVista;
 
         try{
-            servicioEquipo.registrarEnEquipo(id, usuario);
-            //model.put("msg", "Te uniste correctamente");
+            servicioEquipo.registrarEnEquipo(id, idUsuario);
+
             modeloVista = new ModelAndView("union-equipo-exitosa", model);
         }
         catch (Exception e){

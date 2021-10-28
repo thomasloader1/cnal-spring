@@ -61,6 +61,6 @@ public class DatosEquipo {
     }
 
     public Equipo crearEquipo() {
-        return new Equipo(this.getNombre(),this.getCantidadJugadores(),this.getTipoPartido(), this.getCategoria());
+        return new Equipo(this.getNombre(), this.getTipoPartido(), this.getCategoria());
     }
 }

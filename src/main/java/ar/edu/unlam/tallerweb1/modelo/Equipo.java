@@ -1,12 +1,10 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity
 public class Equipo {
@@ -34,6 +32,12 @@ public class Equipo {
     public Equipo(String nombre, int cantidadJugadores, int tipoPartido, String categoria) {
         this.nombre = nombre;
         this.cantidadJugadores = cantidadJugadores;
+        this.tipoPartido = tipoPartido;
+        this.categoria = categoria;
+    }
+
+    public Equipo(String nombre, int tipoPartido, String categoria) {
+        this.nombre = nombre;
         this.tipoPartido = tipoPartido;
         this.categoria = categoria;
     }

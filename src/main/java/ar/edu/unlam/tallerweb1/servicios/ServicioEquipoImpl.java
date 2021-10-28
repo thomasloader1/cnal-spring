@@ -23,34 +23,41 @@ public class ServicioEquipoImpl implements ServicioEquipo{
     }
 
     @Override
-    public Boolean registrarEnEquipo(Long iDEquipo, Usuario usuario) throws Exception {
+    public Equipo registrarEquipo(Equipo equipo) {
+        repositorioEquipo.guardarEquipo(equipo);
+        return equipo;
+    }
+
+
+
+    @Override
+    public Boolean registrarEnEquipo(Long iDEquipo, Long idUsuario) throws Exception {
         Boolean registroExitoso = false;
 
         Equipo equipoBuscado = repositorioEquipo.buscarEquipo(iDEquipo);
-        int cantJugadoresActuales = equipoBuscado.getCantidadJugadores();
 
         if(equipoBuscado==null)
             throw new Exception();
 
-        if(equipoBuscado!= null && hayLugaresDisponibles(equipoBuscado)){
+        if(hayLugaresDisponibles(equipoBuscado)){
 
-            equipoBuscado.setCantidadJugadores(cantJugadoresActuales + 1);
+            Usuario jugadorBuscado = repositorioEquipo.buscarJugador(idUsuario);
+            if(jugadorBuscado.getEquipo()==null){
+                unirJugadorAlEquipoElegido(equipoBuscado, jugadorBuscado);
+            }
+            else{
+                Equipo equipoAnterior = jugadorBuscado.getEquipo();
 
-            //equipoBuscado.setJugadores(usuario);
-            repositorioEquipo.actualizarEquipo(equipoBuscado);
+                unirJugadorAlEquipoElegido(equipoBuscado, jugadorBuscado);
 
+                equipoAnterior.setCantidadJugadores(repositorioEquipo.buscarJugadoresDeUnEquipo(equipoAnterior).size());
+            }
             registroExitoso = true;
-
         }
 
         return registroExitoso;
     }
 
-    @Override
-    public Equipo registrarEquipo(Equipo equipo) {
-        repositorioEquipo.guardarEquipo(equipo);
-        return equipo;
-    }
 
     @Override
     public List<Equipo> buscarTodosLosEquipos() {
@@ -60,17 +67,21 @@ public class ServicioEquipoImpl implements ServicioEquipo{
 
     public boolean hayLugaresDisponibles(Equipo equipo){
         boolean hayLugar = false;
+        int tipoPartido = equipo.getTipoPartido();
+        List<Usuario> jugadoresDelEquipo = repositorioEquipo.buscarJugadoresDeUnEquipo(equipo);
 
-        if(equipo.getTipoPartido()==5 && equipo.getCantidadJugadores()<5){
+        if(jugadoresDelEquipo.size()<tipoPartido){
             hayLugar = true;
-        }
-        else if(equipo.getTipoPartido()==11 && equipo.getCantidadJugadores()<11){
-            hayLugar = true;
-        }
-        else{
-            equipo.setHabilitado(true); //ya esta completo y habilitado para jugar en un partido ese equipo
         }
         return hayLugar;
+    }
+
+
+    public void unirJugadorAlEquipoElegido(Equipo equipo, Usuario jugador){
+        jugador.setEquipo(equipo);
+
+        repositorioEquipo.actualizarEquipo(equipo);
+        equipo.setCantidadJugadores(repositorioEquipo.buscarJugadoresDeUnEquipo(equipo).size());
     }
 
 }

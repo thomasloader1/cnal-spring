@@ -30,6 +30,7 @@ public class RepositorioEquipoImpl implements RepositorioEquipo{
 
     @Override
     public void actualizarEquipo(Equipo equipoBuscado) {
+        System.out.println ("holas");
         this.sessionFactory.getCurrentSession().update(equipoBuscado);
     }
 
@@ -55,5 +56,20 @@ public class RepositorioEquipoImpl implements RepositorioEquipo{
                 .add(Restrictions.eq("equipo", equipo))
                 .list();
 
+    }
+
+    @Override
+    public void registrarJugadorEnElEquipo(Long usuario, Long idUsuario) {
+        //sessionFactory.getCurrentSession().save();
+
+    }
+
+    @Override
+    public Usuario buscarJugador(Long idUsuario) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return (Usuario) session.createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", idUsuario))
+                .uniqueResult();
     }
 }
