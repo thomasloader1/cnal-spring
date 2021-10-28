@@ -61,11 +61,27 @@ public class RepositorioEquipoImpl implements RepositorioEquipo{
     }
 
     @Override
-    public List<Equipo> equiposFiltrados(Integer tipo){
+    public List<Equipo> equiposFiltrados(Integer tipo) {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Equipo.class);
-            criteria.add(Restrictions.eq("tipoPartido", tipo));
+        criteria.add(Restrictions.eq("tipoPartido", tipo));
         return criteria.list();
+    }
+
+
+    public void registrarJugadorEnElEquipo(Long usuario, Long idUsuario) {
+        //sessionFactory.getCurrentSession().save();
+
+    }
+
+
+    @Override
+    public Usuario buscarJugador(Long idUsuario) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return (Usuario) session.createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", idUsuario))
+                .uniqueResult();
 
     }
 }

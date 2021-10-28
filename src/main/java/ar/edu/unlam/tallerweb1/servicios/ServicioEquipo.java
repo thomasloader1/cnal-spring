@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ServicioEquipo {
 
-    Boolean registrarEnEquipo(Long iDEquipo, Usuario usuario) throws Exception;
+    Boolean registrarEnEquipo(Long iDEquipo, Long iDUsuario) throws Exception;
 
     Equipo registrarEquipo(Equipo equipo);
 

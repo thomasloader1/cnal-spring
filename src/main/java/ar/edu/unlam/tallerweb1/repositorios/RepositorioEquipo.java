@@ -19,5 +19,11 @@ public interface RepositorioEquipo {
 
     List<Usuario> buscarJugadoresDeUnEquipo(Equipo equipo);
 
+
     List<Equipo> equiposFiltrados(Integer tipo);
+
+    void registrarJugadorEnElEquipo(Long usuario, Long idUsuario);
+
+    Usuario buscarJugador(Long idUsuario);
+
 }
