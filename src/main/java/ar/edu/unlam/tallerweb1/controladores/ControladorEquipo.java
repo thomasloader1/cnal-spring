@@ -59,7 +59,7 @@ public class ControladorEquipo {
 
 
     @RequestMapping(path = "/unirse-a-equipo/{id}", method = RequestMethod.GET)
-    public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") HttpServletRequest request, @PathVariable Long id) {
+    public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") @PathVariable Long id, HttpServletRequest request) {
 
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
 
