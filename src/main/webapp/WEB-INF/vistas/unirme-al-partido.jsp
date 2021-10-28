@@ -8,7 +8,7 @@
     <%@ include file = "partial/header.jsp" %>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarJugador.jsp" %>
 
 
     <div class="container">
@@ -26,19 +26,21 @@
             </div>
             <div class="col-11">
                 <form:form action="listar-partidos-filtrados" method="get">
-                    <select name="localidad" id="">
+                    <div class="d-flex">
+                    <select class="form-control col-3" name="localidad" id="">
                             <option>Localidad</option>
                         <c:forEach items="${LOCALIDAD}" var="LOCALIDAD">
                             <option scope="row" name="localidad">${LOCALIDAD.descripcion}</option>
                         </c:forEach>
                     </select>
 
-                    <select name="categoria">
+                    <select name="categoria" class="form-control col-3">
                         <option>Categoria</option>
                         <option>Juvenil</option>
                         <option>Adulto</option>
                     </select>
                         <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                    </div>
                 </form:form>
             </div>
         </div>

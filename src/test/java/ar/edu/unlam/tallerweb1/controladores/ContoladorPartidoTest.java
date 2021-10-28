@@ -52,7 +52,6 @@ public class ContoladorPartidoTest {
        // assertThat(modeloVistaPartido.getModel().get("categoria")).isEqualTo(partido.getCategoria());
     }
 
-
     @Test
     public void noPuedoCrearPartidoPorCategoriaInvalida() throws Exception {
         givenQueUnPartidoNoExiste(partidoConCategoriaInvalida);
@@ -65,7 +64,6 @@ public class ContoladorPartidoTest {
         verify(servicioCrearPartido, never()).registrarPartido(any());
     }
 
-
     @Test
     public void noPuedoCrearPartidoPorTipoInvalido() throws Exception {
         givenQueUnPartidoNoExiste(partidoConTipoInvalido);
@@ -77,8 +75,7 @@ public class ContoladorPartidoTest {
         assertThat(modeloVistaPartido.getModel().get("msg")).isEqualTo("El tipo de partido ingresado es incorrecto.");
         verify(servicioCrearPartido, never()).registrarPartido(any());
     }
-
-
+    
     @Test
     public void noPuedoCrearPartidoPorCantidadJugadoresIncorrecta() throws Exception {
         givenQueUnPartidoNoExiste(partidoConCantidadJugadoresInvalida);

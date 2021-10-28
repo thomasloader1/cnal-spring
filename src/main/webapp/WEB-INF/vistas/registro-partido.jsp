@@ -6,7 +6,7 @@
     <title>Registrar Partido</title>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarJugador.jsp" %>
     <div class="container">
         <div class="row my-5">
             <div id="registrarPartido" class="col-md-12">
@@ -15,17 +15,26 @@
                     <hr class="colorgraph"><br>
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese la cantidad de jugadores</label>
-                        <input name="cant_jugadores" id="defaultRegisterFormCantidad" class="form-control" />
+                        <input name="cant_jugadores" id="defaultRegisterFormCantidad" class="form-control" type="number"/>
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese tipo de partido</label>
-                        <input name="tipo" id="defaultRegisterFormTipo" class="form-control"/>
+                        <select class="form-control" name="tipo">
+                            <option selected>Seleccione el tipo de partido</option>
+                            <option value="5">Futbol 5</option>
+                            <option value="11">Futbol 11</option>
+                        </select>
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese la categoria</label>
-                        <input name="categoria" id="defaultRegisterFormCategoria" class="form-control"/>
+                        <select class="form-control" name="categoria">
+                            <option selected>Seleccione la categoria</option>
+                            <option value="Infantil">Infantil</option>
+                            <option value="Juvenil">Juvenil</option>
+                            <option value="Adulto">Adulto</option>
+                        </select>
                     </div>
 
                     <div class="form-outline mb-4">

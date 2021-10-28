@@ -12,7 +12,7 @@
   <%@ include file = "partial/header.jsp" %>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarJugador.jsp" %>
 
 
 <div class="container">

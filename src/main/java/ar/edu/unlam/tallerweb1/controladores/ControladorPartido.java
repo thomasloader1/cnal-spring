@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -53,23 +54,24 @@ public class ControladorPartido {
     }
 
     @RequestMapping(path = "listar-partidos", method = RequestMethod.GET)
-    public ModelAndView listarPartidos(HttpServletRequest request) {
+    public ModelAndView listarPartidos() {
+        ModelMap model = new ModelMap();
+        model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+        return new ModelAndView("home", model);
+    }
+    @RequestMapping(path = "listar-mis-partidos", method = RequestMethod.GET)
+    public ModelAndView listarMisPartidos(HttpServletRequest request) {
         ModelMap model = new ModelMap();
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
-
         if(idUsuario != null) {
-
             List<Partido> partidosList = servicioCrearPartido.buscarPartidosPorUsuario(idUsuario);
-
             if(partidosList != null){
                 model.put("MIS_PARTIDOS", partidosList);
             }
         }
-
-        return new ModelAndView("home", model);
+        return new ModelAndView("jugador/index-jugador", model);
     }
-
     @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)
     public ModelAndView listarPartidosConFiltro(@RequestParam("localidad") String localidad, @RequestParam("categoria") String categoria) {
         ModelMap model = new ModelMap();

@@ -6,7 +6,7 @@
     <title>Registrar Equipo</title>
 </head>
 <body>
-<%@ include file = "partial/navbar.jsp" %>
+<%@ include file = "partial/navbarJugador.jsp" %>
 <div class="container">
     <div class="row my-5">
         <div id="registrarEquipo" class="col-md-12">
@@ -20,13 +20,23 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese tipo</label>
-                        <input type="number" name="tipoPartido" id="defaultRegisterFormDomicilio" class="form-control"/>
+                        <select class="form-control" name="tipoPartido">
+                            <option selected>Seleccione el tipo de partido</option>
+                            <option value="5">Futbol 5</option>
+                            <option value="11">Futbol 11</option>
+                        </select>
+
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese categoria</label>
-                        <input name="categoria" id="defaultRegisterFormLocalidad" class="form-control"/>
-                    </div>
+                        <select class="form-control" name="categoria">
+                            <option selected>Seleccione la categoria</option>
+                            <option value="Infantil">Infantil</option>
+                            <option value="Juvenil">Juvenil</option>
+                            <option value="Adulto">Adulto</option>
+                        </select>
+                   </div>
 
 <%--
                 <div class="form-outline mb-4">
