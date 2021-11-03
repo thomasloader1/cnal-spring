@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class RepositorioTorneoTest extends SpringTest {
-    Torneo TORNEO= new Torneo("5", "Juvenil", "4", "28/10/2021", "Hurlingam", "Cornalitos");
+    Torneo TORNEO= new Torneo("5", "Juvenil", "4", "18:00", "28/10/2021", "Hurlingam", "Cornalitos");
 
     @Autowired
     private RepositorioTorneo repositorioTorneo;

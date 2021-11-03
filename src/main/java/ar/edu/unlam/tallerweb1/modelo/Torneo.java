@@ -11,16 +11,18 @@ public class Torneo {
     private String tipo;
     private String categoria;
     private String cantidadEquipos;
+    private String horario;
     private String fecha;
     private String localidad;
     private String nombre;
 
     public Torneo() {}
 
-    public Torneo(String tipo, String categoria, String cantidadEquipos, String fecha, String localidad, String nombre) {
+    public Torneo(String tipo, String categoria, String cantidadEquipos, String horario, String fecha, String localidad, String nombre) {
         this.tipo = tipo;
         this.categoria = categoria;
         this.cantidadEquipos = cantidadEquipos;
+        this.horario = horario;
         this.fecha = fecha;
         this.localidad = localidad;
         this.nombre = nombre;
@@ -56,6 +58,14 @@ public class Torneo {
 
     public void setCantidadEquipos(String cantidadEquipos) {
         this.cantidadEquipos = cantidadEquipos;
+    }
+
+    public String getHorario(){
+        return horario;
+    }
+
+    public void setHorario(String horario){
+        this.horario = horario;
     }
 
     public String getFecha() {

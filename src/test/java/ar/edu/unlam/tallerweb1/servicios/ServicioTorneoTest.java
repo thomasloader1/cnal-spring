@@ -12,8 +12,8 @@ import static org.mockito.Mockito.*;
 
 public class ServicioTorneoTest {
 
-    public static final Torneo TORNEO = new Torneo("11", "Juvenil", "4", "18/11/2021", "Ciudad Evita", "NombreDelTorneo");
-    public static final Torneo TORNEO_NO_EXISTENTE = new Torneo("11", "Juvenil", "8", "12/12/2021", "Ciudad Evita", "NombreDelTorneo2");
+    public static final Torneo TORNEO = new Torneo("11", "Juvenil", "4", "18:00", "18/11/2021", "Ciudad Evita", "NombreDelTorneo");
+    public static final Torneo TORNEO_NO_EXISTENTE = new Torneo("11", "Juvenil", "8", "20:00", "12/12/2021", "Ciudad Evita", "NombreDelTorneo2");
     public static final List<Torneo> TORNEOS = new ArrayList<Torneo>(10);
 
     private RepositorioTorneo repositorioTorneo = mock(RepositorioTorneo.class);

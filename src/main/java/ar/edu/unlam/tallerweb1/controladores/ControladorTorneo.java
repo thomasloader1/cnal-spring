@@ -3,12 +3,14 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class ControladorTorneo {
 
     private ServicioTorneo servicioTorneo;
@@ -16,6 +18,11 @@ public class ControladorTorneo {
     @Autowired
     public ControladorTorneo(ServicioTorneo servicioTorneo){
         this.servicioTorneo= servicioTorneo;
+    }
+
+    @RequestMapping(path = "/registro-torneo", method = RequestMethod.GET)
+    public ModelAndView irARegistroTorneo(){
+        return new ModelAndView("registro-torneo");
     }
 
     @RequestMapping(method= RequestMethod.POST, path = "/registrar-torneo")
