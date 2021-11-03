@@ -38,14 +38,6 @@
                         </select>
                    </div>
 
-<%--
-                <div class="form-outline mb-4">
-                    <label class="form-label">Ingrese cantidad jugadores</label>
-                        <input type="number" name="cantidadJugadores" id="defaultRegisterFormCantidad" class="form-control"/>
-                </div>
---%>
-
-
                 <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar Equipo</button>
             </form:form>
 
