@@ -10,6 +10,14 @@
         <form:form action="registrarme" method="POST" modelAttribute="datos">
             <h3 class="form-signin-heading">Registrarse</h3>
             <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input name="nombre" id="nombre" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input name="apellido" id="apellido"  class="form-control">
+            </div>
+            <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp">
             </div>

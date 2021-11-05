@@ -7,13 +7,17 @@ public class DatosRegistro {
     private String password;
     private String repeatPassword;
     private String rol;
+    private String nombre;
+    private String apellido;
     public DatosRegistro(){}
 
-    public DatosRegistro(String email, String clave, String repiteClave, String rol) {
+    public DatosRegistro(String email, String clave, String repiteClave, String rol, String nombre, String apellido) {
         this.email = email;
         this.password = clave;
         this.repeatPassword = repiteClave;
         this.rol = rol;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public String getEmail() {
@@ -44,7 +48,23 @@ public class DatosRegistro {
 
     public void setRol(String rol) { this.rol = rol; }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public Usuario crearUsuario() {
-        return new Usuario(this.getEmail(),this.getPassword(),this.getRol());
+        return new Usuario(this.getEmail(),this.getPassword(),this.getRol(),this.getNombre(), this.getApellido());
     }
 }

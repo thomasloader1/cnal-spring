@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <%@ include file = "../partial/header.jsp" %>
@@ -66,6 +67,9 @@
                         <p class="card-text">
                             <strong>Horario:</strong> ${MIS_PARTIDOS.horario}
                         </p>
+                        <form:form action="ver-jugadores-partido/${MIS_PARTIDOS.id}" method="get">
+                            <button class="btn btn-primary" type="submit">Ver jugadores</button>
+                        </form:form>
                     </div>
                 </div>
             </div>

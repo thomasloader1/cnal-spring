@@ -13,12 +13,12 @@ import static org.mockito.Mockito.*;
 
 public class ServicioEquipoTest {
 
-    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123", "usuario");
-    private static final Usuario USUARIO2 = new Usuario("mail@mail.com", "123", "usuario");
-    private static final Usuario USUARIO3 = new Usuario("scortes@mail.com", "123", "usuario");
-    private static final Usuario USUARIO4 = new Usuario("scortes@mail.com", "123", "usuario");
-    private static final Usuario USUARIO5 = new Usuario("scortes@mail.com", "123", "usuario");
-    private static final Usuario USUARIO6 = new Usuario("scortes@mail.com", "123", "usuario");
+    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123", "usuario","","");
+    private static final Usuario USUARIO2 = new Usuario("mail@mail.com", "123", "usuario","","");
+    private static final Usuario USUARIO3 = new Usuario("scortes@mail.com", "123", "usuario","","");
+    private static final Usuario USUARIO4 = new Usuario("scortes@mail.com", "123", "usuario","","");
+    private static final Usuario USUARIO5 = new Usuario("scortes@mail.com", "123", "usuario","","");
+    private static final Usuario USUARIO6 = new Usuario("scortes@mail.com", "123", "usuario","","");
 
     private RepositorioEquipo repositorioEquipo = mock(RepositorioEquipo.class);
     private ServicioEquipo servicioEquipo = new ServicioEquipoImpl(repositorioEquipo);

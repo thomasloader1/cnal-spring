@@ -1,13 +1,16 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 // implelemtacion del repositorio de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
@@ -66,6 +69,32 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
 				.add(Restrictions.eq("id", id))
 				.uniqueResult();
+	}
+
+	@Override
+	public void eliminarUsuario(Usuario usuario){
+		sessionFactory.getCurrentSession().delete(usuario);
+	}
+
+
+	@Override
+	public List<Usuario> listarJugadoresPorPartido(Long idPartido) {
+		final Session session = sessionFactory.getCurrentSession();
+
+		List<Usuario> usuarioList = new LinkedList<>();
+
+		List<UsuarioPartido> usuarioPartidos = session.createCriteria(UsuarioPartido.class).add(Restrictions.eq("primaryTwo", idPartido)).list();
+
+		if(usuarioPartidos.size() > 0) {
+			for (UsuarioPartido usuarioPartido : usuarioPartidos) {
+
+				Usuario usuario = this.buscarUsuarioPorId(usuarioPartido.getPrimaryOne());
+
+				usuarioList.add(usuario);
+
+			}
+		}
+		return usuarioList;
 	}
 
 }

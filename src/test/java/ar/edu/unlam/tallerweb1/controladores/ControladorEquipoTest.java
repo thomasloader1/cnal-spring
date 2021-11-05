@@ -18,7 +18,7 @@ public class ControladorEquipoTest {
     private ServicioEquipo servicioEquipo = mock(ServicioEquipo.class);
     private ControladorEquipo controladorEquipo = new ControladorEquipo(servicioEquipo);
 
-    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123","admin");
+    private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123","admin","","");
     private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11, 11, "Juvenil");
     private static final DatosEquipo EQUIPO_INCOMPLETO = new DatosEquipo("Pirulo", 3, 5, "Juvenil");
 

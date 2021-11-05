@@ -1,0 +1,44 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Fede
+  Date: 31/10/2021
+  Time: 21:29
+  To change this template use File | Settings | File Templates.
+--%>
+<!DOCTYPE html>
+<html>
+<%@ include file = "partial/header.jsp" %>
+<body>
+<%@ include file = "partial/navbarJugador.jsp" %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+        <form:form id="datos-reporte" modelAttribute="datos-reporte" action="enviar-reporte-usuario/${IDUSUARIO}" method="post">
+                <div>
+                    <h3>Formulario de Reporte</h3>
+                </div>
+                <div class="mb-3">
+                    <label for="motivo" class="form-label">Motivo del reporte</label>
+                    <form:input path="motivo" name="motivo" id="motivo" class="form-control"></form:input>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion del problema</label>
+                    <form:textarea path="descripcion" name="descripcion" id="descripcion" class="form-control"></form:textarea>
+                </div>
+                <form:button class="btn btn-lg btn-primary btn-block" Type="Submit">Enviar reporte</form:button>
+            </form:form>
+        </div>
+        </div>
+</div>
+
+
+
+<%@ include file = "partial/scripts.jsp" %>
+<%@ include file = "partial/footer.jsp" %>
+</body>
+</html>

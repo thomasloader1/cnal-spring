@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface RepositorioUsuario {
 	void modificar(Usuario usuario);
 	List<Usuario> todosLosUsuarios();
 	Usuario buscarUsuarioPorId(Long id);
+	void eliminarUsuario(Usuario usuario);
+	List<Usuario> listarJugadoresPorPartido(Long idPartido);
 }

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioReporte;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.junit.Test;
 
@@ -10,9 +11,10 @@ import static org.mockito.Mockito.when;
 
 public class ServicioUsuarioTest
 {
-    public static final Usuario USUARIO = new Usuario("asd@asd.com", "asd", "Admin" );
+    public static final Usuario USUARIO = new Usuario("asd@asd.com", "asd", "Admin" ,"","");
     private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
-    private ServicioUsuario servicioUsuario = new ServicioUsuarioImpl(repositorioUsuario);
+    private RepositorioReporte repositorioReporte = mock(RepositorioReporte.class);
+    private ServicioUsuario servicioUsuario = new ServicioUsuarioImpl(repositorioUsuario, repositorioReporte);
 
     @Test
     public void puedeCambiarRolDeUnUsuario()

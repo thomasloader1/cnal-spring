@@ -15,16 +15,31 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
+	private String nombre;
+	private String apellido;
+	private String fechaSancion;
 
 	@ManyToOne
 	private Equipo equipo;
 
 	public Usuario(){}
 
-	public Usuario(String email, String password, String rol) {
+	public Usuario(String email, String password, String rol, String nombre, String apellido) {
 		this.email = email;
 		this.password = password;
 		this.rol = rol;
+		this.nombre = nombre;
+		this.apellido = apellido;
+
+	}
+
+	public Usuario(String email, String password, String rol, String nombre, String apellido, String fechaSancion) {
+		this.email = email;
+		this.password = password;
+		this.rol = rol;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaSancion = fechaSancion;
 	}
 
 	private Boolean activo = false;
@@ -83,5 +98,21 @@ public class Usuario {
 
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
+	}
+
+	public String getNombre() {return nombre;}
+
+	public void setNombre(String nombre) {this.nombre = nombre;}
+
+	public String getApellido() {return apellido;}
+
+	public void setApellido(String apellido) {this.apellido = apellido;}
+
+	public String getFechaSancion() {
+		return fechaSancion;
+	}
+
+	public void setFechaSancion(String fechaSancion) {
+		this.fechaSancion = fechaSancion;
 	}
 }

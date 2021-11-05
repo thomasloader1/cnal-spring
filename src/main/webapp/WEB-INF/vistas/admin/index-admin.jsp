@@ -27,15 +27,28 @@
                 <tbody>
                 <c:forEach items="${USUARIOS}" var="USUARIO">
                     <tr class="table-active">
-                        <th scope="row">${USUARIO.email}</th>
-                        <td>${USUARIO.password}</td>
-                        <td>${USUARIO.rol}</td>
+                                <th scope="row">${USUARIO.email}</th>
+                                <td>${USUARIO.password}</td>
+                                <td>${USUARIO.rol}</td>
                         <td>
                             <form:form action="cambio-rol/${USUARIO.id}" method="get">
                                 <button class="btn text-white" style="background-color: #67b168" type="submit">Cambiar Rol</button>
                             </form:form>
                         </td>
+
+                        <!--<td>
+                            <form:form action="eliminar-usuario/${USUARIO.id}" method="get">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </form:form>
+                        </td>-->
+
+                        <td>
+                            <form:form action="ver-reportes-usuario/${USUARIO.id}" method="get">
+                                <button class="btn btn-danger" type="submit">Ver reportes</button>
+                            </form:form>
+                        </td>
                     </tr>
+
                 </c:forEach>
                 </tbody>
             </table>
