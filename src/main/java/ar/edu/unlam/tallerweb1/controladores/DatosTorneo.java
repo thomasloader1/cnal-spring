@@ -9,8 +9,11 @@ public class DatosTorneo {
     private String tipo;
     private String categoria;
     private String cantidadEquipos;
+    private String horario;
     private String fecha;
     private String localidad;
+
+    public DatosTorneo(){}
 
     public DatosTorneo(String tipo, String categoria, String cantidadEquipos, String fecha, String localidad, String nombre) {
         this.nombre = nombre;
@@ -61,9 +64,8 @@ public class DatosTorneo {
         return esValido;
     }
 
-
     public Torneo crearTorneo() {
-        return new Torneo(this.getTipo(), this.getCategoria(), this.getCantidadEquipos(), this.getFecha(), this.getLocalidad(), this.getNombre());
+        return new Torneo(this.getTipo(), this.getCategoria(), this.getCantidadEquipos(), this.getHorario(), this.getFecha(), this.getLocalidad(), this.getNombre());
     }
 
     public String getNombre() {
@@ -80,6 +82,10 @@ public class DatosTorneo {
 
     public String getCantidadEquipos() {
         return cantidadEquipos;
+    }
+
+    public String getHorario(){
+        return horario;
     }
 
     public String getFecha() {
@@ -104,6 +110,10 @@ public class DatosTorneo {
 
     public void setCantidadEquipos(String cantidadEquipos) {
         this.cantidadEquipos = cantidadEquipos;
+    }
+
+    public void setHorario(String horario){
+        this.horario = horario;
     }
 
     public void setFecha(String fecha) {
