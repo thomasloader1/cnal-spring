@@ -28,9 +28,9 @@
                     <tr class="table-active">
                         <th scope="row">${USUARIO.email}</th>
                         <td>${USUARIO.nombre}</td>
-                        <td>${USUARIO.apellido}</td>
+                        <td>${USUARIO.id}</td>
                         <td>
-                            <form:form action="reportar-usuario/${USUARIO.id}" method="get">
+                            <form:form action="/proyecto_limpio_spring_war_exploded/reportar-usuario/${USUARIO.id}" method="GET">
                                 <button class="btn btn-danger" type="submit">Reportar Jugador</button>
                             </form:form>
                         </td>

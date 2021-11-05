@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-12">
 
-        <form:form id="datos-reporte" modelAttribute="datos-reporte" action="enviar-reporte-usuario/${IDUSUARIO}" method="post">
+        <form:form modelAttribute="datos-reporte" action="/proyecto_limpio_spring_war_exploded/enviar-reporte-usuario/${IDUSUARIO}" method="post">
                 <div>
                     <h3>Formulario de Reporte</h3>
                 </div>

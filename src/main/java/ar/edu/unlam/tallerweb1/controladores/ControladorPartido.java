@@ -93,7 +93,7 @@ public class ControladorPartido {
         return new ModelAndView("unirme-al-partido", model);
     }
 
-    @RequestMapping(path = "union-partido/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/union-partido/{id}", method = RequestMethod.GET)
     public ModelAndView unirseAUnPartido(HttpServletRequest request, @ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
         try {
 
@@ -104,17 +104,16 @@ public class ControladorPartido {
             if(usuario == null) {
                 Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
                 servicioCrearPartido.unirmeAlPartido(partidoPorId);
-
                 servicioCrearPartido.vincularJugadorAPartido(idUsuario, id);
 
                 modelo.put("msg", "¡Te uniste al partido correctamente!");
-                return new ModelAndView("union-a-partido", modelo);
+                return new ModelAndView("/union-a-partido", modelo);
             }
             else {
                 modelo.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
                 modelo.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
                 modelo.put("msg", "¡Ya te haz unido a este partido!");
-                return new ModelAndView("unirme-al-partido", modelo);
+                return new ModelAndView("/unirme-al-partido", modelo);
             }
         }
         catch (Exception e){

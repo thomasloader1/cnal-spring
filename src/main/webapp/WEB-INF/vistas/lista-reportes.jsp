@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-2">
-                <form:form action="sancionarUsuario/${IDUSUARIO}" method="get">
+                <form:form action="/proyecto_limpio_spring_war_exploded/sancionarUsuario/${IDUSUARIO}" method="get">
                     <button class="btn btn-danger"type="submit">Sancionar Jugador</button>
                 </form:form>
             </div>
@@ -47,7 +47,7 @@
                         <td>${REPORTES.fechaReporte}</td>
                         <td>${REPORTES.aprobado}</td>
                         <td>
-                            <form:form action="aprobar-reporte-usuario/${REPORTES.idReporte}" method="get">
+                            <form:form action="/proyecto_limpio_spring_war_exploded/aprobar-reporte-usuario/${REPORTES.idReporte}" method="get">
                                 <button class="btn text-white" style="background-color: #67b168" type="submit">Aprobar reporte</button>
                             </form:form>
                         </td>

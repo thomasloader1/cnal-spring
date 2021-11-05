@@ -30,6 +30,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
         Integer lugares= 0;
         if (partido.getCant_jugadores() < jugadores_totales){
             lugares= jugadores_totales - partido.getCant_jugadores();
+            partido.setCant_lugaresDisp(lugares);
         }
         repositorioPartidoImpl.guardarPartido(partido);
         return partido;

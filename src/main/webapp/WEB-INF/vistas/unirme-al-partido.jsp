@@ -83,7 +83,7 @@
                         <td>${PARTIDO.horario}</td>
                         <td>${PARTIDO.cant_lugaresDisp}</td>
                         <td>
-                           <form:form action="union-partido/${PARTIDO.id}" method="get" modelAttribute="unirse-a-partido">
+                           <form:form action="/union-partido/${PARTIDO.id}" method="get" modelAttribute="unirse-a-partido">
                                <c:choose>
                                    <c:when test="${PARTIDO.cant_lugaresDisp  == 0}">
                                        <button class="btn text-white" style="background-color: #67b168" type="submit" disabled>Unirme</button>

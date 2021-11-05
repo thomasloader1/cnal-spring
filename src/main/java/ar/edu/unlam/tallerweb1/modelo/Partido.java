@@ -55,11 +55,11 @@ public class Partido {
         this.id = id;
     }
 
-    public int getCant_jugadores() {
+    public Integer getCant_jugadores() {
         return this.cant_jugadores;
     }
 
-    public void setCant_jugadores(int cant_jugadores) {
+    public void setCant_jugadores(Integer cant_jugadores) {
         this.cant_jugadores = cant_jugadores;
     }
 
