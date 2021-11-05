@@ -17,7 +17,7 @@
 
             <div class="col-2">
                 <form:form action="sancionarUsuario/${IDUSUARIO}" method="get">
-                    <button class="btn btn-danger"type="submit">Aprobar reporte</button>
+                    <button class="btn btn-danger"type="submit">Sancionar Jugador</button>
                 </form:form>
             </div>
         </div>
