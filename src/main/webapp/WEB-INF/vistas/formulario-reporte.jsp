@@ -23,14 +23,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="motivo" class="form-label">Motivo del reporte</label>
-                    <form:input path="motivo" name="motivo" id="motivo" class="form-control"></form:input>
+                    <input path="motivo" name="motivo" id="motivo" class="form-control">
                 </div>
 
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripcion del problema</label>
-                    <form:textarea path="descripcion" name="descripcion" id="descripcion" class="form-control"></form:textarea>
+                    <textarea path="descripcion" name="descripcion" id="descripcion" class="form-control"></textarea>
                 </div>
-                <form:button class="btn btn-lg btn-primary btn-block" Type="Submit">Enviar reporte</form:button>
+                <button class="btn btn-lg btn-primary btn-block" Type="Submit">Enviar reporte</button>
             </form:form>
         </div>
         </div>
