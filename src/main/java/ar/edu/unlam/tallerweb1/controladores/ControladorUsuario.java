@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,6 +91,7 @@ public class ControladorUsuario {
     @RequestMapping(value = "enviar-reporte-usuario/{id}", method = RequestMethod.POST)
     public ModelAndView envioReporteUsuario(@ModelAttribute("datos-reporte") DatosReporte datosReporte,@PathVariable Long id) {
 
+        ModelMap model = new ModelMap();
         ReporteUsuario reporteUsuario = new ReporteUsuario();
         Date date = new Date();
         reporteUsuario.setMotivo(datosReporte.getMotivo());
@@ -98,9 +100,11 @@ public class ControladorUsuario {
         reporteUsuario.setAprobado(false);
         reporteUsuario.setFechaReporte(date.toString());
 
+        model.put("REPORTE", reporteUsuario);
+
         servicioUsuario.enviarReporteUsuario(reporteUsuario);
 
-        return new ModelAndView("envio-formulario-reporte");
+        return new ModelAndView("envio-formulario-reporte", model);
     }
 
     @RequestMapping(path = "ver-reportes-usuario/{id}", method = RequestMethod.GET)

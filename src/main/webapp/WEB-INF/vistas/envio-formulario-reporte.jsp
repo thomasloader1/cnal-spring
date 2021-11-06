@@ -13,9 +13,18 @@
 <%@ include file = "partial/navbarJugador.jsp" %>
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h3>Formulario enviado con exito.</h3>
+    <div class="row my-5">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card">
+                <h3>Reporte enviado con exito</h3>
+                <img class="card-img-top" src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80" alt="Card image cap" style="height: 300px">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Motivo: </strong>${REPORTE.motivo}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Descripcion: </strong>${REPORTE.descripcion}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
