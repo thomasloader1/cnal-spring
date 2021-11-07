@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,22 @@ public class ControladorTorneo {
 
 
 
+    public ModelAndView generarCruceDeEquipos(Torneo torneo) {
+        ModelAndView modeloVista = null;
+        ModelMap model = new ModelMap();
+
+        try {
+            servicioTorneo.generarCruceDeEquiposDeUnTorneo(torneo);
+
+            modeloVista = new ModelAndView("fixture-generado", model);
+
+
+        }catch (Exception e){
+            model.put("error", "El torneo está incompleto. No se puede generar el fixture");
+            modeloVista = new ModelAndView("torneos-registrados", model);
+        }
+
+
+        return modeloVista;
+    }
 }

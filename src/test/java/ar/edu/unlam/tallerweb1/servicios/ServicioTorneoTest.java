@@ -1,9 +1,14 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTorneo;
 import org.junit.Test;
+import org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 import java.util.*;
 
@@ -15,6 +20,14 @@ public class ServicioTorneoTest {
     public static final Torneo TORNEO = new Torneo("11", "Juvenil", "4", "18:00", "18/11/2021", "Ciudad Evita", "NombreDelTorneo");
     public static final Torneo TORNEO_NO_EXISTENTE = new Torneo("11", "Juvenil", "8", "20:00", "12/12/2021", "Ciudad Evita", "NombreDelTorneo2");
     public static final List<Torneo> TORNEOS = new ArrayList<Torneo>(10);
+
+    public List<Equipo> equipos = new ArrayList<>();
+    public Equipo river = new Equipo();
+    public Equipo sanLorenzo = new Equipo();
+    public Equipo boca = new Equipo();
+    public Equipo racing = new Equipo();
+
+
 
     private RepositorioTorneo repositorioTorneo = mock(RepositorioTorneo.class);
     private ServicioTorneo servicioTorneo = new ServicioTorneoImpl(repositorioTorneo);
@@ -95,6 +108,35 @@ public class ServicioTorneoTest {
 
     private void thenElTorneoSeGuarda(Torneo torneo){
         verify(repositorioTorneo,times(1)).guardarTorneo(torneo);
+    }
+
+
+    //@Test
+    public void puedoRealizarElCruceDeEquiposDeUnTorneo(){
+        equipos.add(sanLorenzo);
+        equipos.add(river);
+        equipos.add(boca);
+        equipos.add(racing);
+
+        givenUnaListaDeEquiposDeUnTorneo(TORNEO, equipos);
+
+        List<PartidoTorneo> partidosGenerados = whenRealizoElCruceDeLosEquipos(TORNEO);
+
+        thenElCruceEsExitoso(partidosGenerados);
+    }
+
+    private void givenUnaListaDeEquiposDeUnTorneo(Torneo torneo, List<Equipo> equipos) {
+        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(torneo);
+        when(repositorioTorneo.buscarEquiposDeUnTorneo(torneo)).thenReturn(equipos);
+    }
+
+    private List<PartidoTorneo> whenRealizoElCruceDeLosEquipos(Torneo torneo) {
+        return servicioTorneo.generarCruceDeEquiposDeUnTorneo(torneo);
+    }
+
+    private void thenElCruceEsExitoso(List<PartidoTorneo> partidos) {
+        assertThat(partidos).isNotNull();
+        assertThat(partidos.size()).isEqualTo(2);
     }
 
 }
