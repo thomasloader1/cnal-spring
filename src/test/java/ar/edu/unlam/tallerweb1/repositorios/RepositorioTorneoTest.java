@@ -38,4 +38,18 @@ public class RepositorioTorneoTest extends SpringTest {
         TORNEO.setId(1L);
         repositorioTorneo.guardarTorneo(torneo);
     }
+
+
+
+    @Test
+    public void puedoObtenerLosEquiposDeUnTorneo(){
+
+    }
+
+
+    @Test
+    public void puedoObtenerLosPartidosDeUnTorneo(){
+
+
+    }
 }

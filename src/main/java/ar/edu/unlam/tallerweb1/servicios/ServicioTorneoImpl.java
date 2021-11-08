@@ -49,8 +49,8 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         List<Equipo> equiposDelTorneo = repositorioTorneoImpl.buscarEquiposDeUnTorneo(torneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
-        if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(equiposDelTorneo.size())){
-            //crear los partidostorneo e ir asignando los equipos sorteados
+        if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
+
             partidosDelTorneo = crearPartidosParaElTorneo(equiposDelTorneo.size());
 
             for (PartidoTorneo partido: partidosDelTorneo) {
@@ -61,12 +61,14 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 }while(!equipoNoEstaAsignadoAUnPartido(equipoSorteado, partidosDelTorneo));
 
                 partido.setEquipoUno(equipoSorteado);
+                repositorioTorneoImpl.actualizarPartidoTorneo(partido);
 
                 do{
                     equipoSorteado = sortearEquipo(equiposDelTorneo);
                 }while(!equipoNoEstaAsignadoAUnPartido(equipoSorteado, partidosDelTorneo));
 
                 partido.setEquipoDos(equipoSorteado);
+                repositorioTorneoImpl.actualizarPartidoTorneo(partido);
 
             }
         }
@@ -76,7 +78,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
     public Equipo sortearEquipo(List<Equipo> equipos){
 
-        int numeroDeEquipoAleatorio = (int) (Math.random()* (0 - equipos.size()));
+        int numeroDeEquipoAleatorio = (int) (Math.random()* (equipos.size()));
         return equipos.get(numeroDeEquipoAleatorio);
     }
 
@@ -86,11 +88,11 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         boolean noEstaEnUnPartido = true;
 
         for (PartidoTorneo partido: partidosDelTorneo) {
-            if(partido.getEquipoUno().equals(equipoSorteado)){
+            if(partido.getEquipoUno()!=null && (partido.getEquipoUno().getId().equals(equipoSorteado.getId()))){
                 noEstaEnUnPartido = false;
                 break;
             }
-            if(partido.getEquipoDos().equals(equipoSorteado)){
+            if(partido.getEquipoDos()!=null && (partido.getEquipoDos().getId().equals(equipoSorteado.getId()))){
                 noEstaEnUnPartido = false;
                 break;
             }
@@ -108,6 +110,8 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
         for (int i=0; i<cantidadDePartidosACrear; i++){
             PartidoTorneo partido = new PartidoTorneo();
+
+            repositorioTorneoImpl.guardarPartidoTorneo(partido);
 
             partidosCreados.add(partido);
         }

@@ -27,6 +27,7 @@ public class ServicioTorneoTest {
     public Equipo boca = new Equipo();
     public Equipo racing = new Equipo();
 
+    public List<Equipo> listaEquiposIncompleta = new ArrayList<>();
 
 
     private RepositorioTorneo repositorioTorneo = mock(RepositorioTorneo.class);
@@ -111,8 +112,17 @@ public class ServicioTorneoTest {
     }
 
 
-    //@Test
+    @Test
     public void puedoRealizarElCruceDeEquiposDeUnTorneo(){
+        sanLorenzo.setId(1L);
+        sanLorenzo.setNombre("San Lorenzo");
+        river.setId(2L);
+        river.setNombre("River");
+        boca.setId(3L);
+        boca.setNombre("Boca");
+        racing.setId(4L);
+        racing.setNombre("Racing");
+
         equipos.add(sanLorenzo);
         equipos.add(river);
         equipos.add(boca);
@@ -138,5 +148,32 @@ public class ServicioTorneoTest {
         assertThat(partidos).isNotNull();
         assertThat(partidos.size()).isEqualTo(2);
     }
+
+
+    @Test
+    public void noPuedoGenerarCruceDeEquiposEnTorneoIncompleto(){
+        sanLorenzo.setId(1L);
+        sanLorenzo.setNombre("San Lorenzo");
+        boca.setId(3L);
+        boca.setNombre("Boca");
+        listaEquiposIncompleta.add(sanLorenzo);
+        listaEquiposIncompleta.add(boca);
+
+        givenUnaListaIncompletaDeEquiposDeUnTorneo(TORNEO, listaEquiposIncompleta);
+
+        List<PartidoTorneo> partidosTorneo = whenRealizoElCruceDeLosEquipos(TORNEO);
+
+        thenElCruceFalla(partidosTorneo);
+    }
+
+    private void givenUnaListaIncompletaDeEquiposDeUnTorneo(Torneo torneo, List<Equipo> listaEquiposIncompleta) {
+        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(torneo);
+        when(repositorioTorneo.buscarEquiposDeUnTorneo(torneo)).thenReturn(listaEquiposIncompleta);
+    }
+
+    private void thenElCruceFalla(List<PartidoTorneo> partidosTorneo) {
+        assertThat(partidosTorneo).isNull();
+    }
+
 
 }
