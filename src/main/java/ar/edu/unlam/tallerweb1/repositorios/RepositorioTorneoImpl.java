@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,5 +38,24 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     @Override
     public void guardarTorneo(Torneo torneo) {
         sessionFactory.getCurrentSession().save(torneo);
+    }
+
+
+
+    @Override
+    public List<Equipo> buscarEquiposDeUnTorneo(Torneo torneo) {
+
+
+        return null;
+    }
+
+    @Override
+    public void actualizarPartidoTorneo(PartidoTorneo partido) {
+
+    }
+
+    @Override
+    public void guardarPartidoTorneo(PartidoTorneo partido) {
+
     }
 }
