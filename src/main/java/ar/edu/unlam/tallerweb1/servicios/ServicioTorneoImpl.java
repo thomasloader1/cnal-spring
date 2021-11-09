@@ -51,7 +51,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         List<PartidoTorneo> partidosDelTorneo = null;
         if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
 
-            partidosDelTorneo = crearPartidosParaElTorneo(equiposDelTorneo.size());
+            partidosDelTorneo = crearPartidosParaElTorneo(equiposDelTorneo.size(), torneoBuscado);
 
             for (PartidoTorneo partido: partidosDelTorneo) {
                 Equipo equipoSorteado;
@@ -103,7 +103,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
 
     //Se instancia la cantidad de partidos necesarios según la cantidad de equipos que tiene el torneo
-    public List<PartidoTorneo> crearPartidosParaElTorneo(int cantidadEquipos) {
+    public List<PartidoTorneo> crearPartidosParaElTorneo(int cantidadEquipos, Torneo torneo) {
         int cantidadDePartidosACrear = cantidadEquipos/2;
 
         List<PartidoTorneo> partidosCreados = new ArrayList<>();
@@ -111,6 +111,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         for (int i=0; i<cantidadDePartidosACrear; i++){
             PartidoTorneo partido = new PartidoTorneo();
 
+            partido.setTorneo(torneo);
             repositorioTorneoImpl.guardarPartidoTorneo(partido);
 
             partidosCreados.add(partido);

@@ -56,6 +56,15 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
 
     @Override
     public void guardarPartidoTorneo(PartidoTorneo partido) {
+        sessionFactory.getCurrentSession().save(partido);
+    }
 
+    @Override
+    public List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return session.createCriteria(PartidoTorneo.class)
+                .add(Restrictions.eq("torneo", torneo))
+                .list();
     }
 }

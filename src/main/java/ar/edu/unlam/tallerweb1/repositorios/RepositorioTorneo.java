@@ -19,4 +19,6 @@ public interface RepositorioTorneo {
     void actualizarPartidoTorneo(PartidoTorneo partido);
 
     void guardarPartidoTorneo(PartidoTorneo partido);
+
+    List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 }
