@@ -41,12 +41,22 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         }
     }
 
+    @Override
+    public Torneo buscarTorneoPorID(Long idTorneo) {
+        return repositorioTorneoImpl.buscarTorneoPorID(idTorneo);
+    }
 
     @Override
-    public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Torneo torneo) {
+    public List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo) {
+        return repositorioTorneoImpl.buscarLosPartidosDeUnTorneo(torneo);
+    }
 
-        Torneo torneoBuscado = repositorioTorneoImpl.buscarTorneo(torneo);
-        List<Equipo> equiposDelTorneo = repositorioTorneoImpl.buscarEquiposDeUnTorneo(torneo);
+
+    @Override
+    public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo) {
+
+        Torneo torneoBuscado = repositorioTorneoImpl.buscarTorneoPorID(idTorneo);
+        List<Equipo> equiposDelTorneo = repositorioTorneoImpl.buscarEquiposDeUnTorneo(idTorneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
         if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
@@ -75,6 +85,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
         return partidosDelTorneo;
     }
+
 
     public Equipo sortearEquipo(List<Equipo> equipos){
 

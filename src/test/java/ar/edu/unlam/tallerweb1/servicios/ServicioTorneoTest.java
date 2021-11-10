@@ -128,20 +128,21 @@ public class ServicioTorneoTest {
         equipos.add(boca);
         equipos.add(racing);
 
-        givenUnaListaDeEquiposDeUnTorneo(TORNEO, equipos);
+        TORNEO.setId(8L);
+        givenUnaListaDeEquiposDeUnTorneo(TORNEO.getId(), equipos);
 
-        List<PartidoTorneo> partidosGenerados = whenRealizoElCruceDeLosEquipos(TORNEO);
+        List<PartidoTorneo> partidosGenerados = whenRealizoElCruceDeLosEquipos(TORNEO.getId());
 
         thenElCruceEsExitoso(partidosGenerados);
     }
 
-    private void givenUnaListaDeEquiposDeUnTorneo(Torneo torneo, List<Equipo> equipos) {
-        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(torneo);
-        when(repositorioTorneo.buscarEquiposDeUnTorneo(torneo)).thenReturn(equipos);
+    private void givenUnaListaDeEquiposDeUnTorneo(Long idTorneo, List<Equipo> equipos) {
+        when(repositorioTorneo.buscarTorneoPorID(idTorneo)).thenReturn(TORNEO);
+        when(repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo)).thenReturn(equipos);
     }
 
-    private List<PartidoTorneo> whenRealizoElCruceDeLosEquipos(Torneo torneo) {
-        return servicioTorneo.generarCruceDeEquiposDeUnTorneo(torneo);
+    private List<PartidoTorneo> whenRealizoElCruceDeLosEquipos(Long idTorneo) {
+        return servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo);
     }
 
     private void thenElCruceEsExitoso(List<PartidoTorneo> partidos) {
@@ -159,16 +160,17 @@ public class ServicioTorneoTest {
         listaEquiposIncompleta.add(sanLorenzo);
         listaEquiposIncompleta.add(boca);
 
-        givenUnaListaIncompletaDeEquiposDeUnTorneo(TORNEO, listaEquiposIncompleta);
+        TORNEO.setId(6L);
+        givenUnaListaIncompletaDeEquiposDeUnTorneo(TORNEO.getId(), listaEquiposIncompleta);
 
-        List<PartidoTorneo> partidosTorneo = whenRealizoElCruceDeLosEquipos(TORNEO);
+        List<PartidoTorneo> partidosTorneo = whenRealizoElCruceDeLosEquipos(TORNEO.getId());
 
         thenElCruceFalla(partidosTorneo);
     }
 
-    private void givenUnaListaIncompletaDeEquiposDeUnTorneo(Torneo torneo, List<Equipo> listaEquiposIncompleta) {
-        when(repositorioTorneo.buscarTorneo(torneo)).thenReturn(torneo);
-        when(repositorioTorneo.buscarEquiposDeUnTorneo(torneo)).thenReturn(listaEquiposIncompleta);
+    private void givenUnaListaIncompletaDeEquiposDeUnTorneo(Long idTorneo, List<Equipo> listaEquiposIncompleta) {
+        when(repositorioTorneo.buscarTorneoPorID(idTorneo)).thenReturn(TORNEO);
+        when(repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo)).thenReturn(listaEquiposIncompleta);
     }
 
     private void thenElCruceFalla(List<PartidoTorneo> partidosTorneo) {
