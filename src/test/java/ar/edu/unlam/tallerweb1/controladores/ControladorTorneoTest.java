@@ -40,20 +40,21 @@ public class ControladorTorneoTest {
 
     @Test
     public void queNoPuedaCrearElFixtureDeUnTorneoIncompleto(){
-        givenUnTorneoIncompleto(elTorneo);
+        elTorneo.setId(15L);
+        givenUnTorneoIncompleto(elTorneo.getId());
 
-        ModelAndView modeloVista = whenRealizoElCruceDeEquipos(elTorneo);
+        ModelAndView modeloVista = whenRealizoElCruceDeEquipos(elTorneo.getId());
 
         thenElCruceNoSeRealiza(modeloVista);
     }
 
-    private void givenUnTorneoIncompleto(Torneo torneo) {
-        doThrow(Exception.class).when(servicioTorneo).generarCruceDeEquiposDeUnTorneo(elTorneo);
+    private void givenUnTorneoIncompleto(Long idTorneo) {
+        doThrow(Exception.class).when(servicioTorneo).generarCruceDeEquiposDeUnTorneo(idTorneo);
     }
 
 
-    private ModelAndView whenRealizoElCruceDeEquipos(Torneo torneo) {
-        return controladorTorneo.generarCruceDeEquipos(torneo);
+    private ModelAndView whenRealizoElCruceDeEquipos(Long idTorneo) {
+        return controladorTorneo.generarCruceDeEquipos(idTorneo);
     }
 
     private void thenElCruceNoSeRealiza(ModelAndView modeloVista) {
@@ -66,14 +67,15 @@ public class ControladorTorneoTest {
 
     @Test
     public void queSeGenereElFixtureDelTorneoSiEstaCompleto(){
-        givenUnTorneoCompleto(elTorneo);
+        elTorneo.setId(10L);
+        givenUnTorneoCompleto(elTorneo.getId());
 
-        ModelAndView modeloVista = whenRealizoElCruceDeEquipos(elTorneo);
+        ModelAndView modeloVista = whenRealizoElCruceDeEquipos(elTorneo.getId());
 
         thenElCruceSeRealiza(modeloVista);
     }
 
-    private void givenUnTorneoCompleto(Torneo torneo) {
+    private void givenUnTorneoCompleto(Long idTorneo) {
 
     }
 
