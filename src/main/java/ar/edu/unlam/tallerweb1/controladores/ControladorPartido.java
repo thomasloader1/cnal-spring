@@ -105,7 +105,6 @@ public class ControladorPartido {
                 Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
                 servicioCrearPartido.unirmeAlPartido(partidoPorId);
                 servicioCrearPartido.vincularJugadorAPartido(idUsuario, id);
-
                 modelo.put("msg", "¡Te uniste al partido correctamente!");
                 return new ModelAndView("/union-a-partido", modelo);
             }
