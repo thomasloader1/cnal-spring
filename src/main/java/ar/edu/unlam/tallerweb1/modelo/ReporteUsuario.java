@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class ReporteUsuario {
@@ -15,12 +16,12 @@ public class ReporteUsuario {
     private String descripcion;
     private Boolean aprobado;
     private Long idUsuario;
-    private String fechaReporte;
+    private Date fechaReporte;
 
     public ReporteUsuario() {
     }
 
-    public ReporteUsuario(Long idReporte, String motivo, String descripcion, Boolean aprobado, Long idUsuario, String fechaReporte) {
+    public ReporteUsuario(Long idReporte, String motivo, String descripcion, Boolean aprobado, Long idUsuario, Date fechaReporte) {
         this.idReporte = idReporte;
         this.motivo = motivo;
         this.descripcion = descripcion;
@@ -69,11 +70,11 @@ public class ReporteUsuario {
         this.idUsuario = idUsuario;
     }
 
-    public String getFechaReporte() {
+    public Date getFechaReporte() {
         return fechaReporte;
     }
 
-    public void setFechaReporte(String fechaReporte) {
+    public void setFechaReporte(Date fechaReporte) {
         this.fechaReporte = fechaReporte;
     }
 }

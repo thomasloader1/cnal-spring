@@ -98,7 +98,7 @@ public class ControladorUsuario {
         reporteUsuario.setDescripcion(datosReporte.getDescripcion());
         reporteUsuario.setIdUsuario(id);
         reporteUsuario.setAprobado(false);
-        reporteUsuario.setFechaReporte(date.toString());
+        reporteUsuario.setFechaReporte(date);
 
         model.put("REPORTE", reporteUsuario);
 
