@@ -7,6 +7,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,7 @@ public class ControladorTorneo {
         }
     }
 
+
     @RequestMapping(path = "/unirme-a-torneo", method = RequestMethod.GET)
     public ModelAndView irAUnirseATorneo(){
         ModelMap model= new ModelMap();
@@ -59,16 +61,31 @@ public class ControladorTorneo {
     @RequestMapping(path = "/unirse-a-torneo/{id}", method = RequestMethod.GET)
     public ModelAndView unirmeAUnTorneo(@ModelAttribute("unirse-a-torneo") @PathVariable Long id, HttpServletRequest request) throws Exception {
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
-        ModelMap modelMap= new ModelMap();
+        ModelMap modelMap = new ModelMap();
         ModelAndView modelAndView;
 
-        if (servicioTorneo.registrarEnTorneo(id, idUsuario)){
+        if (servicioTorneo.registrarEnTorneo(id, idUsuario)) {
             modelAndView = new ModelAndView("union-torneo", modelMap);
-        } else{
+        } else {
             modelMap.put("error", "el torneo ya esta completo");
             modelAndView = new ModelAndView("unirme-a-torneo", modelMap);
         }
         return modelAndView;
+    }
+
+    @RequestMapping(path = "/torneos-crear-fixture", method = RequestMethod.GET)
+    public ModelAndView irACrearFixture(){
+        return new ModelAndView("redirect:/listar-torneos-equipos");
+    }
+
+
+    @RequestMapping(path = "listar-torneos-equipos", method = RequestMethod.GET)
+    public ModelAndView listarTorneosConEquipos(){
+        ModelMap model = new ModelMap();
+        model.put("TORNEOSEQUIPOS", servicioTorneo.todosLosTorneos());
+
+        return new ModelAndView("torneos-registrados-fixture", model);
+
     }
 
 
@@ -86,7 +103,7 @@ public class ControladorTorneo {
             modeloVista = new ModelAndView("fixture-generado", model);
         }catch (Exception e){
             model.put("error", "El torneo está incompleto. No se puede generar el fixture");
-            modeloVista = new ModelAndView("torneos-registrados", model);
+            modeloVista = new ModelAndView("torneos-registrados-fixture", model);
         }
         return modeloVista;
     }

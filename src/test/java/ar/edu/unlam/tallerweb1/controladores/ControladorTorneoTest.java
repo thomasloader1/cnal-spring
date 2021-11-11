@@ -61,7 +61,7 @@ public class ControladorTorneoTest {
 
     private void thenElCruceNoSeRealiza(ModelAndView modeloVista) {
         //si el torneo elegido esta incompleto, me lleva a la misma vista (vista de todos los torneos con equipos unidos).
-        assertThat(modeloVista.getViewName()).isEqualTo("torneos-registrados");
+        assertThat(modeloVista.getViewName()).isEqualTo("torneos-registrados-fixture");
         assertThat(modeloVista.getModel().get("error")).isEqualTo("El torneo está incompleto. No se puede generar el fixture");
     }
 
