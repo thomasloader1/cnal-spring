@@ -45,19 +45,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
         sessionFactory.getCurrentSession().save(torneo);
     }
 
-
+    @Override
+    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {return null;}
 
     @Override
-    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {
-
-
-        return null;
-    }
-
-    @Override
-    public void actualizarPartidoTorneo(PartidoTorneo partido) {
-
-    }
+    public void actualizarPartidoTorneo(PartidoTorneo partido) {}
 
     @Override
     public void guardarPartidoTorneo(PartidoTorneo partido) {
@@ -67,7 +59,6 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     @Override
     public List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-
         return session.createCriteria(PartidoTorneo.class)
                 .add(Restrictions.eq("torneo", torneo))
                 .list();
@@ -76,7 +67,6 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     @Override
     public Torneo buscarTorneoPorId(Long idTorneo) {
         final Session session = sessionFactory.getCurrentSession();
-
         return (Torneo) session.createCriteria(Torneo.class)
                 .add(Restrictions.eq("id", idTorneo))
                 .uniqueResult();
