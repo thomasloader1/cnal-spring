@@ -81,30 +81,28 @@ public class ServicioUsuarioImpl implements ServicioUsuario
 
         Date date = new Date ();
 
-        usuario.setFechaSancion(date.toString());
+        usuario.setFechaSancion(date);
 
         repositorioUsuario.modificar(usuario);
     }
 
     @Override
-    public Boolean usuarioSancionado(Long id) {
-
+    public Boolean jugadorEstaSancionado(Long id) {
         Usuario usuario = repositorioUsuario.buscarUsuarioPorId(id);
 
-        /*LocalDate fechaActual = LocalDate.now();
+        Date fechaSancion = usuario.getFechaSancion();
+        if(fechaSancion != null)
+        {
+            Date fechaActual = new Date();
+            int miliSegundosPorDia = 86400000;
+            int dias = (int) ((fechaActual.getTime()-fechaSancion.getTime()) / miliSegundosPorDia);
 
-        LocalDate fechaSancion = LocalDate.parse(usuario.getFechaSancion());
-
-        //TODO FALTA COMPARAR LA FECHA SETEADA DE SANCION CON LA FECHA ACTUAL PARA SABER SI EL USUARIO ESTA SANCIONADO AUN O NO
-        //TODO VERIFICAR SI ESTA BIEN
-        Long cantidadDeDias = ChronoUnit.DAYS.between(fechaSancion, fechaActual);
-
-        if(cantidadDeDias <= 7){
-            return true;
+            if(dias <= 7 )
+            {
+                return true;
+            }
         }
-        else{*/
-            return false;
-        //}
+        return false;
     }
 
 }

@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +27,13 @@ public class ControladorPartido {
 
     private ServicioLocalidad servicioLocalidad;
 
+    private ServicioUsuario servicioUsuario;
+
     @Autowired
-    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario) {
         this.servicioCrearPartido = servicioCrearPartido;
         this.servicioLocalidad = servicioLocalidad;
+        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping(path = "/registro-partido", method = RequestMethod.GET)
@@ -96,17 +100,28 @@ public class ControladorPartido {
     @RequestMapping(path = "/union-partido/{id}", method = RequestMethod.GET)
     public ModelAndView unirseAUnPartido(HttpServletRequest request, @ModelAttribute("unirse-a-partido") DatosCrearPartido partido, @PathVariable Long id) {
         try {
-
             Long idUsuario = (Long) request.getSession().getAttribute("ID");
             ModelMap modelo = new ModelMap();
             UsuarioPartido usuario = servicioCrearPartido.buscarUsuarioPartido(idUsuario , id);
 
             if(usuario == null) {
-                Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
-                servicioCrearPartido.unirmeAlPartido(partidoPorId);
-                servicioCrearPartido.vincularJugadorAPartido(idUsuario, id);
-                modelo.put("msg", "¡Te uniste al partido correctamente!");
-                return new ModelAndView("/union-a-partido", modelo);
+                Boolean sancionado = servicioUsuario.jugadorEstaSancionado(idUsuario);
+
+                if(!sancionado)
+                {
+                    Partido partidoPorId = servicioCrearPartido.buscarPartidoPorID(id);
+                    servicioCrearPartido.unirmeAlPartido(partidoPorId);
+                    servicioCrearPartido.vincularJugadorAPartido(idUsuario, id);
+                    modelo.put("msg", "¡Te uniste al partido correctamente!");
+                    return new ModelAndView("/union-a-partido", modelo);
+                }else
+                {
+                    modelo.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+                    modelo.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
+                    modelo.put("msg", "¡No puedes unirte al partido porque actualmente estas SANCIONADO!");
+                    return new ModelAndView("/unirme-al-partido", modelo);
+                }
+
             }
             else {
                 modelo.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());

@@ -24,6 +24,18 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <c:if test="${not empty error}">
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <h6>${error}</h6>
+                </div>
+            </div>
+        </c:if>
+    </div>
+</div>
+
 
 <div class="container">
     <div class="row my-5">

@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +17,8 @@ public class ControladorEquipoTest {
 
     HttpServletRequest request;
     private ServicioEquipo servicioEquipo = mock(ServicioEquipo.class);
-    private ControladorEquipo controladorEquipo = new ControladorEquipo(servicioEquipo);
+    private ServicioUsuario servicioUsuario = mock(ServicioUsuario.class);
+    private ControladorEquipo controladorEquipo = new ControladorEquipo(servicioEquipo, servicioUsuario);
 
     private static final Usuario USUARIO = new Usuario("scortes@mail.com", "123","admin","","");
     private static final DatosEquipo EQUIPO_COMPLETO = new DatosEquipo("Pirulo", 11, 11, "Juvenil");

@@ -19,6 +19,8 @@
                 <thead>
                 <tr>
                     <th scope="col">Email</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
                     <th scope="col">Equipo</th>
                     <th scope="col">Rol</th>
                     <th scope="col"></th>
@@ -27,9 +29,11 @@
                 <tbody>
                 <c:forEach items="${USUARIOS}" var="USUARIO">
                     <tr class="table-active">
-                                <th scope="row">${USUARIO.email}</th>
-                                <td>${USUARIO.password}</td>
-                                <td>${USUARIO.rol}</td>
+                        <th scope="row">${USUARIO.email}</th>
+                        <td>${USUARIO.nombre}</td>
+                        <td>${USUARIO.apellido}</td>
+                        <td>${USUARIO.equipo}</td>
+                        <td>${USUARIO.rol}</td>
                         <td>
                             <form:form action="cambio-rol/${USUARIO.id}" method="get">
                                 <button class="btn text-white" style="background-color: #67b168" type="submit">Cambiar Rol</button>

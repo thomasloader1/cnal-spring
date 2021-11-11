@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +13,8 @@ public class ContoladorPartidoTest {
 
     private ServicioPartido servicioCrearPartido = mock(ServicioPartido.class);
     private ServicioLocalidad servicioLocalidad = mock(ServicioLocalidad.class);
-    private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido, servicioLocalidad);
+    private ServicioUsuario servicioUsuario = mock(ServicioUsuario.class);
+    private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido, servicioLocalidad, servicioUsuario);
 
     private static final Partido PARTIDO = new Partido(6, 0, "5", "Adulto", "21:00","San Justo", "");
 

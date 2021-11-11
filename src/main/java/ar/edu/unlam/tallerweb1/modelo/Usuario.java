@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.Date;
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
 // el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
@@ -17,7 +18,7 @@ public class Usuario {
 	private String rol;
 	private String nombre;
 	private String apellido;
-	private String fechaSancion;
+	private Date fechaSancion;
 
 	@ManyToOne
 	private Equipo equipo;
@@ -33,7 +34,7 @@ public class Usuario {
 
 	}
 
-	public Usuario(String email, String password, String rol, String nombre, String apellido, String fechaSancion) {
+	public Usuario(String email, String password, String rol, String nombre, String apellido, Date fechaSancion) {
 		this.email = email;
 		this.password = password;
 		this.rol = rol;
@@ -108,11 +109,11 @@ public class Usuario {
 
 	public void setApellido(String apellido) {this.apellido = apellido;}
 
-	public String getFechaSancion() {
+	public Date getFechaSancion() {
 		return fechaSancion;
 	}
 
-	public void setFechaSancion(String fechaSancion) {
+	public void setFechaSancion(Date fechaSancion) {
 		this.fechaSancion = fechaSancion;
 	}
 }
