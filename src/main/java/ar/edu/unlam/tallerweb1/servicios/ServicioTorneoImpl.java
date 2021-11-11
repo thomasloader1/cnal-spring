@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEquipo;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioEquipoImpl;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ import java.util.List;
 public class ServicioTorneoImpl implements ServicioTorneo{
 
     private RepositorioTorneo repositorioTorneo;
+    @Autowired
     private ServicioUsuario servicioUsuario;
+    @Autowired
     private RepositorioEquipo repositorioEquipo;
 
     @Autowired
@@ -45,10 +48,10 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     }
 
     @Override
-    public Boolean registrarEnTorneo(Long idTorneo, Long idUsuario) throws Exception{
+    public Boolean registrarEnTorneo(Long id, Long idUsuario) throws Exception{
         Boolean registroOk= false;
 
-        Torneo torneoEncontrado = (Torneo) repositorioTorneo.buscarTorneoPorId(idTorneo);
+        Torneo torneoEncontrado = (Torneo) repositorioTorneo.buscarTorneoPorId(id);
 
         if(torneoEncontrado == null){
             throw new Exception();
@@ -65,7 +68,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 for (int j= 0; j<jugadores.size(); j++){
                     Usuario jugador = jugadores.get(j);
                     if (jugador.getId() == idUsuario){
-                        unirEquipoAlTorneo(idTorneo, equipo);
+                        unirEquipoAlTorneo(id, equipo);
                         registroOk=true;
                     }
                 }
@@ -78,7 +81,13 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     private void unirEquipoAlTorneo(Long idTorneo, Equipo equipo) {
         Torneo torneoEncontrado = (Torneo) repositorioTorneo.buscarTorneoPorId(idTorneo);
         torneoEncontrado.setCantidadEquipos(torneoEncontrado.getCantidadEquipos()+1);
-        torneoEncontrado.getEquiposInscriptos().add(equipo);
+        try {
+            torneoEncontrado.getEquiposInscriptos().add(equipo);
+        }catch (NullPointerException e){
+            ArrayList<Equipo> equipoNuevo= new ArrayList<>();
+            equipoNuevo.add(equipo);
+            torneoEncontrado.setEquiposInscriptos(equipoNuevo);
+        }
         equipo.setTorneo(torneoEncontrado);
         repositorioTorneo.actualizarTorneo(torneoEncontrado);
     }
@@ -93,9 +102,9 @@ public class ServicioTorneoImpl implements ServicioTorneo{
             cantEquiposInscriptos = 0;
         }
         String cantEquipos = torneo.getCantidadEquipos();
-        Integer equiposParaTorneo = Integer.parseInt(cantEquipos);
+        Integer cantEquiposDefinidos = Integer.parseInt(cantEquipos);
 
-        if(equiposParaTorneo<cantEquiposInscriptos){
+        if(cantEquiposInscriptos<cantEquiposDefinidos){
             hayLugar = true;
         }
         return hayLugar;
