@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +49,20 @@ public class ControladorTorneo {
         return modelAndView;
     }
 
+    @RequestMapping(path = "/torneos-crear-fixture", method = RequestMethod.GET)
+    public ModelAndView irACrearFixture(){
+        return new ModelAndView("redirect:/listar-torneos-equipos");
+    }
+
+
+    @RequestMapping(path = "listar-torneos-equipos", method = RequestMethod.GET)
+    public ModelAndView listarTorneosConEquipos(){
+        ModelMap model = new ModelMap();
+        model.put("TORNEOSEQUIPOS", servicioTorneo.todosLosTorneos());
+
+        return new ModelAndView("torneos-registrados-fixture", model);
+    }
+
 
     @RequestMapping(path = "/crear-fixture/{idTorneo}", method = RequestMethod.POST)
     public ModelAndView generarCruceDeEquipos(@ModelAttribute("crear-fixture") @PathVariable Long idTorneo) {
@@ -67,7 +82,7 @@ public class ControladorTorneo {
 
         }catch (Exception e){
             model.put("error", "El torneo está incompleto. No se puede generar el fixture");
-            modeloVista = new ModelAndView("torneos-registrados", model);
+            modeloVista = new ModelAndView("torneos-registrados-fixture", model);
         }
 
 
