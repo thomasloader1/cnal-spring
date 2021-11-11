@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ControladorTorneo {
@@ -44,7 +47,27 @@ public class ControladorTorneo {
         return modelAndView;
     }
 
+    @RequestMapping(path = "/unirse-a-torneo", method = RequestMethod.GET)
+    public ModelAndView irAUnirseATorneo(){
+        ModelMap model= new ModelMap();
+        model.put("torneos", servicioTorneo.todosLosTorneos());
+        return new ModelAndView("unirme-a-torneo", model);
+    }
 
+    @RequestMapping(path = "/unirme-a-torneo/{id}", method = RequestMethod.GET)
+    public ModelAndView unirmeAUnTorneo(@ModelAttribute("unirse-a-torneo") @PathVariable Long id, HttpServletRequest request) throws Exception {
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+        ModelMap modelMap= new ModelMap();
+        ModelAndView modelAndView;
+
+        if (servicioTorneo.registrarEnTorneo(id, idUsuario)){
+            modelAndView = new ModelAndView("union-torneo", modelMap);
+        } else{
+            modelMap.put("error", "el torneo ya esta completo");
+            modelAndView = new ModelAndView("unirme-a-torneo", modelMap);
+        }
+        return modelAndView;
+    }
 
     public ModelAndView generarCruceDeEquipos(Torneo torneo) {
         ModelAndView modeloVista = null;

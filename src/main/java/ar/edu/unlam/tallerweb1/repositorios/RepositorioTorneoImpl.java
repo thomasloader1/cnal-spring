@@ -36,6 +36,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     }
 
     @Override
+    public void actualizarTorneo(Torneo torneo) {
+        this.sessionFactory.getCurrentSession().update(torneo);
+    }
+
+    @Override
     public void guardarTorneo(Torneo torneo) {
         sessionFactory.getCurrentSession().save(torneo);
     }
@@ -66,5 +71,10 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
         return session.createCriteria(PartidoTorneo.class)
                 .add(Restrictions.eq("torneo", torneo))
                 .list();
+    }
+
+    @Override
+    public Torneo buscarTorneoPorId(Long idTorneo) {
+        return (Torneo) sessionFactory.getCurrentSession().createCriteria(Torneo.class).add(Restrictions.eq("id", idTorneo)).uniqueResult();
     }
 }

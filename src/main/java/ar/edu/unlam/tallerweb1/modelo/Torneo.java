@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Torneo {
@@ -16,6 +18,10 @@ public class Torneo {
     private String localidad;
     private String nombre;
 
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @Column(name = "equiposInscriptos")
+    protected ArrayList<Equipo> equiposInscriptos;
+
     public Torneo() {}
 
     public Torneo(String tipo, String categoria, String cantidadEquipos, String horario, String fecha, String localidad, String nombre) {
@@ -26,6 +32,14 @@ public class Torneo {
         this.fecha = fecha;
         this.localidad = localidad;
         this.nombre = nombre;
+    }
+
+    public ArrayList<Equipo> getEquiposInscriptos(){
+        return equiposInscriptos;
+    }
+
+    public void setEquiposInscriptos(ArrayList<Equipo> equipos){
+        this.equiposInscriptos = equipos;
     }
 
     public Long getId() {

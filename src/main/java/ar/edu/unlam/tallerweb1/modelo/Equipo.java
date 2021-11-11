@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity
@@ -19,6 +16,8 @@ public class Equipo {
     private boolean habilitado = false;
     //private List<Usuario> jugadores;
 
+    @ManyToOne
+    private Torneo torneo;
 
     public Equipo() {
     }
@@ -40,6 +39,14 @@ public class Equipo {
         this.nombre = nombre;
         this.tipoPartido = tipoPartido;
         this.categoria = categoria;
+    }
+
+    public Torneo getTorneo(){
+        return torneo;
+    }
+
+    public void setTorneo(Torneo torneo){
+        this.torneo = torneo;
     }
 
     public Long getId() {
