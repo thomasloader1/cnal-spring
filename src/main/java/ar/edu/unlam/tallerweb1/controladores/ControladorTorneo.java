@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ControladorTorneo {
@@ -70,11 +72,18 @@ public class ControladorTorneo {
     }
 
     public ModelAndView generarCruceDeEquipos(Torneo torneo) {
+    @RequestMapping(path = "/crear-fixture/{idTorneo}", method = RequestMethod.POST)
+    public ModelAndView generarCruceDeEquipos(@ModelAttribute("crear-fixture") @PathVariable Long idTorneo) {
         ModelAndView modeloVista = null;
         ModelMap model = new ModelMap();
 
+
         try {
-            servicioTorneo.generarCruceDeEquiposDeUnTorneo(torneo);
+            servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo);
+
+            Torneo torneo = servicioTorneo.buscarTorneoPorID(idTorneo);
+            List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+            model.put("PARTIDOSTORNEO", partidosDelTorneo);
 
             modeloVista = new ModelAndView("fixture-generado", model);
 

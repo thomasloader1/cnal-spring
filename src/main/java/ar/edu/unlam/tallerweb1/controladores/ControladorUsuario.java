@@ -131,8 +131,10 @@ public class ControladorUsuario {
         ModelMap model = new ModelMap();
 
         model.put("REPORTES", reporteUsuariosList);
+        model.put("error", "El Jugador ha sido sancionado");
 
         return new ModelAndView("lista-reportes", model);
     }
+
 }
 

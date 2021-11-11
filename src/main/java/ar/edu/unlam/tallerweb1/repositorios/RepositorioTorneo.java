@@ -18,11 +18,13 @@ public interface RepositorioTorneo {
 
     void guardarTorneo(Torneo torneo);
 
-    List<Equipo> buscarEquiposDeUnTorneo(Torneo torneo);
+    List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo);
 
     void actualizarPartidoTorneo(PartidoTorneo partido);
 
     void guardarPartidoTorneo(PartidoTorneo partido);
 
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
+
+    Torneo buscarTorneoPorID(Long idTorneo);
 }

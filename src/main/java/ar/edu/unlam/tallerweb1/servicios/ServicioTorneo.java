@@ -13,7 +13,11 @@ public interface ServicioTorneo {
 
     void registrarTorneo(Torneo crearTorneo) throws ExceptionYaExiste;
 
-    List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Torneo torneo);
-
     Boolean registrarEnTorneo(Long idTorneo, Long idUsuario) throws Exception;
+
+    List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo);
+
+    Torneo buscarTorneoPorID(Long idTorneo);
+
+    List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 }

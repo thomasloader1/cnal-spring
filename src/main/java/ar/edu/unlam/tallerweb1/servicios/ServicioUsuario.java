@@ -14,5 +14,5 @@ public interface ServicioUsuario {
     void enviarReporteUsuario(ReporteUsuario reporteUsuario);
     List<ReporteUsuario> todosLosReportesPorUsuario(Long id);
     void sancionarJugador(Long id);
-    Boolean usuarioSancionado(Long id);
+    Boolean jugadorEstaSancionado(Long id);
 }

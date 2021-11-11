@@ -18,9 +18,9 @@
             <table class="table text-center">
                 <thead>
                 <tr>
+                    <th scope="col">Email</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,7 +28,7 @@
                     <tr class="table-active">
                         <th scope="row">${USUARIO.email}</th>
                         <td>${USUARIO.nombre}</td>
-                        <td>${USUARIO.id}</td>
+                        <td>${USUARIO.apellido}</td>
                         <td>
                             <form:form action="/proyecto_limpio_spring_war_exploded/reportar-usuario/${USUARIO.id}" method="GET">
                                 <button class="btn btn-danger" type="submit">Reportar Jugador</button>

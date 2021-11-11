@@ -48,7 +48,7 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
 
 
     @Override
-    public List<Equipo> buscarEquiposDeUnTorneo(Torneo torneo) {
+    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {
 
 
         return null;
@@ -74,7 +74,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     }
 
     @Override
-    public Torneo buscarTorneoPorId(Long idTorneo) {
-        return (Torneo) sessionFactory.getCurrentSession().createCriteria(Torneo.class).add(Restrictions.eq("id", idTorneo)).uniqueResult();
+    public Torneo buscarTorneoPorID(Long idTorneo) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return (Torneo) session.createCriteria(Torneo.class)
+                .add(Restrictions.eq("id", idTorneo))
+                .uniqueResult();
     }
 }

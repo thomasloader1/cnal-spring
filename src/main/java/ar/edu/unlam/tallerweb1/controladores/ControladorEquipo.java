@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,10 +21,12 @@ public class ControladorEquipo {
     //HttpServletRequest request;
 
     private ServicioEquipo servicioEquipo;
+    private ServicioUsuario servicioUsuario;
 
     @Autowired
-    public ControladorEquipo(ServicioEquipo servicioEquipo) {
+    public ControladorEquipo(ServicioEquipo servicioEquipo, ServicioUsuario servicioUsuario) {
         this.servicioEquipo = servicioEquipo;
+        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping(path = "/registro-equipo", method = RequestMethod.GET)
@@ -69,15 +72,24 @@ public class ControladorEquipo {
         ModelAndView modeloVista;
 
         try{
-            servicioEquipo.registrarEnEquipo(id, idUsuario);
+            Boolean sancionado = servicioUsuario.jugadorEstaSancionado(idUsuario);
 
-            modeloVista = new ModelAndView("union-equipo-exitosa", model);
+            if(!sancionado)
+            {
+                servicioEquipo.registrarEnEquipo(id, idUsuario);
+                modeloVista = new ModelAndView("union-equipo-exitosa", model);
+            }else
+            {
+                model.put("error", "No te puedes unir al equipo porque te encuentras SANCIONADO!");
+                model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
+                modeloVista = new ModelAndView("unirme-a-equipo", model);
+            }
         }
         catch (Exception e){
             model.put("error", "El equipo ya esta completo");
+            model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
             modeloVista = new ModelAndView("unirme-a-equipo", model);
         }
-
         return modeloVista;
     }
 
