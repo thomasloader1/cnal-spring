@@ -86,7 +86,12 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     public boolean hayLugaresDisponibles(Torneo torneo){
 
         boolean hayLugar = false;
-        Integer cantEquiposInscriptos = torneo.getEquiposInscriptos().size();
+        Integer cantEquiposInscriptos;
+        try {
+            cantEquiposInscriptos = torneo.getEquiposInscriptos().size();
+        }catch (NullPointerException e){
+            cantEquiposInscriptos = 0;
+        }
         String cantEquipos = torneo.getCantidadEquipos();
         Integer equiposParaTorneo = Integer.parseInt(cantEquipos);
 
@@ -96,21 +101,21 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         return hayLugar;
     }
     
-    public Torneo buscarTorneoPorID(Long idTorneo) {
-        return repositorioTorneoImpl.buscarTorneoPorID(idTorneo);
+    public Torneo buscarTorneoPorId(Long idTorneo) {
+        return repositorioTorneo.buscarTorneoPorId(idTorneo);
     }
 
     @Override
     public List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo) {
-        return repositorioTorneoImpl.buscarLosPartidosDeUnTorneo(torneo);
+        return repositorioTorneo.buscarLosPartidosDeUnTorneo(torneo);
     }
 
 
     @Override
     public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo) {
 
-        Torneo torneoBuscado = repositorioTorneoImpl.buscarTorneoPorID(idTorneo);
-        List<Equipo> equiposDelTorneo = repositorioTorneoImpl.buscarEquiposDeUnTorneo(idTorneo);
+        Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
+        List<Equipo> equiposDelTorneo = repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
         if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
@@ -139,7 +144,6 @@ public class ServicioTorneoImpl implements ServicioTorneo{
 
         return partidosDelTorneo;
     }
-
 
     public Equipo sortearEquipo(List<Equipo> equipos){
 

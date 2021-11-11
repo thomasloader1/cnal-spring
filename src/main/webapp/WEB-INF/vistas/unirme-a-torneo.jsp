@@ -64,13 +64,13 @@
                 <c:forEach items="${torneos}" var="torneo">
                     <tr class="table-active">
                         <td>${torneo.nombre}</td>
-                        <td>${torneo.tipoPartido}</td>
+                        <td>${torneo.tipo}</td>
                         <td>${torneo.cantidadEquipos}</td>
                         <td>
                             <%--@elvariable id="unirse-a-torneo" type=""--%>
                             <form:form action="unirse-a-torneo/${torneo.id}" method="get" modelAttribute="unirse-a-torneo">
                                 <c:choose>
-                                    <c:when test="${torneo.cantidadEquipos == 4 || torneo.cantidadEquipos == 8}">
+                                    <c:when test="${torneo.equiposInscriptos.size() == 4  && torneo.cantidadEquipos == 4 || torneo.equiposInscriptos.size() == 8 && torneo.cantidadEquipos == 8 }">
                                         <button class="btn text-white" style="background-color: #67b168" type="submit" disabled>Unirme</button>
                                     </c:when>
                                     <c:otherwise>

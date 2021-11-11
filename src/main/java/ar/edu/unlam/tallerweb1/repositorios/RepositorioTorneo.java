@@ -12,8 +12,6 @@ public interface RepositorioTorneo {
 
     Torneo buscarTorneo(Torneo torneo);
 
-    Object buscarTorneoPorId(Long idTorneo);
-
     void actualizarTorneo(Torneo torneo);
 
     void guardarTorneo(Torneo torneo);
@@ -26,5 +24,5 @@ public interface RepositorioTorneo {
 
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 
-    Torneo buscarTorneoPorID(Long idTorneo);
+    Torneo buscarTorneoPorId(Long idTorneo);
 }

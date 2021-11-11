@@ -74,7 +74,7 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     }
 
     @Override
-    public Torneo buscarTorneoPorID(Long idTorneo) {
+    public Torneo buscarTorneoPorId(Long idTorneo) {
         final Session session = sessionFactory.getCurrentSession();
 
         return (Torneo) session.createCriteria(Torneo.class)

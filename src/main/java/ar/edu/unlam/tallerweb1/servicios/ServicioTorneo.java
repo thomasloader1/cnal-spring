@@ -17,7 +17,7 @@ public interface ServicioTorneo {
 
     List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo);
 
-    Torneo buscarTorneoPorID(Long idTorneo);
+    Torneo buscarTorneoPorId(Long idTorneo);
 
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 }

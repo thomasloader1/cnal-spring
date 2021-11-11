@@ -49,14 +49,14 @@ public class ControladorTorneo {
         return modelAndView;
     }
 
-    @RequestMapping(path = "/unirse-a-torneo", method = RequestMethod.GET)
+    @RequestMapping(path = "/unirme-a-torneo", method = RequestMethod.GET)
     public ModelAndView irAUnirseATorneo(){
         ModelMap model= new ModelMap();
         model.put("torneos", servicioTorneo.todosLosTorneos());
         return new ModelAndView("unirme-a-torneo", model);
     }
 
-    @RequestMapping(path = "/unirme-a-torneo/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/unirse-a-torneo/{id}", method = RequestMethod.GET)
     public ModelAndView unirmeAUnTorneo(@ModelAttribute("unirse-a-torneo") @PathVariable Long id, HttpServletRequest request) throws Exception {
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
         ModelMap modelMap= new ModelMap();
@@ -71,7 +71,7 @@ public class ControladorTorneo {
         return modelAndView;
     }
 
-    public ModelAndView generarCruceDeEquipos(Torneo torneo) {
+
     @RequestMapping(path = "/crear-fixture/{idTorneo}", method = RequestMethod.POST)
     public ModelAndView generarCruceDeEquipos(@ModelAttribute("crear-fixture") @PathVariable Long idTorneo) {
         ModelAndView modeloVista = null;
@@ -81,7 +81,7 @@ public class ControladorTorneo {
         try {
             servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo);
 
-            Torneo torneo = servicioTorneo.buscarTorneoPorID(idTorneo);
+            Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
             List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
             model.put("PARTIDOSTORNEO", partidosDelTorneo);
 

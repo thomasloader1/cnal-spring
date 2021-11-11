@@ -1,7 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
+
+import java.util.ArrayList;
 
 public class DatosTorneo {
 
@@ -12,6 +15,7 @@ public class DatosTorneo {
     private String horario;
     private String fecha;
     private String localidad;
+    private ArrayList<Equipo> equiposInscriptos;
 
     public DatosTorneo(){}
 
@@ -123,5 +127,14 @@ public class DatosTorneo {
     public void setLocalidad(String localidad){
         this.localidad = localidad;
     }
+
+    public ArrayList<Equipo> getEquiposInscriptos(){
+        return equiposInscriptos;
+    }
+
+    public void setEquiposInscriptos(ArrayList<Equipo> equipos){
+        this.equiposInscriptos = equipos;
+    }
+
 
 }

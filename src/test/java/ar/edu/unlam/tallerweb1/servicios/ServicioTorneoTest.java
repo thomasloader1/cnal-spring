@@ -137,7 +137,7 @@ public class ServicioTorneoTest {
     }
 
     private void givenUnaListaDeEquiposDeUnTorneo(Long idTorneo, List<Equipo> equipos) {
-        when(repositorioTorneo.buscarTorneoPorID(idTorneo)).thenReturn(TORNEO);
+        when(repositorioTorneo.buscarTorneoPorId(idTorneo)).thenReturn(TORNEO);
         when(repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo)).thenReturn(equipos);
     }
 
@@ -169,7 +169,7 @@ public class ServicioTorneoTest {
     }
 
     private void givenUnaListaIncompletaDeEquiposDeUnTorneo(Long idTorneo, List<Equipo> listaEquiposIncompleta) {
-        when(repositorioTorneo.buscarTorneoPorID(idTorneo)).thenReturn(TORNEO);
+        when(repositorioTorneo.buscarTorneoPorId(idTorneo)).thenReturn(TORNEO);
         when(repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo)).thenReturn(listaEquiposIncompleta);
     }
 
