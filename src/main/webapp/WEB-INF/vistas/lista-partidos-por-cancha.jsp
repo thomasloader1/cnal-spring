@@ -4,15 +4,15 @@
 <html>
 <%@ include file="partial/header.jsp" %>
 <body>
+
 <%@ include file="partial/navbarAdmin.jsp" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista canchas</title>
+    <title>Partidos por cancha</title>
 </head>
 <body>
-
 
 <div class="container">
     <div class="row my-5">
@@ -20,20 +20,24 @@
             <table class="table text-center">
                 <thead>
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Domicilio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Tipo partido</th>
+                    <th scope="col">Direccion</th>
                     <th scope="col">Localidad</th>
+                    <th scope="col">Horario</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${CANCHA}" var="CANCHA">
+                <c:forEach items="${PARTIDO}" var="PARTIDO">
                     <tr class="table-active">
-                        <th scope="row">${CANCHA.nombre}</th>
-                        <td>${CANCHA.domicilio}</td>
-                        <td>${CANCHA.domicilio}</td>
+                        <th scope="row">${PARTIDO.categoria}</th>
+                        <td>${PARTIDO.tipo}</td>
+                        <td>${PARTIDO.direccion}</td>
+                        <td>${PARTIDO.localidad}</td>
+                        <td>${PARTIDO.horario}</td>
                         <td>
-                            <form:form action="/proyecto_limpio_spring_war_exploded/partidos-por-cancha/${CANCHA.id}" method="get">
-                                <button class="btn btn-primary" type="submit">Ver partidos</button>
+                            <form:form action="/proyecto_limpio_spring_war_exploded/ver-jugadores-partido/${PARTIDO.id}" method="get">
+                                <button class="btn btn-primary" type="submit">Ver jugadores</button>
                             </form:form>
                         </td>
                     </tr>

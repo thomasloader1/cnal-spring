@@ -54,7 +54,10 @@
                             alt="..."
                     />
                     <div class="card-body">
-                        <h5 class="card-title">Categoria: ${PARTIDO.categoria}</h5>
+                        <h5 class="card-title">Cancha: ${PARTIDO.cancha.nombre}</h5>
+                        <p class="card-text">
+                            <strong>Categoria:</strong> ${PARTIDO.categoria}
+                        </p>
                         <p class="card-text">
                             <strong>Ubicacion:</strong> ${PARTIDO.direccion}
                         </p>
@@ -65,7 +68,9 @@
                             <strong>Horario:</strong> ${PARTIDO.horario}
                         </p>
                         <!--TODO CAMBIAR BOTON DEBE HACER FUNCION UNIRME A ESTE PARTIDO CON DICHAS VALIDACIONES-->
-                        <a href="#!" class="btn btn-primary">Reservar</a>
+                        <form:form action="/proyecto_limpio_spring_war_exploded/union-partido/${PARTIDO.id}" method="get" modelAttribute="unirse-a-partido">
+                            <button class="btn text-white" style="background-color: #67b168" type="submit" >Unirme</button>
+                        </form:form>
                     </div>
                 </div>
             </div>
@@ -90,7 +95,10 @@
                             alt="..."
                     />
                     <div class="card-body">
-                        <h5 class="card-title">Categoria: ${MIS_PARTIDOS.categoria}</h5>
+                        <h5 class="card-title">Cancha: ${MIS_PARTIDOS.cancha.nombre}</h5>
+                        <p class="card-text">
+                            <strong>Categoria:</strong> ${MIS_PARTIDOS.categoria}
+                        </p>
                         <p class="card-text">
                             <strong>Ubicacion:</strong> ${MIS_PARTIDOS.direccion}
                         </p>
@@ -100,7 +108,7 @@
                         <p class="card-text">
                             <strong>Horario:</strong> ${MIS_PARTIDOS.horario}
                         </p>
-                        <form:form action="ver-jugadores-partido/${MIS_PARTIDOS.id}" method="get">
+                        <form:form action="/proyecto_limpio_spring_war_exploded/ver-jugadores-partido/${MIS_PARTIDOS.id}" method="get">
                             <button class="btn btn-primary" type="submit">Ver jugadores</button>
                         </form:form>
                     </div>

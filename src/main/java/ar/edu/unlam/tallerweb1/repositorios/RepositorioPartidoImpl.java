@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -99,6 +100,12 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
             }
         }
         return partidosList;
+    }
+
+    @Override
+    public List<Partido> buscarPartidosPorCancha(Cancha cancha) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Partido.class).add(Restrictions.eq("cancha", cancha)).list();
     }
 
 

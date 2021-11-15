@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -58,7 +60,7 @@ public class ControladorPartido {
         if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
             model.put("msg", "El partido se creo con éxito");
             model.put("partido", datosPartido);
-            servicioCrearPartido.registrarPartido(datosPartido.crearPartido());
+            servicioCrearPartido.registrarPartido(datosPartido.crearPartido(),cancha);
             modeloVista = new ModelAndView("partido-registrado", model);
         } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
@@ -150,6 +152,18 @@ public class ControladorPartido {
     public Boolean veficarCantidadDeJugadores(Partido partido) {
         Boolean cantidadDeJugadoresCorrecta = partido.getCompleto();
         return cantidadDeJugadoresCorrecta;
+    }
+
+    @RequestMapping(path = "partidos-por-cancha/{id}", method = RequestMethod.GET)
+    public ModelAndView listarPartidosPorCancha(@PathVariable Long id){
+
+        ModelMap model = new ModelMap();
+
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+
+        model.put("PARTIDO", servicioCrearPartido.buscarPartidosPorCancha(cancha));
+
+        return new ModelAndView("/lista-partidos-por-cancha", model);
     }
 
 }

@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.junit.Test;
@@ -15,6 +16,7 @@ public class ServicioPartidoTest {
 
     public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "");
     public static final Partido PARTIDO2 = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "");
+    public static  final Cancha CANCHA = new Cancha();
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
@@ -22,7 +24,7 @@ public class ServicioPartidoTest {
     @Test(expected = Exception.class)
     public void siRegistroConHoraOcupadaDaError() throws Exception {
         givenPartidoYaExiste(PARTIDO);
-        whenResgistro(PARTIDO);
+        whenResgistro(PARTIDO, CANCHA);
         thenElPartidoNoSeGuarda();
     }
 
@@ -35,10 +37,10 @@ public class ServicioPartidoTest {
 
     }
 
-    private void whenResgistro(Partido partido)  throws Exception{
+    private void whenResgistro(Partido partido, Cancha cancha)  throws Exception{
         try {
             servicioPartido.consultarPartido(partido.getHorario(), partido.getCategoria());
-            servicioPartido.registrarPartido(partido);
+            servicioPartido.registrarPartido(partido, cancha);
 
         } catch (Exception e) {
             throw new Exception();
@@ -54,7 +56,7 @@ public class ServicioPartidoTest {
         PARTIDO.setId(2L);
         PARTIDO.setHorario("20:00");
         givenPartidoNoExiste(PARTIDO);
-        whenResgistroPartido(PARTIDO);
+        whenResgistroPartido(PARTIDO, CANCHA);
         thenElPartidoSeGuarda();
     }
 
@@ -66,9 +68,9 @@ public class ServicioPartidoTest {
         }
     }
 
-    private void whenResgistroPartido(Partido partido) throws Exception {
+    private void whenResgistroPartido(Partido partido, Cancha cancha) throws Exception {
         try {
-            servicioPartido.registrarPartido(partido);
+            servicioPartido.registrarPartido(partido, cancha);
 
         } catch (Exception e) {
             throw new Exception("whenResgistroPartidoException");

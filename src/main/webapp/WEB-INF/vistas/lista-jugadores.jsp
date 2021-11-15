@@ -10,7 +10,15 @@
 <html>
 <%@ include file = "partial/header.jsp" %>
 <body>
-<%@ include file = "partial/navbarJugador.jsp" %>
+
+<c:choose>
+    <c:when test="${USUARIO_ACTUAL.rol == 'Jugador'}">
+        <%@ include file = "partial/navbarJugador.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%@ include file = "partial/navbarAdmin.jsp" %>
+    </c:otherwise>
+</c:choose>
 
 <div class="container">
     <div class="row my-5">
@@ -21,6 +29,8 @@
                     <th scope="col">Email</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
+                    <th scope="col">Equipo</th>
+                    <th scope="col">Fecha Sancion</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +39,8 @@
                         <th scope="row">${USUARIO.email}</th>
                         <td>${USUARIO.nombre}</td>
                         <td>${USUARIO.apellido}</td>
+                        <td>${USUARIO.equipo.nombre}</td>
+                        <td>${USUARIO.fechaSancion}</td>
                         <td>
                             <form:form action="/proyecto_limpio_spring_war_exploded/reportar-usuario/${USUARIO.id}" method="GET">
                                 <button class="btn btn-danger" type="submit">Reportar Jugador</button>
