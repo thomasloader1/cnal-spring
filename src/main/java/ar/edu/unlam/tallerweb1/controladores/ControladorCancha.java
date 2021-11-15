@@ -9,12 +9,10 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,5 +81,57 @@ public class ControladorCancha {
         ModelMap model = new ModelMap();
         model.put("CANCHA", servicioCancha.todasLasCanchasPorAdmin(usuario));
         return new ModelAndView("lista-canchas-admin", model);
+    }
+
+    @RequestMapping(path = "ir-a-modificar-datos-cancha/{id}", method = RequestMethod.GET)
+    public ModelAndView irAModificarDatosCancha(@PathVariable Long id) {
+
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+        ModelMap model = new ModelMap();
+        model.put("CANCHA", cancha);
+        return new ModelAndView("modificar-cancha", model);
+    }
+
+    @RequestMapping(path = "modificar-datos-cancha/{id}", method = RequestMethod.GET)
+    public ModelAndView modificarDatosCancha(HttpServletRequest request,@ModelAttribute("modificar-cancha") DatosCrearCancha datosCancha,@PathVariable Long id) {
+
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+
+        Usuario usuario = servicioUsuario.buscarUsuarioPorId(idUsuario);
+
+        cancha.setUsuario(usuario);
+        cancha.setNombre(datosCancha.getNombre());
+        cancha.setLocalidad(datosCancha.getLocalidad());
+        cancha.setDomicilio(datosCancha.getDomicilio());
+        cancha.setPrecio(datosCancha.getPrecio());
+        cancha.setBar(datosCancha.getBar());
+        cancha.setCant_canchas(datosCancha.getCant_canchas());
+
+        servicioCancha.modificarDatosCancha(cancha);
+
+        return new ModelAndView("modificacion-cancha-exitosa");
+    }
+
+
+    @RequestMapping(path = "reservar-cancha/{id}", method = RequestMethod.POST)
+    public ModelAndView reservarCancha(@PathVariable Long id){
+
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+
+        ModelMap model = new ModelMap();
+        String respuesta;
+
+        if(cancha.getBar() == true){
+            respuesta = "Si";
+        }else{
+            respuesta = "No";
+        }
+
+        model.put("CANCHA", cancha);
+        model.put("RESPUESTA", respuesta);
+
+        return  new ModelAndView("detalles-cancha", model);
     }
 }

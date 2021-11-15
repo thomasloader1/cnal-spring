@@ -36,6 +36,12 @@
                                 <button class="btn btn-primary" type="submit">Ver partidos</button>
                             </form:form>
                         </td>
+
+                        <td>
+                            <form:form action="/proyecto_limpio_spring_war_exploded/ir-a-modificar-datos-cancha/${CANCHA.id}" method="get">
+                                <button class="btn btn-primary" type="submit">Modificar datos cancha</button>
+                            </form:form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

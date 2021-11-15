@@ -18,14 +18,14 @@ public class ContoladorPartidoTest {
     private ServicioCancha servicioCancha = mock(ServicioCancha.class);
     private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido, servicioLocalidad, servicioUsuario,servicioCancha);
 
-    private static final Partido PARTIDO = new Partido(6, 0, "5", "Adulto", "21:00","San Justo", "");
+    private static final Partido PARTIDO = new Partido(6, 0, "5", "Adulto", "21:00","San Justo", "",null);
 
-    private DatosCrearPartido partido = new DatosCrearPartido(6, "5", "Adulto", "21:00","", "");
-    private DatosCrearPartido nuevoPartido = new DatosCrearPartido(6, "5", "Adulto", "21:00","", "");
-    private DatosCrearPartido partidoConCategoriaInvalida = new DatosCrearPartido(6, "11", "Niños", "20:00","", "");
-    private DatosCrearPartido partidoConTipoInvalido = new DatosCrearPartido(6, "3", "Infantil", "20:00","", "");
-    private DatosCrearPartido partidoConCantidadJugadoresInvalida = new DatosCrearPartido(25, "11", "adulto", "22:00","", "");
-    private DatosCrearPartido partidoLleno = new DatosCrearPartido(10, "5", "Juvenil", "18:00","","");
+    private DatosCrearPartido partido = new DatosCrearPartido(6, "5", "Adulto", "21:00","", "",null);
+    private DatosCrearPartido nuevoPartido = new DatosCrearPartido(6, "5", "Adulto", "21:00","", "",null);
+    private DatosCrearPartido partidoConCategoriaInvalida = new DatosCrearPartido(6, "11", "Niños", "20:00","", "",null);
+    private DatosCrearPartido partidoConTipoInvalido = new DatosCrearPartido(6, "3", "Infantil", "20:00","", "",null);
+    private DatosCrearPartido partidoConCantidadJugadoresInvalida = new DatosCrearPartido(25, "11", "adulto", "22:00","", "",null);
+    private DatosCrearPartido partidoLleno = new DatosCrearPartido(10, "5", "Juvenil", "18:00","","",null);
 
     //private Partido datosPartido = PARTIDO;
 

@@ -68,4 +68,9 @@ public class ServicioCanchaImpl implements ServicioCancha{
     public Cancha buscarCanchaPorId(Long id) {
         return repositorioCanchaImpl.buscarCanchaPorId(id);
     }
+
+    @Override
+    public void modificarDatosCancha(Cancha cancha) {
+        repositorioCanchaImpl.modificarDatosCancha(cancha);
+    }
 }

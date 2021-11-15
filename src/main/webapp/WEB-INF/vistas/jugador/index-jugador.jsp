@@ -23,15 +23,15 @@
                             alt="..."
                     />
                     <div class="card-body">
-                        <h5 class="card-title">Categoria: ${CANCHA.nombre}</h5>
+                        <h5 class="card-title">Nombre: ${CANCHA.nombre}</h5>
                         <p class="card-text">
                             <strong>Ubicacion:</strong> ${CANCHA.domicilio}
                         </p>
                         <p class="card-text">
                             <strong>Localidad:</strong> ${CANCHA.localidad}
                         </p>
-                        <form:form action="/proyecto_limpio_spring_war_exploded/registro-partido/${CANCHA.id}" method="post">
-                            <button class="btn btn-primary" type="submit">Reservar</button>
+                        <form:form action="/proyecto_limpio_spring_war_exploded/reservar-cancha/${CANCHA.id}" method="POST">
+                            <button class="btn btn-primary" type="submit">Reservar cancha</button>
                         </form:form>
                     </div>
                 </div>

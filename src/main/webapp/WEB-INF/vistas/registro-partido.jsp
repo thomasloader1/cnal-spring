@@ -48,6 +48,12 @@
                     </div>
 
                     <div class="form-outline mb-4">
+                        <label class="form-label">Ingrese la fecha</label>
+                       <input name="fechaPartido" id="defaultRegisterFormFechaPartido" class="form-control"  type="date">
+
+                    </div>
+
+                    <div class="form-outline mb-4">
                         <label class="form-label">Ingrese el horario</label>
                         <select name="horario" id="defaultRegisterFormHorario" class="form-control">
                             <option selected>Seleccione el horario</option>

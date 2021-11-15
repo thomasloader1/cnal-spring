@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -132,6 +133,11 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Override
     public List<Partido> buscarPartidosPorCancha(Cancha cancha) {
         return repositorioPartidoImpl.buscarPartidosPorCancha(cancha);
+    }
+
+    @Override
+    public List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido, String horarioPartido) {
+        return repositorioPartidoImpl.buscarPartidosPorFechaYHora(fechaPartido,horarioPartido);
     }
 
 

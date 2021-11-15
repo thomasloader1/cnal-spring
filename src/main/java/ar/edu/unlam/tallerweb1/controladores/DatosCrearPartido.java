@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 
+import java.util.Date;
+
 public class DatosCrearPartido {
 
     private int cant_jugadores;
@@ -12,11 +14,12 @@ public class DatosCrearPartido {
     private String horario;
     private String localidad;
     private String direccion;
+    private Date fechaPartido;
 
 
     public DatosCrearPartido() {}
 
-    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad, String direccion) {
+    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad, String direccion, Date fechaPartido) {
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = 0;
         this.tipo = tipo;
@@ -24,6 +27,7 @@ public class DatosCrearPartido {
         this.horario = horario;
         this.localidad = localidad;
         this.direccion = direccion;
+        this.fechaPartido = fechaPartido;
     }
 
     public int getCant_jugadores() {
@@ -74,6 +78,10 @@ public class DatosCrearPartido {
 
     public String getDireccion(){return direccion;}
 
+    public Date getFechaPartido() {return fechaPartido;}
+
+    public void setFechaPartido(Date fechaPartido) {this.fechaPartido = fechaPartido;}
+
     public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido) {
         String mensaje = "";
         if ((validarCantidadJugadores(datosPartido)) && (validarCategoria(datosPartido)) && (validarTipoPartido(datosPartido))) {
@@ -117,6 +125,6 @@ public class DatosCrearPartido {
     }
 
     public Partido crearPartido() {
-        return new Partido(this.getCant_jugadores(), this.getCant_lugaresDisp(), this.getTipo(), this.getCategoria(), this.getHorario(), this.getLocalidad(), this.getDireccion());
+        return new Partido(this.getCant_jugadores(), this.getCant_lugaresDisp(), this.getTipo(), this.getCategoria(), this.getHorario(), this.getLocalidad(), this.getDireccion(), this.getFechaPartido());
     }
 }

@@ -18,4 +18,6 @@ public interface RepositorioCancha {
     List<Cancha> todasLasCanchasPorAdmin(Usuario usuario);
 
     Cancha buscarCanchaPorId(Long id);
+
+    void modificarDatosCancha(Cancha cancha);
 }

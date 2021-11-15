@@ -14,8 +14,8 @@ import static org.mockito.Mockito.never;
 
 public class ServicioPartidoTest {
 
-    public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "");
-    public static final Partido PARTIDO2 = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "");
+    public static final Partido PARTIDO = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "",null);
+    public static final Partido PARTIDO2 = new Partido(5, 17, "11","Juvenil","18:00","San Justo", "",null);
     public static  final Cancha CANCHA = new Cancha();
     private RepositorioPartido repositorioPartido = mock(RepositorioPartido.class);
     private ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);

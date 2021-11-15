@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ServicioPartido {
@@ -21,4 +22,5 @@ public interface ServicioPartido {
     UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
     List<Partido> buscarPartidosPorUsuario(Long idUsuario);
     List<Partido> buscarPartidosPorCancha(Cancha cancha);
+    List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido,String horarioPartido);
 }

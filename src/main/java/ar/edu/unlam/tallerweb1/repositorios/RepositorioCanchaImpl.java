@@ -67,4 +67,9 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
     }
+
+    @Override
+    public void modificarDatosCancha(Cancha cancha) {
+        sessionFactory.getCurrentSession().update(cancha);
+    }
 }
