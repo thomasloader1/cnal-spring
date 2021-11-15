@@ -32,7 +32,7 @@
                         <th scope="row">${USUARIO.email}</th>
                         <td>${USUARIO.nombre}</td>
                         <td>${USUARIO.apellido}</td>
-                        <td>${USUARIO.equipo}</td>
+                        <td>${USUARIO.equipo.nombre}</td>
                         <td>${USUARIO.rol}</td>
                         <td>
                             <form:form action="cambio-rol/${USUARIO.id}" method="get">

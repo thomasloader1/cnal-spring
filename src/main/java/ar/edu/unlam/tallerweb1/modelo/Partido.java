@@ -23,7 +23,8 @@ public class Partido {
     private String direccion;
     private String localidad;
 
-
+    @ManyToOne
+    private Cancha cancha;
 
     public Partido() {}
 
@@ -104,4 +105,7 @@ public class Partido {
 
     public String getDireccion(){return direccion;}
 
+    public Cancha getCancha() {return cancha;}
+
+    public void setCancha(Cancha cancha) {this.cancha = cancha;}
 }

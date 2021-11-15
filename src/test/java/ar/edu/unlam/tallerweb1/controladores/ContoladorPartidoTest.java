@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -14,7 +15,8 @@ public class ContoladorPartidoTest {
     private ServicioPartido servicioCrearPartido = mock(ServicioPartido.class);
     private ServicioLocalidad servicioLocalidad = mock(ServicioLocalidad.class);
     private ServicioUsuario servicioUsuario = mock(ServicioUsuario.class);
-    private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido, servicioLocalidad, servicioUsuario);
+    private ServicioCancha servicioCancha = mock(ServicioCancha.class);
+    private ControladorPartido controladorPartido = new ControladorPartido(servicioCrearPartido, servicioLocalidad, servicioUsuario,servicioCancha);
 
     private static final Partido PARTIDO = new Partido(6, 0, "5", "Adulto", "21:00","San Justo", "");
 
@@ -44,7 +46,7 @@ public class ContoladorPartidoTest {
         }
     }
     private ModelAndView whenCreoUnNuevoPartido(DatosCrearPartido nuevoPartido) {
-        return controladorPartido.registrarPartido(nuevoPartido);
+        return controladorPartido.registrarPartido(nuevoPartido,1L);
     }
     private void thenElPartidoSeCreaExitosamente(ModelAndView modeloVistaPartido) {
         assertThat(modeloVistaPartido.getViewName()).isEqualTo("partido-registrado");

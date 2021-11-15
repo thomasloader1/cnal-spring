@@ -105,4 +105,10 @@ public class ServicioUsuarioImpl implements ServicioUsuario
         return false;
     }
 
+    @Override
+    public Usuario buscarUsuarioPorId(Long id) {
+        return repositorioUsuario.buscarUsuarioPorId(id);
+    }
+
+
 }

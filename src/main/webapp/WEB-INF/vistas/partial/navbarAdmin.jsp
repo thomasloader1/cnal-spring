@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-cancha">Crear cancha</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/lista-canchas-admin">Ver mis canchas</a>
+                </li>
             </ul>
         </div>
         <div class="d-flex">

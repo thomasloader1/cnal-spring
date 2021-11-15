@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCancha;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,7 +14,8 @@ import static org.mockito.Mockito.*;
 public class ServicioCanchaTest {
 
     private RepositorioCancha repositorioCancha = mock(RepositorioCancha.class);
-    private ServicioCancha servicioCancha = new ServicioCanchaImpl(repositorioCancha);
+    private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
+    private ServicioCancha servicioCancha = new ServicioCanchaImpl(repositorioCancha,repositorioUsuario);
 
 
     @Test

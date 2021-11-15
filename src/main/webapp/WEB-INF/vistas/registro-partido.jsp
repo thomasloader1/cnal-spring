@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row my-5">
             <div id="registrarPartido" class="col-md-12">
-                <form:form action="registrar-partido" method="POST" modelAttribute="partido-nuevo">
+                <form:form action="/proyecto_limpio_spring_war_exploded/registrar-partido/${CANCHA.id}" method="POST" modelAttribute="partido-nuevo">
                     <h3 class="form-signin-heading">Registrar Partido </h3>
                     <hr class="colorgraph"><br>
                     <div class="form-outline mb-4">
@@ -38,13 +38,28 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label">Ingrese la localidad</label>
-                        <input name="localidad" id="defaultRegisterFormLocalidad" class="form-control"/>
+                        <label class="form-label">Domicilio cancha</label>
+                        <input name="direccion" id="defaultRegisterFormDireccion" class="form-control" value="${CANCHA.domicilio}" readonly/>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Localidad cancha</label>
+                        <input name="localidad" id="defaultRegisterFormLocalidad" class="form-control" value="${CANCHA.localidad}" readonly/>
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label">Ingrese el horario</label>
-                        <input name="horario" id="defaultRegisterFormHorario" class="form-control"/>
+                        <select name="horario" id="defaultRegisterFormHorario" class="form-control">
+                            <option selected>Seleccione el horario</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                            <option value="22:00">22:00</option>
+                        </select>
                     </div>
                     <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar partido</button>
                 </form:form>

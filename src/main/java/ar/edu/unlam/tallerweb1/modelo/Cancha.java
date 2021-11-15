@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cancha {
@@ -15,7 +12,8 @@ public class Cancha {
     private String localidad;
     private String domicilio;
 
-
+    @ManyToOne
+    private Usuario usuario;
 
     public Cancha(){}
 
@@ -52,4 +50,8 @@ public class Cancha {
     public void setDomicilio(String domicilio){this.domicilio = domicilio;}
 
     public String getDomicilio(){return domicilio;}
+
+    public Usuario getUsuario() {return usuario;}
+
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
 }

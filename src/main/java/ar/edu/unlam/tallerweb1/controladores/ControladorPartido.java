@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -29,21 +31,29 @@ public class ControladorPartido {
 
     private ServicioUsuario servicioUsuario;
 
+    private ServicioCancha servicioCancha;
+
     @Autowired
-    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario, ServicioCancha servicioCancha) {
         this.servicioCrearPartido = servicioCrearPartido;
         this.servicioLocalidad = servicioLocalidad;
         this.servicioUsuario = servicioUsuario;
+        this.servicioCancha = servicioCancha;
     }
 
-    @RequestMapping(path = "/registro-partido", method = RequestMethod.GET)
-    public ModelAndView irARegistroPartido() {
-        return new ModelAndView("registro-partido");
-    }
-
-    @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
-    public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido) {
+    @RequestMapping(path = "/registro-partido/{id}", method = RequestMethod.POST)
+    public ModelAndView irARegistroPartido(@PathVariable Long id) {
         ModelMap model = new ModelMap();
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+        model.put("CANCHA",cancha);
+        return new ModelAndView("registro-partido", model);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "registrar-partido/{id}")
+    public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido,@PathVariable Long id) {
+        ModelMap model = new ModelMap();
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+        model.put("CANCHA",cancha);
         ModelAndView modeloVista = null;
         if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
             model.put("msg", "El partido se creo con éxito");
@@ -74,6 +84,7 @@ public class ControladorPartido {
                 model.put("MIS_PARTIDOS", partidosList);
             }
         }
+        model.put("CANCHA", servicioCancha.todasLasCanchas());
         return new ModelAndView("jugador/index-jugador", model);
     }
     @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)

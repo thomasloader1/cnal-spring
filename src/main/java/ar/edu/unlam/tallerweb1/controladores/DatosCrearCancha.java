@@ -6,13 +6,15 @@ public class DatosCrearCancha {
     private String nombre;
     private String localidad;
     private String domicilio;
+    private Long idUsuario;
 
     public DatosCrearCancha() {}
 
-    public DatosCrearCancha(String nombre, String localidad, String domicilio) {
+    public DatosCrearCancha(String nombre, String localidad, String domicilio, Long idUsuario) {
         this.nombre = nombre;
         this.localidad = localidad;
         this.domicilio = domicilio;
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -42,4 +44,8 @@ public class DatosCrearCancha {
     public Cancha crearCancha(){
         return new Cancha(this.getNombre(), this.getLocalidad(), this.getDomicilio());
     }
+
+    public Long getIdUsuario() {return idUsuario;}
+
+    public void setIdUsuario(Long idUsuario) {this.idUsuario = idUsuario;}
 }
