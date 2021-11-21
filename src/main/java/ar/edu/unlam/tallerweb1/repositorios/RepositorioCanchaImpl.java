@@ -50,4 +50,26 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
                 .add(Restrictions.eq("domicilio", domicilio))
                 .uniqueResult();
     }
+
+    @Override
+    public List<Cancha> todasLasCanchasPorAdmin(Usuario usuario) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        return session.createCriteria(Cancha.class)
+                .add(Restrictions.eq("usuario", usuario))
+                .list();
+
+    }
+
+    @Override
+    public Cancha buscarCanchaPorId(Long id) {
+        return (Cancha) sessionFactory.getCurrentSession().createCriteria(Cancha.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    @Override
+    public void modificarDatosCancha(Cancha cancha) {
+        sessionFactory.getCurrentSession().update(cancha);
+    }
 }

@@ -15,4 +15,5 @@ public interface ServicioUsuario {
     List<ReporteUsuario> todosLosReportesPorUsuario(Long id);
     void sancionarJugador(Long id);
     Boolean jugadorEstaSancionado(Long id);
+    Usuario buscarUsuarioPorId(Long id);
 }

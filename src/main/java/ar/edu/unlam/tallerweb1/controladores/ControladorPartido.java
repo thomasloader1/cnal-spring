@@ -1,13 +1,16 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -29,27 +33,44 @@ public class ControladorPartido {
 
     private ServicioUsuario servicioUsuario;
 
+    private ServicioCancha servicioCancha;
+
     @Autowired
-    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario, ServicioCancha servicioCancha) {
         this.servicioCrearPartido = servicioCrearPartido;
         this.servicioLocalidad = servicioLocalidad;
         this.servicioUsuario = servicioUsuario;
+        this.servicioCancha = servicioCancha;
     }
 
-    @RequestMapping(path = "/registro-partido", method = RequestMethod.GET)
-    public ModelAndView irARegistroPartido() {
-        return new ModelAndView("registro-partido");
-    }
-
-    @RequestMapping(method = RequestMethod.POST, path = "/registrar-partido")
-    public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido) {
+    @RequestMapping(path = "/registro-partido/{id}", method = RequestMethod.POST)
+    public ModelAndView irARegistroPartido(@PathVariable Long id) {
         ModelMap model = new ModelMap();
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+        model.put("CANCHA",cancha);
+        return new ModelAndView("registro-partido", model);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "registrar-partido/{id}")
+    public ModelAndView registrarPartido(@ModelAttribute("partido-nuevo") DatosCrearPartido datosPartido,@PathVariable Long id) {
+        ModelMap model = new ModelMap();
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+        model.put("CANCHA",cancha);
         ModelAndView modeloVista = null;
         if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
-            model.put("msg", "El partido se creo con éxito");
-            model.put("partido", datosPartido);
-            servicioCrearPartido.registrarPartido(datosPartido.crearPartido());
-            modeloVista = new ModelAndView("partido-registrado", model);
+
+            List<Partido> partidoEncontrado = servicioCrearPartido.buscarPartidoPorFechaYHora(datosPartido.getFechaPartido(),datosPartido.getHorario());
+
+            if(partidoEncontrado == null || partidoEncontrado.size() < cancha.getCant_canchas()) {
+                model.put("msg", "El partido se creo con éxito");
+                model.put("partido", datosPartido);
+                servicioCrearPartido.registrarPartido(datosPartido.crearPartido(), cancha);
+                modeloVista = new ModelAndView("partido-registrado", model);
+            }
+            else{
+                model.put("msg", "No hay canchas disponibles para esa fecha y horario");
+                modeloVista = new ModelAndView("registro-partido", model);
+            }
         } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
             modeloVista = new ModelAndView("registro-partido", model);
@@ -74,6 +95,7 @@ public class ControladorPartido {
                 model.put("MIS_PARTIDOS", partidosList);
             }
         }
+        model.put("CANCHA", servicioCancha.todasLasCanchas());
         return new ModelAndView("jugador/index-jugador", model);
     }
     @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)
@@ -139,6 +161,18 @@ public class ControladorPartido {
     public Boolean veficarCantidadDeJugadores(Partido partido) {
         Boolean cantidadDeJugadoresCorrecta = partido.getCompleto();
         return cantidadDeJugadoresCorrecta;
+    }
+
+    @RequestMapping(path = "partidos-por-cancha/{id}", method = RequestMethod.GET)
+    public ModelAndView listarPartidosPorCancha(@PathVariable Long id){
+
+        ModelMap model = new ModelMap();
+
+        Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+
+        model.put("PARTIDO", servicioCrearPartido.buscarPartidosPorCancha(cancha));
+
+        return new ModelAndView("/lista-partidos-por-cancha", model);
     }
 
 }

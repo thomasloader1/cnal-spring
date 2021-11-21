@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -10,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -99,6 +101,21 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
             }
         }
         return partidosList;
+    }
+
+    @Override
+    public List<Partido> buscarPartidosPorCancha(Cancha cancha) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Partido.class).add(Restrictions.eq("cancha", cancha)).list();
+    }
+
+    @Override
+    public List<Partido> buscarPartidosPorFechaYHora(Date fechaPartido, String horarioPartido) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Partido.class)
+                .add(Restrictions.eq("fechaPartido",fechaPartido ))
+                .add(Restrictions.eq("horario", horarioPartido))
+                .list();
     }
 
 

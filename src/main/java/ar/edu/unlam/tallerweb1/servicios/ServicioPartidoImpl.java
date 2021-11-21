@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,8 +25,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public Partido registrarPartido(Partido partido)  {
+    public Partido registrarPartido(Partido partido, Cancha cancha)  {
         String tipo= partido.getTipo();
+        partido.setCancha(cancha);
         Integer jugadores = Integer.parseInt(tipo);
         Integer jugadores_totales = jugadores * 2;
         Integer lugares= 0;
@@ -125,6 +128,16 @@ public class ServicioPartidoImpl implements ServicioPartido {
     @Override
     public List<Partido> buscarPartidosPorUsuario(Long idUsuario) {
         return repositorioPartidoImpl.todosLosPartidosPorUsuario(idUsuario);
+    }
+
+    @Override
+    public List<Partido> buscarPartidosPorCancha(Cancha cancha) {
+        return repositorioPartidoImpl.buscarPartidosPorCancha(cancha);
+    }
+
+    @Override
+    public List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido, String horarioPartido) {
+        return repositorioPartidoImpl.buscarPartidosPorFechaYHora(fechaPartido,horarioPartido);
     }
 
 

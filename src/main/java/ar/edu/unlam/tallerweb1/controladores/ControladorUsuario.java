@@ -65,23 +65,33 @@ public class ControladorUsuario {
 
 
     @RequestMapping(path = "ver-jugadores-partido/{id}", method = RequestMethod.GET)
-    public ModelAndView listarJugadoresPorPartido(@PathVariable Long id) {
+    public ModelAndView listarJugadoresPorPartido(HttpServletRequest request,@PathVariable Long id) {
 
         ModelMap model = new ModelMap();
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
 
         List<Usuario> usuarioList = servicioUsuario.todosLosUsuariosPorPartido(id);
 
+        Usuario usarioActual = servicioUsuario.buscarUsuarioPorId(idUsuario);
+
+        model.put("USUARIO_ACTUAL", usarioActual);
         model.put("USUARIO", usuarioList);
 
         return new ModelAndView("lista-jugadores", model);
     }
 
     @RequestMapping(path = "reportar-usuario/{id}", method = RequestMethod.GET)
-    public ModelAndView reportarUsuario(@PathVariable Long id) {
+    public ModelAndView reportarUsuario(HttpServletRequest request,@PathVariable Long id) {
 
         ModelMap model = new ModelMap();
 
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
         DatosReporte datosReporte = new DatosReporte();
+
+        Usuario usarioActual = servicioUsuario.buscarUsuarioPorId(idUsuario);
+
+        model.put("USUARIO_ACTUAL", usarioActual);
 
         model.put("IDUSUARIO", id);
 
@@ -89,7 +99,9 @@ public class ControladorUsuario {
     }
 
     @RequestMapping(value = "enviar-reporte-usuario/{id}", method = RequestMethod.POST)
-    public ModelAndView envioReporteUsuario(@ModelAttribute("datos-reporte") DatosReporte datosReporte,@PathVariable Long id) {
+    public ModelAndView envioReporteUsuario(HttpServletRequest request,@ModelAttribute("datos-reporte") DatosReporte datosReporte,@PathVariable Long id) {
+
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
 
         ModelMap model = new ModelMap();
         ReporteUsuario reporteUsuario = new ReporteUsuario();
@@ -98,7 +110,11 @@ public class ControladorUsuario {
         reporteUsuario.setDescripcion(datosReporte.getDescripcion());
         reporteUsuario.setIdUsuario(id);
         reporteUsuario.setAprobado(false);
-        reporteUsuario.setFechaReporte(date.toString());
+        reporteUsuario.setFechaReporte(date);
+
+        Usuario usarioActual = servicioUsuario.buscarUsuarioPorId(idUsuario);
+
+        model.put("USUARIO_ACTUAL", usarioActual);
 
         model.put("REPORTE", reporteUsuario);
 

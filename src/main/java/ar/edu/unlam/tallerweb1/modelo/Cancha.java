@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cancha {
@@ -14,15 +11,22 @@ public class Cancha {
     private String nombre;
     private String localidad;
     private String domicilio;
+    private Double precio;
+    private Boolean bar;
+    private Integer cant_canchas;
 
-
+    @ManyToOne
+    private Usuario usuario;
 
     public Cancha(){}
 
-    public Cancha(String nombre, String localidad, String domicilio){
+    public Cancha(String nombre, String localidad, String domicilio, Double precio, Boolean bar, Integer cant_canchas){
         this.nombre = nombre;
         this.localidad = localidad;
         this.domicilio = domicilio;
+        this.precio = precio;
+        this.bar = bar;
+        this.cant_canchas = cant_canchas;
     }
 
     public void setId(Long id) {
@@ -52,4 +56,20 @@ public class Cancha {
     public void setDomicilio(String domicilio){this.domicilio = domicilio;}
 
     public String getDomicilio(){return domicilio;}
+
+    public Usuario getUsuario() {return usuario;}
+
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
+
+    public Double getPrecio() {return precio;}
+
+    public void setPrecio(Double precio) {this.precio = precio;}
+
+    public Boolean getBar() {return bar;}
+
+    public void setBar(Boolean bar) {this.bar = bar;}
+
+    public Integer getCant_canchas() {return cant_canchas;}
+
+    public void setCant_canchas(Integer cant_canchas) {this.cant_canchas = cant_canchas;}
 }

@@ -10,7 +10,14 @@
 <html>
 <%@ include file = "partial/header.jsp" %>
 <body>
-<%@ include file = "partial/navbarJugador.jsp" %>
+<c:choose>
+    <c:when test="${USUARIO_ACTUAL.rol == 'Jugador'}">
+        <%@ include file = "partial/navbarJugador.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%@ include file = "partial/navbarAdmin.jsp" %>
+    </c:otherwise>
+</c:choose>
 
 <div class="container">
     <div class="row my-5">

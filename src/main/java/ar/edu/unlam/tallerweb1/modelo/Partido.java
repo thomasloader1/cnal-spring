@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,12 +23,14 @@ public class Partido {
     private String horario;
     private String direccion;
     private String localidad;
+    private Date fechaPartido;
 
-
+    @ManyToOne
+    private Cancha cancha;
 
     public Partido() {}
 
-    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad, String direccion) {
+    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad, String direccion, Date fechaPartido) {
         this.id = id;
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = lugares;
@@ -37,6 +40,7 @@ public class Partido {
         this.horario = horario;
         this.localidad = localidad;
         this.direccion = direccion;
+        this.fechaPartido = fechaPartido;
     }
 
     public Long getId() {
@@ -104,4 +108,11 @@ public class Partido {
 
     public String getDireccion(){return direccion;}
 
+    public Cancha getCancha() {return cancha;}
+
+    public void setCancha(Cancha cancha) {this.cancha = cancha;}
+
+    public Date getFechaPartido() {return fechaPartido;}
+
+    public void setFechaPartido(Date fechaPartido) {this.fechaPartido = fechaPartido;}
 }
