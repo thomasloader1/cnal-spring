@@ -68,7 +68,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 for (int j= 0; j<jugadores.size(); j++){
                     Usuario jugador = jugadores.get(j);
                     if (jugador.getId() == idUsuario){
-                        unirEquipoAlTorneo(id, equipo);
+                        vincularJugadorAPartido(id, equipo.getId());
                         registroOk=true;
                     }
                 }
@@ -92,6 +92,20 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         repositorioTorneo.actualizarTorneo(torneoEncontrado);
     }
 
+    private void vincularJugadorAPartido(Long idUsuario, Long idEquipo){
+        try {
+            EquipoTorneo registro = new EquipoTorneo();
+
+            registro.setPrimaryOne(idUsuario);
+
+            registro.setPrimaryTwo(idEquipo);
+
+            repositorioTorneo.registrarEquipoEnTorneo(registro);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
     public boolean hayLugaresDisponibles(Torneo torneo){
 
         boolean hayLugar = false;

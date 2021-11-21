@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 
-import ar.edu.unlam.tallerweb1.modelo.Equipo;
-import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
-import ar.edu.unlam.tallerweb1.modelo.Torneo;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -45,19 +43,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
         sessionFactory.getCurrentSession().save(torneo);
     }
 
-
+    @Override
+    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {return null;}
 
     @Override
-    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {
-
-
-        return null;
-    }
-
-    @Override
-    public void actualizarPartidoTorneo(PartidoTorneo partido) {
-
-    }
+    public void actualizarPartidoTorneo(PartidoTorneo partido) {}
 
     @Override
     public void guardarPartidoTorneo(PartidoTorneo partido) {
@@ -67,7 +57,6 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     @Override
     public List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-
         return session.createCriteria(PartidoTorneo.class)
                 .add(Restrictions.eq("torneo", torneo))
                 .list();
@@ -76,9 +65,12 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     @Override
     public Torneo buscarTorneoPorId(Long idTorneo) {
         final Session session = sessionFactory.getCurrentSession();
-
         return (Torneo) session.createCriteria(Torneo.class)
                 .add(Restrictions.eq("id", idTorneo))
                 .uniqueResult();
+    }
+    @Override
+    public void registrarEquipoEnTorneo(EquipoTorneo registro) {
+        sessionFactory.getCurrentSession().save(registro);
     }
 }

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.EquipoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 
@@ -25,4 +26,6 @@ public interface RepositorioTorneo {
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 
     Torneo buscarTorneoPorId(Long idTorneo);
+
+    void registrarEquipoEnTorneo(EquipoTorneo registro);
 }

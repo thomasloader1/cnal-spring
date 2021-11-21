@@ -1,20 +1,22 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
 @IdClass(TimePk.class)
-public class JugadorEquipo {
-
+public class EquipoTorneo {
     @Id
     private Long primaryOne;
 
     @Id
     private Long primaryTwo;
 
-    public JugadorEquipo(){}
+    public EquipoTorneo() {
+    }
 
-    public JugadorEquipo(Long primaryOne, Long primaryTwo){
+    public EquipoTorneo(Long primaryOne, Long primaryTwo) {
         this.primaryOne = primaryOne;
         this.primaryTwo = primaryTwo;
     }
@@ -35,3 +37,4 @@ public class JugadorEquipo {
         this.primaryTwo = primaryTwo;
     }
 }
+
