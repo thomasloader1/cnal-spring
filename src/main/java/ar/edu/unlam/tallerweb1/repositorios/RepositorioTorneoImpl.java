@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 
-import ar.edu.unlam.tallerweb1.modelo.Equipo;
-import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
-import ar.edu.unlam.tallerweb1.modelo.Torneo;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -70,5 +68,9 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
         return (Torneo) session.createCriteria(Torneo.class)
                 .add(Restrictions.eq("id", idTorneo))
                 .uniqueResult();
+    }
+    @Override
+    public void registrarEquipoEnTorneo(EquipoTorneo registro) {
+        sessionFactory.getCurrentSession().save(registro);
     }
 }

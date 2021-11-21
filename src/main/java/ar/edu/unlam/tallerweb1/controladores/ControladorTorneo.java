@@ -58,13 +58,13 @@ public class ControladorTorneo {
         return new ModelAndView("unirme-a-torneo", model);
     }
 
-    @RequestMapping(path = "/unirse-a-torneo/{id}", method = RequestMethod.GET)
-    public ModelAndView unirmeAUnTorneo(@ModelAttribute("unirse-a-torneo") @PathVariable Long id, HttpServletRequest request) throws Exception {
+    @RequestMapping(path = "/unirse-a-torneo/{idTorneo}", method = RequestMethod.GET)
+    public ModelAndView unirmeAUnTorneo(@ModelAttribute("unirse-a-torneo") @PathVariable Long idTorneo, HttpServletRequest request) throws Exception {
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
         ModelMap modelMap = new ModelMap();
         ModelAndView modelAndView;
 
-        if (servicioTorneo.registrarEnTorneo(id, idUsuario)) {
+        if (servicioTorneo.registrarEnTorneo(idTorneo, idUsuario)) {
             modelAndView = new ModelAndView("union-torneo", modelMap);
         } else {
             modelMap.put("error", "el torneo ya esta completo");
@@ -96,7 +96,7 @@ public class ControladorTorneo {
 
         try {
             servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo);
-            Torneo torneo = servicioTorneo.buscarTorneoPorID(idTorneo);
+            Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
             List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
             model.put("PARTIDOSTORNEO", partidosDelTorneo);
 
