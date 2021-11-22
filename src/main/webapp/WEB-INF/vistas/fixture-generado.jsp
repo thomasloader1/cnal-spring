@@ -34,7 +34,7 @@
                             <p class="card-text">
                                 <strong>Torneo: </strong> ${PARTIDO.torneo.nombre}
                             </p>
-                            <a href="#!" class="btn btn-primary">Ver jugadores</a> //opcional! Ver si se implementa más adelante
+                            <%--<a href="#!" class="btn btn-primary">Ver jugadores</a> //opcional! Ver si se implementa más adelante--%>
                         </div>
                     </div>
                 </div>
