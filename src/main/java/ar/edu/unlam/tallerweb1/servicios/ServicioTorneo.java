@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosTorneo;
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 
@@ -20,4 +21,6 @@ public interface ServicioTorneo {
     Torneo buscarTorneoPorId(Long idTorneo);
 
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
+
+    List<Equipo> obtenerListaDeEquiposDelTorneo(Long idTorneo);
 }

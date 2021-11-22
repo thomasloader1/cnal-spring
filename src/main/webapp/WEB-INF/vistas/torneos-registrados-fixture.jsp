@@ -32,9 +32,9 @@
                         <p class="card-text">
                             <strong>Cantidad de Equipos:</strong> ${TORNEO.cantidadEquipos}
                         </p>
-                        <p class="card-text">
+                        <%--<p class="card-text">
                             <strong>Equipos:</strong>
-                        </p>
+                        </p>--%>
 
                         <form:form action="crear-fixture/${TORNEO.id}" method="POST" modelAttribute="crear-fixture">
 

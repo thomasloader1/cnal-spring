@@ -44,7 +44,12 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     }
 
     @Override
-    public List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo) {return null;}
+    public List<EquipoTorneo> buscarEquiposDeUnTorneo(Long idTorneo) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(EquipoTorneo.class)
+                .add(Restrictions.eq("primaryOne", idTorneo))
+                .list();
+    }
 
     @Override
     public void actualizarPartidoTorneo(PartidoTorneo partido) {}

@@ -138,7 +138,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo) {
 
         Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
-        List<Equipo> equiposDelTorneo = repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo);
+        List<Equipo> equiposDelTorneo = obtenerListaDeEquiposDelTorneo(idTorneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
         if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
@@ -166,6 +166,18 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         }
 
         return partidosDelTorneo;
+    }
+
+    public List<Equipo> obtenerListaDeEquiposDelTorneo(Long idTorneo) {
+        List<EquipoTorneo> equipoTorneoBuscados = repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo);
+        List<Equipo> equiposEncontrados = new ArrayList<>();
+
+        Equipo equipoBuscado = null;
+        for (EquipoTorneo equipoActual : equipoTorneoBuscados) {
+            equipoBuscado = repositorioEquipo.buscarEquipo(equipoActual.getPrimaryTwo());
+            equiposEncontrados.add(equipoBuscado);
+        }
+        return equiposEncontrados;
     }
 
     public Equipo sortearEquipo(List<Equipo> equipos){

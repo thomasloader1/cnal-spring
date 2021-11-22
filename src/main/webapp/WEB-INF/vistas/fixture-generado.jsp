@@ -24,12 +24,15 @@
                 <div class="col-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Partido: ${PARTIDO.nombre}</h5>
+                            <%--<h5 class="card-title">Partido: ${PARTIDO.nombre}</h5>--%>
                             <p class="card-text">
-                                <strong>Equipo 1:</strong> ${PARTIDO.equipoUno}
+                                <strong>Equipo 1: </strong> ${PARTIDO.equipoUno.nombre}
                             </p>
                             <p class="card-text">
-                                <strong>Equipo 2:</strong> ${PARTIDO.equipoDos}
+                                <strong>Equipo 2: </strong> ${PARTIDO.equipoDos.nombre}
+                            </p>
+                            <p class="card-text">
+                                <strong>Torneo: </strong> ${PARTIDO.torneo.nombre}
                             </p>
                             <a href="#!" class="btn btn-primary">Ver jugadores</a> //opcional! Ver si se implementa más adelante
                         </div>

@@ -17,7 +17,7 @@ public interface RepositorioTorneo {
 
     void guardarTorneo(Torneo torneo);
 
-    List<Equipo> buscarEquiposDeUnTorneo(Long idTorneo);
+    List<EquipoTorneo> buscarEquiposDeUnTorneo(Long idTorneo);
 
     void actualizarPartidoTorneo(PartidoTorneo partido);
 
