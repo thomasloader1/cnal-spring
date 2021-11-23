@@ -39,7 +39,7 @@
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-torneo">Unirme a un
                             torneo</a>
 
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/torneos-crear-fixture">Crear fixtures</a>
+                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/torneos-crear-fixture">Fixtures</a>
 
                     </li>
                 </ul>
