@@ -21,20 +21,26 @@
 
         <div class="row">
             <c:forEach items="${PARTIDOSTORNEO}" var="PARTIDO">
-                <div class="col-4">
+                <div class="col-4 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <%--<h5 class="card-title">Partido: ${PARTIDO.nombre}</h5>--%>
-                            <p class="card-text">
-                                <strong>Equipo 1: </strong> ${PARTIDO.equipoUno.nombre}
-                            </p>
-                            <p class="card-text">
-                                <strong>Equipo 2: </strong> ${PARTIDO.equipoDos.nombre}
+                            <p class="card-text text-center fs-3 bg-primary text-white bg-gradient pt-1 pb-1">
+                                <strong> ${PARTIDO.equipoUno.nombre.toUpperCase()} vs. ${PARTIDO.equipoDos.nombre.toUpperCase()} </strong>
                             </p>
                             <p class="card-text">
                                 <strong>Torneo: </strong> ${PARTIDO.torneo.nombre}
                             </p>
-                            <a href="#!" class="btn btn-primary">Ver jugadores</a> //opcional! Ver si se implementa más adelante
+                            <p class="card-text">
+                                <strong>Horario: </strong> ${PARTIDO.torneo.horario}
+                            </p>
+                            <p class="card-text">
+                                <strong>Categoría: </strong> ${PARTIDO.torneo.categoria}
+                            </p>
+                            <p class="card-text">
+                                <strong>Localidad: </strong> ${PARTIDO.torneo.localidad}
+                            </p>
+                            <%--<a href="#!" class="btn btn-primary">Ver jugadores</a> //opcional! Ver si se implementa más adelante--%>
                         </div>
                     </div>
                 </div>

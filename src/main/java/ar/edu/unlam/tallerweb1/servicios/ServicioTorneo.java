@@ -23,4 +23,8 @@ public interface ServicioTorneo {
     List<PartidoTorneo> buscarLosPartidosDeUnTorneo(Torneo torneo);
 
     List<Equipo> obtenerListaDeEquiposDelTorneo(Long idTorneo);
+
+    boolean partidosExisten(Long idTorneo);
+
+    List<PartidoTorneo> buscarTodosLosPartidosDeLosTorneos();
 }

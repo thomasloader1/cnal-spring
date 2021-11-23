@@ -78,4 +78,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo{
     public void registrarEquipoEnTorneo(EquipoTorneo registro) {
         sessionFactory.getCurrentSession().save(registro);
     }
+
+    @Override
+    public List<PartidoTorneo> buscarLosPartidosDeTodosLosTorneos() {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(PartidoTorneo.class)
+                .list();
+    }
 }

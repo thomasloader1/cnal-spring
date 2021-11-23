@@ -95,16 +95,38 @@ public class ControladorTorneo {
         ModelMap model = new ModelMap();
 
         try {
-            servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo);
-            Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
-            List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
-            model.put("PARTIDOSTORNEO", partidosDelTorneo);
+            if(!servicioTorneo.partidosExisten(idTorneo)){
+                if(servicioTorneo.generarCruceDeEquiposDeUnTorneo(idTorneo)!=null){
+                    Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
+                    List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+                    model.put("PARTIDOSTORNEO", partidosDelTorneo);
 
-            modeloVista = new ModelAndView("fixture-generado", model);
+                    modeloVista = new ModelAndView("fixture-generado", model);
+                }
+                else{
+                    model.put("error", "El torneo está incompleto. No se puede generar el fixture");
+                    modeloVista = new ModelAndView("torneos-registrados-fixture", model);
+                }
+            }
+            else{
+                model.put("error", "El fixture ya esta creado");
+                modeloVista = new ModelAndView("torneos-registrados-fixture", model);
+            }
         }catch (Exception e){
-            model.put("error", "El torneo está incompleto. No se puede generar el fixture");
+            model.put("error", "Ha ocurrido un error. Volver a intertar");
             modeloVista = new ModelAndView("torneos-registrados-fixture", model);
         }
         return modeloVista;
     }
+
+
+    @RequestMapping(path = "/ver-fixture/{idTorneo}", method = RequestMethod.POST)
+    public ModelAndView mostrarFixture(@ModelAttribute("ver-fixture") @PathVariable Long idTorneo) {
+        ModelMap model = new ModelMap();
+        Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
+        model.put("PARTIDOSTORNEO", servicioTorneo.buscarLosPartidosDeUnTorneo(torneo));
+
+       return new ModelAndView("fixture-generado", model);
+    }
+
 }

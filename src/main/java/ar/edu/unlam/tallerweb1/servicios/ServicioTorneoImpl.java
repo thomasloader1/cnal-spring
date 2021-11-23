@@ -163,6 +163,9 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 repositorioTorneo.actualizarPartidoTorneo(partido);
 
             }
+
+            torneoBuscado.setFixtureCreado(true);
+            repositorioTorneo.actualizarTorneo(torneoBuscado);
         }
 
         return partidosDelTorneo;
@@ -222,4 +225,19 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         }
         return partidosCreados;
     }
+
+    @Override
+    public boolean partidosExisten(Long idTorneo) {
+        Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
+        if(buscarLosPartidosDeUnTorneo(torneoBuscado).size()!=0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<PartidoTorneo> buscarTodosLosPartidosDeLosTorneos() {
+        return repositorioTorneo.buscarLosPartidosDeTodosLosTorneos();
+    }
+
 }
