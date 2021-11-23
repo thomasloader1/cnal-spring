@@ -28,4 +28,6 @@ public interface RepositorioTorneo {
     Torneo buscarTorneoPorId(Long idTorneo);
 
     void registrarEquipoEnTorneo(EquipoTorneo registro);
+
+    List<PartidoTorneo> buscarLosPartidosDeTodosLosTorneos();
 }
