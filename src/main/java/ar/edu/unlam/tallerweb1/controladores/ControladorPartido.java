@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
@@ -74,13 +75,15 @@ public class ControladorPartido {
     }
 
     @RequestMapping(path = "listar-partidos", method = RequestMethod.GET)
-    public ModelAndView listarPartidos() {
+    public ModelAndView listarPartidos(HttpServletRequest request) {
         ModelMap model = new ModelMap();
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+        model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
         return new ModelAndView("home", model);
     }
     @RequestMapping(path = "listar-mis-partidos", method = RequestMethod.GET)
-    public ModelAndView listarMisPartidos(HttpServletRequest request) {
+    public ModelAndView listarMisPartidos(HttpServletRequest request, ModelMap data) {
         ModelMap model = new ModelMap();
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
@@ -91,6 +94,8 @@ public class ControladorPartido {
             }
         }
         model.put("CANCHA", servicioCancha.todasLasCanchas());
+        model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
+
         return new ModelAndView("jugador/index-jugador", model);
     }
     @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)

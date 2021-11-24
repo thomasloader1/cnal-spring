@@ -8,11 +8,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear
-                            partido</a>
-                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="unirmeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Unirme a
@@ -37,35 +32,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Buscar cancha</a>
                     </li>
-                    <%--<li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-al-partido">Unirme a un partido</a>
-                    </li>--%>
-                   <%-- <li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-equipo">Crear equipo</a>
-                    </li>--%>
-
-                    <%--<li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-equipo">Unirme a un
-                            equipo</a>
-                    </li>--%>
-
-                    <%--<li class="nav-item">
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/registro-torneo">Crear un
-                            torneo</a>
-                    </li>--%>
-
-                    <%--<li class="nav-item">
-
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/unirme-a-torneo">Unirme a un
-                            torneo</a>
-
-                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/torneos-crear-fixture">Fixtures</a>
-
-                    </li>--%>
                 </ul>
-            </div>
-            <div class="d-flex">
-                <a class="btn btn-outline-danger" href="/proyecto_limpio_spring_war_exploded/cerrarSesion">Cerrar sesion</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i> ${user.getNombre()}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
+                            <h6 class="dropdown-header">Cuenta:  ${user.getRol()}</h6>
+                            <a class="dropdown-item" href="#">Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/proyecto_limpio_spring_war_exploded/cerrarSesion">Cerrar sesion</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
