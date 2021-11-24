@@ -22,6 +22,9 @@
                 </ul>
             </div>
         </div>
+        <div class="d-flex align-item-center">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-mis-partidos">Volver</a>
+        </div>
     </div>
 </div>
 

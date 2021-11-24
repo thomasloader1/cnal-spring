@@ -20,6 +20,9 @@
         <div class="col-12">
             <h1>¡Te uniste al partido!</h1>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/unirme-al-partido">Volver</a>
+        </div>
     </div>
 </div>
 

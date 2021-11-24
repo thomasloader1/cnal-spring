@@ -68,6 +68,9 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <div class="d-flex">
+                <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/index-admin">Volver a Usuarios Registrados</a>
+            </div>
         </div>
     </div>
 
