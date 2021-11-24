@@ -14,7 +14,9 @@
 <body>
     <h5>Cancha modificada exitosamente</h5>
 
-
+    <div class="d-flex">
+        <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/lista-canchas-admin">Volver a Mis Canchas</a>
+    </div>
     <%@ include file="partial/scripts.jsp" %>
     <%@ include file="partial/footer.jsp" %>
 </body>

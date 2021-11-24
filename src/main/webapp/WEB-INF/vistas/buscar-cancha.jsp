@@ -64,15 +64,17 @@
                             <td>${CANCHA.domicilio}</td>
                             <td>${CANCHA.localidad}</td>
                             <td>
-                                <form:form action="" method="get">
-                                    <!--TODO EN VEZ DE IR A LA VISTA COMO TAL DEBERIA OBTENER EL DOMICILIO DE LA CANCHA Y PONERLO EN LA FORM DE CREAR PARTIDO-->
-                                    <button class="btn text-white" style="background-color: #67b168" type="submit"><a class="nav-link" style="text-decoration: none; color:white" href="/proyecto_limpio_spring_war_exploded/registro-partido">Crear partido en esta cancha</a></button>
+                                <form:form action="/proyecto_limpio_spring_war_exploded/reservar-cancha/${CANCHA.id}" method="POST">
+                                    <button class="btn btn-primary" type="submit">Crear partido en esta cancha</button>
                                 </form:form>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
+                <div class="d-flex">
+                    <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-mis-partidos">Volver al Inicio</a>
+                </div>
             </div>
         </div>
         <c:if test="${not empty msg}">

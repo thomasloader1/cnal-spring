@@ -21,6 +21,9 @@
                 </ul>
             </div>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/lista-canchas-admin">Volver a Mis Canchas</a>
+        </div>
     </div>
 </div>
 

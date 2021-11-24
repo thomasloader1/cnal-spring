@@ -69,6 +69,9 @@
                     </div>
                     <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar partido</button>
                 </form:form>
+                <div class="d-flex">
+                    <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Volver a Canchas</a>
+                </div>
 
                         <c:if test="${not empty msg}">
                 <div class="col-12">
