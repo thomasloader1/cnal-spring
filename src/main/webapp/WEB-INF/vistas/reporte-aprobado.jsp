@@ -13,6 +13,9 @@
         <div class="col">
           <h3>Reporte aprobado exitosamente.</h3>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/index-admin">Volver a Reportes</a>
+        </div>
     </div>
 </div>
 

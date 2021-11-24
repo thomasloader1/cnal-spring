@@ -17,6 +17,9 @@ public class Torneo {
     private String localidad;
     private String nombre;
 
+    private boolean fixtureCreado = false;
+
+
     @SuppressWarnings("JpaAttributeTypeInspection")
     @Column(name = "equiposInscriptos")
     protected ArrayList<Equipo> equiposInscriptos;
@@ -103,6 +106,14 @@ public class Torneo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean isFixtureCreado() {
+        return fixtureCreado;
+    }
+
+    public void setFixtureCreado(boolean fixtureCreado) {
+        this.fixtureCreado = fixtureCreado;
     }
 
 }

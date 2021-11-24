@@ -24,7 +24,7 @@
         <c:forEach items="${TORNEOSEQUIPOS}" var="TORNEO">
             <div class="col-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body mb-3">
                         <h5 class="card-title">Torneo: ${TORNEO.nombre}</h5>
                         <p class="card-text">
                             <strong>Localidad:</strong> ${TORNEO.localidad}
@@ -32,15 +32,19 @@
                         <p class="card-text">
                             <strong>Cantidad de Equipos:</strong> ${TORNEO.cantidadEquipos}
                         </p>
-                        <p class="card-text">
-                            <strong>Equipos:</strong>
-                        </p>
+                        <c:choose>
+                            <c:when test='${TORNEO.fixtureCreado==true}'>
+                                <form:form action="ver-fixture/${TORNEO.id}" method="POST" modelAttribute="ver-fixture">
+                                    <button class="btn text-white" style="background-color: #67b168" type="submit">Ver fixture</button>
+                                </form:form>
+                            </c:when>
+                            <c:otherwise>
+                                <form:form action="crear-fixture/${TORNEO.id}" method="POST" modelAttribute="crear-fixture">
+                                    <button class="btn text-white" style="background-color: #67b168" type="submit">Crear el fixture</button>
+                                </form:form>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <form:form action="crear-fixture/${TORNEO.id}" method="POST" modelAttribute="crear-fixture">
-
-                            <button class="btn text-white" style="background-color: #67b168" type="submit">Crear el fixture</button>
-
-                        </form:form>
                     </div>
                 </div>
             </div>

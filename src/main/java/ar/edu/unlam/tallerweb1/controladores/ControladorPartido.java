@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -58,19 +57,10 @@ public class ControladorPartido {
         model.put("CANCHA",cancha);
         ModelAndView modeloVista = null;
         if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
-
-            List<Partido> partidoEncontrado = servicioCrearPartido.buscarPartidoPorFechaYHora(datosPartido.getFechaPartido(),datosPartido.getHorario());
-
-            if(partidoEncontrado == null || partidoEncontrado.size() < cancha.getCant_canchas()) {
-                model.put("msg", "El partido se creo con éxito");
-                model.put("partido", datosPartido);
-                servicioCrearPartido.registrarPartido(datosPartido.crearPartido(), cancha);
-                modeloVista = new ModelAndView("partido-registrado", model);
-            }
-            else{
-                model.put("msg", "No hay canchas disponibles para esa fecha y horario");
-                modeloVista = new ModelAndView("registro-partido", model);
-            }
+            model.put("msg", "El partido se creo con éxito");
+            model.put("partido", datosPartido);
+            servicioCrearPartido.registrarPartido(datosPartido.crearPartido(),cancha);
+            modeloVista = new ModelAndView("partido-registrado", model);
         } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
             modeloVista = new ModelAndView("registro-partido", model);

@@ -31,6 +31,12 @@
                 </ul>
             </div>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-torneos-equipos">Ir al Fixture</a>
+        </div>
+        <div class="d-flex">
+            <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-mis-partidos">Volver al Inicio</a>
+        </div>
     </div>
 </div>
 

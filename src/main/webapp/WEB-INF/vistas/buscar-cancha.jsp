@@ -72,6 +72,9 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                <div class="d-flex">
+                    <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-mis-partidos">Volver al Inicio</a>
+                </div>
             </div>
         </div>
         <c:if test="${not empty msg}">
