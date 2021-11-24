@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +13,8 @@ import static org.mockito.Mockito.*;
 public class ControladorTorneoTest {
 
     private ServicioTorneo servicioTorneo= mock(ServicioTorneo.class);
-    private ControladorTorneo controladorTorneo= new ControladorTorneo(servicioTorneo);
+    private ServicioLocalidad servicioLocalidad= mock(ServicioLocalidad.class);
+    private ControladorTorneo controladorTorneo= new ControladorTorneo(servicioTorneo,servicioLocalidad);
 
     private static final Torneo TORNEO= new Torneo();
 
@@ -60,7 +62,7 @@ public class ControladorTorneoTest {
     private void thenElCruceNoSeRealiza(ModelAndView modeloVista) {
         //si el torneo elegido esta incompleto, me lleva a la misma vista (vista de todos los torneos con equipos unidos).
         assertThat(modeloVista.getViewName()).isEqualTo("torneos-registrados-fixture");
-        assertThat(modeloVista.getModel().get("error")).isEqualTo("El torneo está incompleto. No se puede generar el fixture");
+        assertThat(modeloVista.getModel().get("error")).isEqualTo("Ha ocurrido un error. Volver a intertar");
     }
 
 

@@ -68,7 +68,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 for (int j= 0; j<jugadores.size(); j++){
                     Usuario jugador = jugadores.get(j);
                     if (jugador.getId() == idUsuario){
-                        unirEquipoAlTorneo(id, equipo);
+                        vincularJugadorAPartido(id, equipo.getId());
                         registroOk=true;
                     }
                 }
@@ -92,6 +92,20 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         repositorioTorneo.actualizarTorneo(torneoEncontrado);
     }
 
+    private void vincularJugadorAPartido(Long idUsuario, Long idEquipo){
+        try {
+            EquipoTorneo registro = new EquipoTorneo();
+
+            registro.setPrimaryOne(idUsuario);
+
+            registro.setPrimaryTwo(idEquipo);
+
+            repositorioTorneo.registrarEquipoEnTorneo(registro);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
     public boolean hayLugaresDisponibles(Torneo torneo){
 
         boolean hayLugar = false;
@@ -124,7 +138,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo) {
 
         Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
-        List<Equipo> equiposDelTorneo = repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo);
+        List<Equipo> equiposDelTorneo = obtenerListaDeEquiposDelTorneo(idTorneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
         if(torneoBuscado != null && torneoBuscado.getCantidadEquipos().equals(Integer.toString(equiposDelTorneo.size()))){
@@ -149,9 +163,24 @@ public class ServicioTorneoImpl implements ServicioTorneo{
                 repositorioTorneo.actualizarPartidoTorneo(partido);
 
             }
+
+            torneoBuscado.setFixtureCreado(true);
+            repositorioTorneo.actualizarTorneo(torneoBuscado);
         }
 
         return partidosDelTorneo;
+    }
+
+    public List<Equipo> obtenerListaDeEquiposDelTorneo(Long idTorneo) {
+        List<EquipoTorneo> equipoTorneoBuscados = repositorioTorneo.buscarEquiposDeUnTorneo(idTorneo);
+        List<Equipo> equiposEncontrados = new ArrayList<>();
+
+        Equipo equipoBuscado = null;
+        for (EquipoTorneo equipoActual : equipoTorneoBuscados) {
+            equipoBuscado = repositorioEquipo.buscarEquipo(equipoActual.getPrimaryTwo());
+            equiposEncontrados.add(equipoBuscado);
+        }
+        return equiposEncontrados;
     }
 
     public Equipo sortearEquipo(List<Equipo> equipos){
@@ -196,4 +225,19 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         }
         return partidosCreados;
     }
+
+    @Override
+    public boolean partidosExisten(Long idTorneo) {
+        Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
+        if(buscarLosPartidosDeUnTorneo(torneoBuscado).size()!=0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<PartidoTorneo> buscarTodosLosPartidosDeLosTorneos() {
+        return repositorioTorneo.buscarLosPartidosDeTodosLosTorneos();
+    }
+
 }

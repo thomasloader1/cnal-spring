@@ -49,24 +49,21 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label">Ingrese el horaio en el que inicia el torneo</label>
+                    <label class="form-label">Ingrese el horario en el que inicia el torneo</label>
                     <input name="horario" id="defaultRegisterFormHorary" class="form-control" />
                 </div>
 
                 <div class="form-outline mb-4">
                     <label class="form-label">Ingrese la localidad</label>
-                    <select class="form-control" name="localidad">
-                        <option selected>Seleccione la localidad</option>
-                        <option value="Moreno">Moreno</option>
-                        <option value="Merlo">Merlo</option>
-                        <option value="Moron">Moron</option>
-                        <option value="Ramos Mejia">Ramos Mejia</option>
-                        <option value="Hurlingam">Hurlingam</option>
-                        <option value="La Matanza">La Matanza</option>
+                    <select class="form-control col-3" name="localidad" id="">
+                        <option>Localidad</option>
+                        <c:forEach items="${LOCALIDAD}" var="LOCALIDAD">
+                            <option scope="row" name="localidad">${LOCALIDAD.descripcion}</option>
+                        </c:forEach>
                     </select>
                 </div>
 
-                <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar Equipo</button>
+                <button id="btn-registrar" class="btn btn-primary btn-block" Type="Submit"/>Registrar Torneo</button>
             </form:form>
 
             <c:if test="${not empty msg}">
