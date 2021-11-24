@@ -9,7 +9,24 @@
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
+            themeSystem: 'bootstrap',
+            initialView: 'timeGridWeek',
+            slotMinTime: '07:00:00',
+            slotMaxTime: '24:00:00',
+            allDaySlot: false,
+            selectable: true,
+            height: 650,
+            contentHeight: 600,
+            select: function (info){
+              console.group("select f():")
+                console.info(info)
+                console.groupEnd()
+            },
+            dateClick: function (event){
+                console.group("dateCLick f():")
+                console.info(event)
+                console.groupEnd()
+            }
         });
         calendar.render();
     });
