@@ -21,7 +21,7 @@
                 <div class="form-outline mb-4">
                     <label class="form-label">Ingrese la cantidad de canchas disponibles para alquilar</label>
                     <select name="cant_canchas" id="defaultRegisterFormCantCanchas" class="form-control" required>
-                        <option selected>Seleccione una opcion</option>
+                        <option selected>${CANCHA.cant_canchas}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -49,7 +49,7 @@
                 <div class="form-outline mb-4">
                     <label class="form-label">Posee servicio de bar</label>
                     <select name="bar" id="defaultRegisterFormBar" class="form-control" required>
-                        <option selected>Seleccione la opcion</option>
+                        <option selected>${CANCHA.bar}</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
