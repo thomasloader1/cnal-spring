@@ -46,7 +46,7 @@ public class ControladorLogin {
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
 			request.getSession().setAttribute("ID", usuarioBuscado.getId());
-			return redirectPorRol(usuarioBuscado.getRol());
+			return redirectPorRol(usuarioBuscado.getRol(), usuarioBuscado);
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}
@@ -59,9 +59,12 @@ public class ControladorLogin {
 	}
 
 	@RequestMapping(path = "/index-admin", method = RequestMethod.GET)
-	public ModelAndView irAHomeAdmin() {
+	public ModelAndView irAHomeAdmin(HttpServletRequest request) {
 		List<Usuario> usuarioList = servicioUsuario.todosLosUsuarios();
 		ModelMap model = new ModelMap();
+		Long idUsuario = (Long) request.getSession().getAttribute("ID");
+		model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
+
 		if(usuarioList != null)
 		{
 			model.put("USUARIOS", usuarioList);
@@ -70,7 +73,8 @@ public class ControladorLogin {
 	}
 
 	@RequestMapping(path = "/index-jugador", method = RequestMethod.GET)
-	public ModelAndView irAHomeJugador() {
+	public ModelAndView irAHomeJugador(HttpServletRequest request) {
+
 		return new ModelAndView("redirect:/listar-mis-partidos");
 	}
 
@@ -85,13 +89,16 @@ public class ControladorLogin {
 		return new ModelAndView("redirect:/login");
 	}
 
-	public ModelAndView redirectPorRol(String rol){
+	public ModelAndView redirectPorRol(String rol, Usuario usuario){
+		ModelMap model = new ModelMap();
+		model.put("usuario", usuario);
+
 		switch (rol) {
 			case "Admin":
-				return new ModelAndView("redirect:/index-admin");
+				return new ModelAndView("redirect:/index-admin", model);
 
 			case "Jugador":
-				return new ModelAndView("redirect:/index-jugador");
+				return new ModelAndView("redirect:/index-jugador", model);
 		}
 		return new ModelAndView("redirect:/home");
 	}

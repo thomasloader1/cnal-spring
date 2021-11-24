@@ -9,7 +9,13 @@
     <h4 class="mb-3">Solo por hoy 25% off en todo el sitio</h4>
     <a class="btn text-white" href="" role="button" style="background-color: #2b542c">Reservar</a>
 </div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
 <div class="container py-3">
     <h3 style="margin-bottom: 3%; margin-top: 3%">Canchas disponibles</h3>
 
@@ -19,9 +25,7 @@
                 <div class="card">
                     <img
                             src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80"
-                            class="card-img-top"
-                            alt="..."
-                    />
+                            class="card-img-top" alt="..."/>
                     <div class="card-body">
                         <h5 class="card-title">Nombre: ${CANCHA.nombre}</h5>
                         <p class="card-text">

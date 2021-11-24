@@ -1,5 +1,4 @@
 <header>
-
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f1f1f1;margin-bottom: 5px">
         <div class="container">
             <a class="navbar-brand" href="/proyecto_limpio_spring_war_exploded/home">Navbar</a>
