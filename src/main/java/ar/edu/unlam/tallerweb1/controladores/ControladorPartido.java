@@ -58,10 +58,19 @@ public class ControladorPartido {
         model.put("CANCHA",cancha);
         ModelAndView modeloVista = null;
         if (datosPartido.losDatosIngresadosSonValidos(datosPartido).equals("exito")) {
-            model.put("msg", "El partido se creo con éxito");
-            model.put("partido", datosPartido);
-            servicioCrearPartido.registrarPartido(datosPartido.crearPartido(),cancha);
-            modeloVista = new ModelAndView("partido-registrado", model);
+
+            List<Partido> partidoEncontrado = servicioCrearPartido.buscarPartidoPorFechaYHora(datosPartido.getFechaPartido(),datosPartido.getHorario());
+
+            if(partidoEncontrado == null || partidoEncontrado.size() < cancha.getCant_canchas()) {
+                model.put("msg", "El partido se creo con éxito");
+                model.put("partido", datosPartido);
+                servicioCrearPartido.registrarPartido(datosPartido.crearPartido(), cancha);
+                modeloVista = new ModelAndView("partido-registrado", model);
+            }
+            else{
+                model.put("msg", "No hay canchas disponibles para esa fecha y horario");
+                modeloVista = new ModelAndView("registro-partido", model);
+            }
         } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
             modeloVista = new ModelAndView("registro-partido", model);
