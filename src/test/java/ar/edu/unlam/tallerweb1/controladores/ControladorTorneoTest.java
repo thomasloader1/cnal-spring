@@ -1,11 +1,15 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -21,6 +25,8 @@ public class ControladorTorneoTest {
     private DatosTorneo torneo= new DatosTorneo("11", "Juvenil", "4", "18/11/2021", "Ciudad Evita", "Corre Forest, corre!");
 
     private Torneo elTorneo = new Torneo("11", "Juvenil", "4", "18hs", "18/11/2021", "Ciudad Evita", "Corre Forest, corre!");
+
+    List<PartidoTorneo> partidosDelTorneo = new ArrayList<>();
 
 
     @Test
@@ -83,6 +89,61 @@ public class ControladorTorneoTest {
 
     private void thenElCruceSeRealiza(ModelAndView modeloVista) {
         assertThat(modeloVista.getViewName()).isEqualTo("fixture-generado"); //TODO HACER vista!
+    }
+
+
+    @Test
+    public void queNOSePuedaGenerarElFixtureYPartidosInicialesDeUnTorneoSiYaFueCreado(){
+        elTorneo.setId(10L);
+        givenUnTorneoConFixtureYPartidosInicialesCreados(elTorneo);
+
+        ModelAndView modeloVistaFixture = whenIntentoCrearElFixtureInicialDeNuevo(elTorneo.getId());
+
+        thenFallaLaCreacion(modeloVistaFixture);
+    }
+
+    private void givenUnTorneoConFixtureYPartidosInicialesCreados(Torneo elTorneo) {
+        when(servicioTorneo.partidosExisten(elTorneo.getId())).thenReturn(true);
+    }
+
+    private ModelAndView whenIntentoCrearElFixtureInicialDeNuevo(Long id) {
+        return controladorTorneo.generarCruceDeEquipos(id);
+    }
+
+    private void thenFallaLaCreacion(ModelAndView modeloVistaFixture) {
+        assertThat(modeloVistaFixture.getViewName()).isEqualTo("torneos-registrados-fixture");
+        assertThat(modeloVistaFixture.getModel().get("error")).isEqualTo("El fixture ya esta creado");
+    }
+
+
+    @Test
+    public void quePuedaObtenerAlFixtureDeUnTorneoSiYaEstaCreado(){
+        elTorneo.setId(10L);
+        givenUnTorneoConFixtureYPartidosCreados(elTorneo);
+
+        ModelAndView modeloVistaFixture = whenIntentoObtenerElFixtureInicial(elTorneo.getId());
+
+        thenObtengoElFixtureConPartidosIniciales(modeloVistaFixture);
+
+    }
+
+    private void givenUnTorneoConFixtureYPartidosCreados(Torneo elTorneo) {
+        when(servicioTorneo.buscarTorneoPorId(elTorneo.getId())).thenReturn(elTorneo);
+
+        partidosDelTorneo.add(new PartidoTorneo());
+        partidosDelTorneo.add(new PartidoTorneo());
+        partidosDelTorneo.add(new PartidoTorneo());
+        partidosDelTorneo.add(new PartidoTorneo());
+
+        when(servicioTorneo.buscarLosPartidosDeUnTorneo(elTorneo)).thenReturn(partidosDelTorneo);
+    }
+
+    private ModelAndView whenIntentoObtenerElFixtureInicial(Long id) {
+        return controladorTorneo.mostrarFixture(elTorneo.getId());
+    }
+
+    private void thenObtengoElFixtureConPartidosIniciales(ModelAndView modeloVistaFixture) {
+        assertThat(modeloVistaFixture.getViewName()).isEqualTo("fixture-generado");
     }
 
 

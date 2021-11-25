@@ -51,7 +51,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     public Boolean registrarEnTorneo(Long id, Long idUsuario) throws Exception{
         Boolean registroOk= false;
 
-        Torneo torneoEncontrado = (Torneo) repositorioTorneo.buscarTorneoPorId(id);
+        Torneo torneoEncontrado = (Torneo) buscarTorneoPorId(id);
 
         if(torneoEncontrado == null){
             throw new Exception();
@@ -79,7 +79,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     }
 
     private void unirEquipoAlTorneo(Long idTorneo, Equipo equipo) {
-        Torneo torneoEncontrado = (Torneo) repositorioTorneo.buscarTorneoPorId(idTorneo);
+        Torneo torneoEncontrado = (Torneo) buscarTorneoPorId(idTorneo);
         torneoEncontrado.setCantidadEquipos(torneoEncontrado.getCantidadEquipos()+1);
         try {
             torneoEncontrado.getEquiposInscriptos().add(equipo);
@@ -137,7 +137,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
     @Override
     public List<PartidoTorneo> generarCruceDeEquiposDeUnTorneo(Long idTorneo) {
 
-        Torneo torneoBuscado = repositorioTorneo.buscarTorneoPorId(idTorneo);
+        Torneo torneoBuscado = buscarTorneoPorId(idTorneo);
         List<Equipo> equiposDelTorneo = obtenerListaDeEquiposDelTorneo(idTorneo);
 
         List<PartidoTorneo> partidosDelTorneo = null;
