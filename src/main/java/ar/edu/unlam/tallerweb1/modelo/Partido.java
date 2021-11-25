@@ -23,14 +23,14 @@ public class Partido {
     private String horario;
     private String direccion;
     private String localidad;
-    private Date fechaPartido;
+    private String fechaPartido;
 
     @ManyToOne
     private Cancha cancha;
 
     public Partido() {}
 
-    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad, String direccion, Date fechaPartido) {
+    public Partido(int cant_jugadores, Integer lugares, String tipo, String categoria, String horario, String localidad, String direccion, String fechaPartido) {
         this.id = id;
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = lugares;
@@ -112,7 +112,7 @@ public class Partido {
 
     public void setCancha(Cancha cancha) {this.cancha = cancha;}
 
-    public Date getFechaPartido() {return fechaPartido;}
+    public String getFechaPartido() {return fechaPartido;}
 
-    public void setFechaPartido(Date fechaPartido) {this.fechaPartido = fechaPartido;}
+    public void setFechaPartido(String fechaPartido) {this.fechaPartido = fechaPartido;}
 }
