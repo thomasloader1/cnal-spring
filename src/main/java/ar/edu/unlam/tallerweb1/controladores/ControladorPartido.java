@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,18 +22,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.net.ssl.HandshakeCompletedEvent;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
 @Controller
+@SessionAttributes("partido")
 public class ControladorPartido {
 
     private ServicioPartido servicioCrearPartido;
-
     private ServicioLocalidad servicioLocalidad;
-
     private ServicioUsuario servicioUsuario;
-
     private ServicioCancha servicioCancha;
 
     @Autowired
@@ -71,28 +71,38 @@ public class ControladorPartido {
 
     @RequestMapping(path = "listar-partidos", method = RequestMethod.GET)
     public ModelAndView listarPartidos(HttpServletRequest request) {
+
         ModelMap model = new ModelMap();
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
-        Long idUsuario = (Long) request.getSession().getAttribute("ID");
-        model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
-        return new ModelAndView("home", model);
+
+            Long idUsuario = (Long) request.getSession().getAttribute("ID");
+            model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
+            return new ModelAndView("home", model);
+
+
     }
     @RequestMapping(path = "listar-mis-partidos", method = RequestMethod.GET)
     public ModelAndView listarMisPartidos(HttpServletRequest request, ModelMap data) {
         ModelMap model = new ModelMap();
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
-        model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
-        if(idUsuario != null) {
+
+        if(idUsuario != null){
+            Usuario user = servicioUsuario.buscarUsuarioPorId(idUsuario);
             List<Partido> partidosList = servicioCrearPartido.buscarPartidosPorUsuario(idUsuario);
+
+            model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
+            model.put("CANCHA", servicioCancha.todasLasCanchas());
+            model.put("user", user);
+
             if(partidosList != null){
                 model.put("MIS_PARTIDOS", partidosList);
             }
+            return new ModelAndView("jugador/index-jugador", model);
         }
-        model.put("CANCHA", servicioCancha.todasLasCanchas());
-        model.put("user", servicioUsuario.buscarUsuarioPorId(idUsuario));
+            return new ModelAndView("redirect:/login");
 
-        return new ModelAndView("jugador/index-jugador", model);
     }
+
     @RequestMapping(path = "listar-partidos-filtrados", method = RequestMethod.GET)
     public ModelAndView listarPartidosConFiltro(@RequestParam("localidad") String localidad, @RequestParam("categoria") String categoria) {
         ModelMap model = new ModelMap();
@@ -169,5 +179,6 @@ public class ControladorPartido {
 
         return new ModelAndView("/lista-partidos-por-cancha", model);
     }
+
 
 }

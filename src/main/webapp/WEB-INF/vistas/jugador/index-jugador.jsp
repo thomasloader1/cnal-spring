@@ -8,6 +8,8 @@
     <h1 class="mb-3" >Reserva tu cancha al instante</h1>
     <h4 class="mb-3">Solo por hoy 25% off en todo el sitio</h4>
     <a class="btn text-white" href="" role="button" style="background-color: #2b542c">Reservar</a>
+    <pre>${not empty MIS_PARTIDOS}</pre>
+
 </div>
 <div class="container">
     <div class="row">
@@ -121,6 +123,7 @@
         </c:forEach>
     </div>
 </div>
+<%@ include file = "../partial/modals.jsp" %>
 
 
 <%@ include file = "../partial/scripts.jsp" %>

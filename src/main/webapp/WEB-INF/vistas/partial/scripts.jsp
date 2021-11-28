@@ -17,6 +17,10 @@
             selectable: true,
             height: 650,
             contentHeight: 600,
+            eventSources: {
+                url: 'http://localhost:8080/proyecto_limpio_spring_war_exploded/partidos',
+                method: 'GET'
+            },
             select: function (info){
               console.group("select f():")
                 console.info(info)
@@ -26,6 +30,11 @@
                 console.group("dateCLick f():")
                 console.info(event)
                 console.groupEnd()
+            },
+            eventClick: function(info) {
+                console.log(info.event)
+                $("#genericModal").modal("toggle")
+                console.log()
             }
         });
         calendar.render();
