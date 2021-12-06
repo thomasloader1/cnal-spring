@@ -18,6 +18,11 @@ public class PartidoTorneo {
     @ManyToOne
     private Torneo torneo;
 
+    @ManyToOne
+    private Equipo equipoGanador;
+
+    private String fase;
+
 
     public PartidoTorneo() {
     }
@@ -57,5 +62,21 @@ public class PartidoTorneo {
 
     public void setTorneo(Torneo torneo) {
         this.torneo = torneo;
+    }
+
+    public Equipo getEquipoGanador() {
+        return equipoGanador;
+    }
+
+    public void setEquipoGanador(Equipo equipoGanador) {
+        this.equipoGanador = equipoGanador;
+    }
+
+    public String getFase() {
+        return fase;
+    }
+
+    public void setFase(String fase) {
+        this.fase = fase;
     }
 }
