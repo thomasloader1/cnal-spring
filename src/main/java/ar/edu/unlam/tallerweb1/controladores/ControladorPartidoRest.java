@@ -36,7 +36,8 @@ public class ControladorPartidoRest {
             List<EventoPartido> eventos = new ArrayList<>();
 
             for(Partido p : partidos){
-                EventoPartido ep = new EventoPartido(p.getId(),p.getLocalidad(),p.getFechaPartido(),p);
+
+                EventoPartido ep = new EventoPartido(p.getId(),p.getLocalidad(), p.getFechaPartido(),p);
                 eventos.add(ep);
             }
 

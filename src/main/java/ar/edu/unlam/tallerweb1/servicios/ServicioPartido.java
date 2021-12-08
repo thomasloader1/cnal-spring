@@ -22,5 +22,5 @@ public interface ServicioPartido {
     UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
     List<Partido> buscarPartidosPorUsuario(Long idUsuario);
     List<Partido> buscarPartidosPorCancha(Cancha cancha);
-    List<Partido> buscarPartidoPorFechaYHora(String fechaPartido,String horarioPartido);
+    List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido,String horarioPartido);
 }
