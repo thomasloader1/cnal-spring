@@ -96,5 +96,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		}
 		return usuarioList;
 	}
+	@Override
+	public Usuario verPerfil(Long id){
+		final Session session = this.sessionFactory.getCurrentSession();
+		Usuario usuario = session.get(Usuario.class , id);
+		return usuario;
+	}
 
 }

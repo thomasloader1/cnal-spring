@@ -7,7 +7,6 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTorneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +31,7 @@ public class ControladorTorneo {
 
     @RequestMapping(path = "/registro-torneo", method = RequestMethod.GET)
     public ModelAndView irARegistroTorneo(){
-        return new ModelAndView("registro-torneo");
+        return new ModelAndView("torneo/registro-torneo");
     }
 
     @RequestMapping(method= RequestMethod.POST, path = "/registrar-torneo")
@@ -43,10 +42,10 @@ public class ControladorTorneo {
             model.put("torneo", datosTorneo);
             model.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
             servicioTorneo.registrarTorneo(datosTorneo.crearTorneo());
-            return new ModelAndView("torneo-registrado", model);
+            return new ModelAndView("torneo/torneo-registrado", model);
         }else {
             model.put("msg", datosTorneo.losDatosIngresadosSonValidos(datosTorneo));
-            return new ModelAndView("registro-torneo", model);
+            return new ModelAndView("torneo/registro-torneo", model);
         }
     }
 
@@ -55,7 +54,7 @@ public class ControladorTorneo {
     public ModelAndView irAUnirseATorneo(){
         ModelMap model= new ModelMap();
         model.put("torneos", servicioTorneo.todosLosTorneos());
-        return new ModelAndView("unirme-a-torneo", model);
+        return new ModelAndView("torneo/unirme-a-torneo", model);
     }
 
     @RequestMapping(path = "/unirse-a-torneo/{idTorneo}", method = RequestMethod.GET)
@@ -65,10 +64,10 @@ public class ControladorTorneo {
         ModelAndView modelAndView;
 
         if (servicioTorneo.registrarEnTorneo(idTorneo, idUsuario)) {
-            modelAndView = new ModelAndView("union-torneo", modelMap);
+            modelAndView = new ModelAndView("torneo/union-torneo", modelMap);
         } else {
             modelMap.put("error", "el torneo ya esta completo");
-            modelAndView = new ModelAndView("unirme-a-torneo", modelMap);
+            modelAndView = new ModelAndView("torneo/unirme-a-torneo", modelMap);
         }
         return modelAndView;
     }
@@ -84,7 +83,7 @@ public class ControladorTorneo {
         ModelMap model = new ModelMap();
         model.put("TORNEOSEQUIPOS", servicioTorneo.todosLosTorneos());
 
-        return new ModelAndView("torneos-registrados-fixture", model);
+        return new ModelAndView("torneo/torneos-registrados-fixture", model);
 
     }
 
@@ -101,20 +100,20 @@ public class ControladorTorneo {
                     List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
                     model.put("PARTIDOSTORNEO", partidosDelTorneo);
 
-                    modeloVista = new ModelAndView("fixture-generado", model);
+                    modeloVista = new ModelAndView("torneo/fixture-generado", model);
                 }
                 else{
                     model.put("error", "El torneo está incompleto. No se puede generar el fixture");
-                    modeloVista = new ModelAndView("torneos-registrados-fixture", model);
+                    modeloVista = new ModelAndView("torneo/torneos-registrados-fixture", model);
                 }
             }
             else{
                 model.put("error", "El fixture ya esta creado");
-                modeloVista = new ModelAndView("torneos-registrados-fixture", model);
+                modeloVista = new ModelAndView("torneo/torneos-registrados-fixture", model);
             }
         }catch (Exception e){
             model.put("error", "Ha ocurrido un error. Volver a intertar");
-            modeloVista = new ModelAndView("torneos-registrados-fixture", model);
+            modeloVista = new ModelAndView("torneo/torneos-registrados-fixture", model);
         }
         return modeloVista;
     }
@@ -126,7 +125,7 @@ public class ControladorTorneo {
         Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
         model.put("PARTIDOSTORNEO", servicioTorneo.buscarLosPartidosDeUnTorneo(torneo));
 
-       return new ModelAndView("fixture-generado", model);
+       return new ModelAndView("torneo/fixture-generado", model);
     }
 
 }
