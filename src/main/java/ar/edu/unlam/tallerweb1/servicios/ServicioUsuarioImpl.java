@@ -109,6 +109,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario
     public Usuario buscarUsuarioPorId(Long id) {
         return repositorioUsuario.buscarUsuarioPorId(id);
     }
-
-
+    @Override
+    public Usuario verPerfil(Long id){ return repositorioUsuario.verPerfil(id); }
 }

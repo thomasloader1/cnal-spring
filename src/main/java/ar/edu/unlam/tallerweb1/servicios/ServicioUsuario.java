@@ -16,4 +16,5 @@ public interface ServicioUsuario {
     void sancionarJugador(Long id);
     Boolean jugadorEstaSancionado(Long id);
     Usuario buscarUsuarioPorId(Long id);
+    Usuario verPerfil(Long id);
 }

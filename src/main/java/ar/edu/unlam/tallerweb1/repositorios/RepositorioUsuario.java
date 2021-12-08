@@ -17,4 +17,5 @@ public interface RepositorioUsuario {
 	Usuario buscarUsuarioPorId(Long id);
 	void eliminarUsuario(Usuario usuario);
 	List<Usuario> listarJugadoresPorPartido(Long idPartido);
+	Usuario verPerfil(Long id);
 }
