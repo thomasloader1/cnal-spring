@@ -187,10 +187,5 @@
             <artifactId>jetty</artifactId>
             <version>6.1.25</version>
         </dependency>
-		<dependency>
-			<groupId> com.mercadopago </groupId>
-			<artifactId> sdk-java </artifactId>
-			<version> 1.11.0 </version>
-		</dependency>
-	</dependencies>
+    </dependencies>
 </project>
