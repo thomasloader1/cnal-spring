@@ -151,6 +151,14 @@ public class ControladorUsuario {
 
         return new ModelAndView("lista-reportes", model);
     }
-
+    @RequestMapping(path = "ir-a-perfil-jugador" , method = RequestMethod.GET)
+    public ModelAndView verPerfil(HttpServletRequest request){
+        ModelMap model = new ModelMap();
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+        Usuario usuario = servicioUsuario.verPerfil(idUsuario);
+        request.getSession().setAttribute("id", usuario.getId());
+        model.put("usuario", usuario);
+        return new ModelAndView("perfil-jugador", model);
+    }
 }
 

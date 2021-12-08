@@ -44,7 +44,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                             <h6 class="dropdown-header">Cuenta:  ${user.getRol()}</h6>
-                            <a class="dropdown-item" href="#">Perfil</a>
+                            <a class="dropdown-item" href="/proyecto_limpio_spring_war_exploded/ir-a-perfil-jugador">Perfil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/proyecto_limpio_spring_war_exploded/cerrarSesion">Cerrar sesion</a>
                         </div>

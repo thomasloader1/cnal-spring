@@ -15,6 +15,7 @@
     <title>Fixture del Torneo</title>
 </head>
 <body>
+
     <%@ include file = "partial/navbarJugador.jsp" %>
     <div class="container py-3 w-100" style="background-image: url('https://images.unsplash.com/photo-1556056504-5c7696c4c28d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=976&q=80'); background-size: cover;background-position: center; background-repeat: no-repeat">
         <h1 class="text-center" style="color: #ffffff; text-shadow: 3px 3px 5px black">TORNEO ${TORNEO.nombre.toUpperCase()}</h1>
