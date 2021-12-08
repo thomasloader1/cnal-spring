@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
@@ -26,21 +27,4 @@ public interface ServicioTorneo {
     boolean partidosExisten(Long idTorneo);
 
     List<PartidoTorneo> buscarTodosLosPartidosDeLosTorneos();
-
-    void crearNuevoPartidoParaElTorneo(List<PartidoTorneo> partidos, String fase, Torneo torneo);
-
-    void guardarEquipoGanador(Equipo equipoGanador, PartidoTorneo partido);
-
-    PartidoTorneo buscarPartidoPorID(Long idPartido);
-
-    PartidoTorneo buscarPartidoFinalDeUnTorneo(Torneo torneo);
-
-    boolean fueronJugadosPartidos(List<PartidoTorneo> partidos, String fase);
-
-    List<PartidoTorneo> buscarPartidosSemifinalesDeUnTorneo(Torneo torneo);
-
-    List<PartidoTorneo> buscarLosPartidosJugados(Torneo torneo);
-
-    List<PartidoTorneo> buscarLosPartidosCuartosDeFinal(Torneo torneo);
-
 }
