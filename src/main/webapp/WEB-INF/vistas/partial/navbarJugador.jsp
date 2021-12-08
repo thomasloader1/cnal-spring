@@ -129,7 +129,15 @@
                             <li> <a href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Buscar cancha</a></li>
                             <li> <a href="/proyecto_limpio_spring_war_exploded/torneos-crear-fixture">Torneos</a></li>
 
+                            <li> <a href="javascript:;"><i class="fa fa-user"></i> ${user.getNombre()}</i></a>
 
+                                <ul class="sub-menu">
+                                    <li><h6 >Cuenta:  ${user.getRol()}</h6></li>
+                                    <li><a  href="/proyecto_limpio_spring_war_exploded/ir-a-perfil-jugador">Perfil</a></li>
+                                    <li><a  href="/proyecto_limpio_spring_war_exploded/cerrarSesion">Cerrar sesion</a></li>
+                                </ul>
+
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -137,5 +145,4 @@
         </div>
     </div>
     <!-- main header END -->
-</header>
-<!-- header END -->
+</header><!-- header END -->
