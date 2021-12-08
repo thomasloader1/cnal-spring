@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
 import ar.edu.unlam.tallerweb1.modelo.PartidoTorneo;
 import ar.edu.unlam.tallerweb1.modelo.Torneo;
 import ar.edu.unlam.tallerweb1.servicios.ExceptionYaExiste;
@@ -27,7 +28,9 @@ public class ControladorTorneoTest {
     private Torneo elTorneo = new Torneo("11", "Juvenil", "4", "18hs", "18/11/2021", "Ciudad Evita", "Corre Forest, corre!");
 
     List<PartidoTorneo> partidosDelTorneo = new ArrayList<>();
-
+    private static final PartidoTorneo PARTIDO = new PartidoTorneo();
+    private static final Equipo EQUIPOUNO = new Equipo();
+    private static final Equipo EQUIPODOS = new Equipo();
 
     @Test
     public void puedoCrearUnTorneo() throws ExceptionYaExiste {
@@ -144,6 +147,27 @@ public class ControladorTorneoTest {
 
     private void thenObtengoElFixtureConPartidosIniciales(ModelAndView modeloVistaFixture) {
         assertThat(modeloVistaFixture.getViewName()).isEqualTo("fixture-generado");
+    }
+
+    //Tests equipo ganador
+
+    @Test
+    public void quePuedaCrearNuevoPartidoParaLoEquiposGanadores(){
+        givenDosEquiposGanadores();
+        ModelAndView modeloVista = whenCreoElNuevoPartido(EQUIPOUNO.getNombre(), PARTIDO.getId());
+        thenQuedaRegistradoExitosamente(modeloVista);
+    }
+
+    private void givenDosEquiposGanadores() {
+    }
+
+    private ModelAndView whenCreoElNuevoPartido(String equipo, Long idPartido) {
+        return controladorTorneo.guardarEquipoGanadorDelPartido(equipo, idPartido);
+    }
+
+    private void thenQuedaRegistradoExitosamente(ModelAndView modeloVista) {
+        assertThat(modeloVista.getViewName()).isEqualTo("fixture-generado");
+        assertThat(modeloVista.getModel().get("msj")).isEqualTo("Partido creado exitosamente");
     }
 
 

@@ -30,4 +30,8 @@ public interface RepositorioTorneo {
     void registrarEquipoEnTorneo(EquipoTorneo registro);
 
     List<PartidoTorneo> buscarLosPartidosDeTodosLosTorneos();
+
+    Torneo buscarTorneoAlQuePerteneceUnPartido(PartidoTorneo partidoTorneo);
+
+    PartidoTorneo buscarPartidoPorID(Long idPartido);
 }
