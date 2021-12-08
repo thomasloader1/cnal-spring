@@ -81,6 +81,7 @@ public class ControladorPartido {
 
 
     }
+
     @RequestMapping(path = "listar-mis-partidos", method = RequestMethod.GET)
     public ModelAndView listarMisPartidos(HttpServletRequest request, ModelMap data) {
         ModelMap model = new ModelMap();
