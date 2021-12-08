@@ -265,7 +265,7 @@ public class ServicioTorneoImpl implements ServicioTorneo{
             repositorioTorneo.guardarPartidoTorneo(partido);
 
         }
-        else{
+        else if(fase.equals("Semifinal")){
             List<Equipo> equipos = new ArrayList<>();
             for (PartidoTorneo partido:partidos) {
                 if(partido.getFase().equals("Cuartos de Final")){
@@ -322,5 +322,46 @@ public class ServicioTorneoImpl implements ServicioTorneo{
         }
         return todosFueronJugados;
     }
+
+    @Override
+    public List<PartidoTorneo> buscarPartidosSemifinalesDeUnTorneo(Torneo torneo) {
+        List<PartidoTorneo> partidos = repositorioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+
+        List<PartidoTorneo> partidosSemifinales = new ArrayList<>();
+        for (PartidoTorneo partido:partidos) {
+            if(partido.getFase().equals("Semifinal")){
+                partidosSemifinales.add(partido);
+            }
+        }
+
+        return partidosSemifinales;
+    }
+
+    @Override
+    public List<PartidoTorneo> buscarLosPartidosJugados(Torneo torneo) {
+        List<PartidoTorneo> partidos = repositorioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+
+        List<PartidoTorneo> partidosJugados = new ArrayList<>();
+        for (PartidoTorneo partido:partidos) {
+            if(partido.getEquipoGanador()!=null){
+                partidosJugados.add(partido);
+            }
+        }
+        return partidosJugados;
+    }
+
+    @Override
+    public List<PartidoTorneo> buscarLosPartidosCuartosDeFinal(Torneo torneo) {
+        List<PartidoTorneo> partidos = repositorioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+
+        List<PartidoTorneo> cuartosDeFinal = new ArrayList<>();
+        for (PartidoTorneo partido:partidos) {
+            if(partido.getFase().equals("Cuartos de Final")){
+                cuartosDeFinal.add(partido);
+            }
+        }
+        return cuartosDeFinal;
+    }
+
 
 }

@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/buscar-cancha">Buscar cancha</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/torneos-crear-fixture">Torneos</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">

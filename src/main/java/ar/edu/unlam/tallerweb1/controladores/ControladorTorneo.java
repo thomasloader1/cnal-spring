@@ -99,6 +99,7 @@ public class ControladorTorneo {
                     Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
                     List<PartidoTorneo> partidosDelTorneo = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
                     model.put("PARTIDOSTORNEO", partidosDelTorneo);
+                    model.put("TORNEO", torneo);
 
                     modeloVista = new ModelAndView("fixture-generado", model);
                 }
@@ -123,6 +124,32 @@ public class ControladorTorneo {
     public ModelAndView mostrarFixture(@ModelAttribute("ver-fixture") @PathVariable Long idTorneo) {
         ModelMap model = new ModelMap();
         Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
+        List<PartidoTorneo> partidosJugados = servicioTorneo.buscarLosPartidosJugados(torneo);
+
+
+        if(partidosJugados.size()==3 && torneo.getCantidadEquipos().equals("4")){
+            List<PartidoTorneo> semifinales = servicioTorneo.buscarPartidosSemifinalesDeUnTorneo(torneo);
+            PartidoTorneo partidoFinal = servicioTorneo.buscarPartidoFinalDeUnTorneo(torneo);
+            model.put("PARTIDOS", partidosJugados);
+            model.put("SEMIFINAL", semifinales);
+            model.put("FINAL", partidoFinal);
+            model.put("TORNEO", torneo);
+            return new ModelAndView("fixture-completo", model);
+        }
+        else if(partidosJugados.size()==7){
+            List<PartidoTorneo> cuartosDeFinales = servicioTorneo.buscarLosPartidosCuartosDeFinal(torneo);
+            List<PartidoTorneo> semifinales = servicioTorneo.buscarPartidosSemifinalesDeUnTorneo(torneo);
+            PartidoTorneo partidoFinal = servicioTorneo.buscarPartidoFinalDeUnTorneo(torneo);
+
+            model.put("PARTIDOS", partidosJugados);
+            model.put("CUARTOSDEFINAL", cuartosDeFinales);
+            model.put("SEMIFINAL", semifinales);
+            model.put("FINAL", partidoFinal);
+            model.put("TORNEO", torneo);
+            return new ModelAndView("fixture-completo", model);
+        }
+
+        model.put("PARTIDOSJUGADOS", partidosJugados);
         model.put("PARTIDOSTORNEO", servicioTorneo.buscarLosPartidosDeUnTorneo(torneo));
         model.put("TORNEO", torneo);
 
@@ -153,8 +180,10 @@ public class ControladorTorneo {
         if(partido.getFase().equals("Final")){
             return new ModelAndView("campeon-del-torneo", model);
         }
+        else{
+            return new ModelAndView("equipo-ganador", model);
+        }
 
-        return new ModelAndView("equipo-ganador", model);
     }
 
 
@@ -190,6 +219,44 @@ public class ControladorTorneo {
         model.put("TORNEO", torneo);
         return new ModelAndView("la-final", model);
     }
+
+    @RequestMapping(path = "crear-partidos-semifinal/{idTorneo}", method = RequestMethod.POST)
+    public ModelAndView crearSemifinal(@ModelAttribute("partidos-semifinal") @PathVariable Long idTorneo){
+        ModelMap model = new ModelMap();
+        ModelAndView modeloVista = null;
+
+        Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
+        List<PartidoTorneo> partidos = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+
+        if(servicioTorneo.fueronJugadosPartidos(partidos, "Cuartos de Final")){
+            servicioTorneo.crearNuevoPartidoParaElTorneo(partidos, "Semifinal", torneo);
+
+            List<PartidoTorneo> partidosSemifinal = servicioTorneo.buscarPartidosSemifinalesDeUnTorneo(torneo);
+            model.put("PARTIDOSSEMIFINAL", partidosSemifinal);
+            model.put("PARTIDOSTORNEO", partidos);
+            model.put("TORNEO", torneo);
+            modeloVista = new ModelAndView("semifinal", model);
+        }
+        else{
+            model.put("error", "Aún faltan partidos por jugar");
+            modeloVista = new ModelAndView("semifinal", model);
+        }
+        return modeloVista;
+    }
+
+    @RequestMapping(path = "/ver-semifinal/{idTorneo}", method = RequestMethod.POST)
+    public ModelAndView verSemifinal(@ModelAttribute("semifinal") @PathVariable Long idTorneo) {
+        ModelMap model = new ModelMap();
+        Torneo torneo = servicioTorneo.buscarTorneoPorId(idTorneo);
+        List<PartidoTorneo> partidosSemifinal = servicioTorneo.buscarPartidosSemifinalesDeUnTorneo(torneo);
+        List<PartidoTorneo> partidos = servicioTorneo.buscarLosPartidosDeUnTorneo(torneo);
+
+        model.put("PARTIDOSTORNEO", partidos);
+        model.put("PARTIDOSSEMIFINAL", partidosSemifinal);
+        model.put("TORNEO", torneo);
+        return new ModelAndView("semifinal", model);
+    }
+
 
     @RequestMapping(path = "/fixture-completo/{idTorneo}", method = RequestMethod.POST)
     public ModelAndView verFixtureCompleto(@ModelAttribute("fixture-completo") @PathVariable Long idTorneo) {

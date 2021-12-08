@@ -19,10 +19,9 @@
 <div class="container py-3 w-100" style="background-image: url('https://images.unsplash.com/photo-1556056504-5c7696c4c28d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=976&q=80'); background-size: cover;background-position: center; background-repeat: no-repeat">
     <h1 class="text-center" style="color: #ffffff; text-shadow: 3px 3px 5px black">TORNEO ${TORNEO.nombre.toUpperCase()}</h1>
     <div class="col-1 mb-1" style="margin: auto">
-        <div class="card text-center" style="background-color: #EEEEEE; background-image: url('https://images.emojiterra.com/google/android-11/512px/1f3c6.png'); background-size: contain;background-position: center; background-repeat: no-repeat; height: 80px">
-        </div>
-    </div>div>
-    <h3 class="text-center" style="margin-bottom: 1%; margin-top: -18px; color: #FFF323; -webkit-text-stroke: 2px #FFCA03;">CAMPEÓN: ${FINAL.equipoGanador.nombre.toUpperCase()}</h3><hr />
+        <div class="card text-center" style="background-color: #EEEEEE; background-image: url('https://images.emojiterra.com/google/android-11/512px/1f3c6.png'); background-size: contain;background-position: center; background-repeat: no-repeat; height: 80px"></div>
+    </div>
+    <h3 class="text-center" style="margin-bottom: 1%; margin-top: 15px; color: #FFF323; -webkit-text-stroke: 2px #FFCA03;">CAMPEÓN: ${FINAL.equipoGanador.nombre.toUpperCase()}</h3><hr />
     <h3 class="text-center" style="margin-bottom: 1%; margin-top: -2px; color: #ffffff; text-shadow: 3px 3px 5px black">Final</h3>
     <div class="row justify-content-center">
             <div class="col-3 mb-1">
@@ -75,9 +74,9 @@
             <div class="row justify-content-center">
                 <c:forEach items="${CUARTOSDEFINAL}" var="PARTIDO">
                     <div class="col-3 mb-1">
-                        <div class="card text-dark bg-light text-center" style="background-color: #EEEEEE">
+                        <div class="card text-dark bg-light text-center" style="font-size: 13px">
                             <div class="card-body">
-                                <p class="card-text text-center fs-3 bg-primary text-white bg-gradient pt-1 pb-1" style="font-size: 13px;">
+                                <p class="card-text text-center fs-3 bg-primary text-white bg-gradient pt-1 pb-1">
                                     <strong> ${PARTIDO.equipoUno.nombre.toUpperCase()} vs. ${PARTIDO.equipoDos.nombre.toUpperCase()} </strong>
                                 </p>
                                 <p class="card-text">
@@ -98,7 +97,7 @@
         </c:when>
     </c:choose>
     <div class="d-flex align-item-center">
-        <input class="btn btn-secondary mt-5"  type="submit" value="Volver" onclick="history.back()"></input>
+        <a class="btn btn-secondary" href="/proyecto_limpio_spring_war_exploded/listar-mis-partidos">Volver</a>
     </div>
 </div>
 <%@ include file = "partial/scripts.jsp" %>

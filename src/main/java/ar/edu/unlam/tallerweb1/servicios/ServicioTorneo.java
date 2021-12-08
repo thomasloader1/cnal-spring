@@ -36,4 +36,11 @@ public interface ServicioTorneo {
     PartidoTorneo buscarPartidoFinalDeUnTorneo(Torneo torneo);
 
     boolean fueronJugadosPartidos(List<PartidoTorneo> partidos, String fase);
+
+    List<PartidoTorneo> buscarPartidosSemifinalesDeUnTorneo(Torneo torneo);
+
+    List<PartidoTorneo> buscarLosPartidosJugados(Torneo torneo);
+
+    List<PartidoTorneo> buscarLosPartidosCuartosDeFinal(Torneo torneo);
+
 }

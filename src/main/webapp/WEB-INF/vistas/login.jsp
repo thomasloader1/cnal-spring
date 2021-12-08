@@ -9,11 +9,11 @@
 				<form:form action="validar-login" method="POST" modelAttribute="datosLogin">
 						<div class="mb-3">
 							<label for="email" class="form-label">Email</label>
-							<input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp" value="sca@mail.com">
+							<input name="email" id="email" type="email" class="form-control" aria-describedby="emailHelp">
 						</div>
 						<div class="mb-3">
 							<label for="password" class="form-label">Password</label>
-							<input name="password" id="password" type="password" class="form-control" aria-describedby="passwordHelp" value="123">
+							<input name="password" id="password" type="password" class="form-control" aria-describedby="passwordHelp">
 						</div>
 					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
 				</form:form>
