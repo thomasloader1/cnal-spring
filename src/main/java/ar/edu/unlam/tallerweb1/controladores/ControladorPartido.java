@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
@@ -47,7 +48,7 @@ public class ControladorPartido {
         ModelMap model = new ModelMap();
         Cancha cancha = servicioCancha.buscarCanchaPorId(id);
         model.put("CANCHA",cancha);
-        return new ModelAndView("partido/registro-partido", model);
+        return new ModelAndView("registro-partido", model);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "registrar-partido/{id}")
@@ -64,15 +65,15 @@ public class ControladorPartido {
                 model.put("msg", "El partido se creo con éxito");
                 model.put("partido", datosPartido);
                 servicioCrearPartido.registrarPartido(datosPartido.crearPartido(), cancha);
-                modeloVista = new ModelAndView("partido/partido-registrado", model);
+                modeloVista = new ModelAndView("partido-registrado", model);
             }
             else{
                 model.put("msg", "No hay canchas disponibles para esa fecha y horario");
-                modeloVista = new ModelAndView("partido/registro-partido", model);
+                modeloVista = new ModelAndView("registro-partido", model);
             }
         } else {
             model.put("msg", datosPartido.losDatosIngresadosSonValidos(datosPartido));
-            modeloVista = new ModelAndView("partido/registro-partido", model);
+            modeloVista = new ModelAndView("registro-partido", model);
         }
         return modeloVista;
     }
@@ -111,7 +112,7 @@ public class ControladorPartido {
             model.put("msg", "¡Debe seleccionar una categoria o una localidad para filtrar!");
         }
 
-        return new ModelAndView("partido/unirme-al-partido", model);
+        return new ModelAndView("unirme-al-partido", model);
     }
 
     @RequestMapping(path = "/unirme-al-partido", method = RequestMethod.GET)
@@ -119,7 +120,7 @@ public class ControladorPartido {
         ModelMap model = new ModelMap();
         model.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
         model.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
-        return new ModelAndView("partido/unirme-al-partido", model);
+        return new ModelAndView("unirme-al-partido", model);
     }
 
     @RequestMapping(path = "/union-partido/{id}", method = RequestMethod.GET)
@@ -138,13 +139,13 @@ public class ControladorPartido {
                     servicioCrearPartido.unirmeAlPartido(partidoPorId);
                     servicioCrearPartido.vincularJugadorAPartido(idUsuario, id);
                     modelo.put("msg", "¡Te uniste al partido correctamente!");
-                    return new ModelAndView("partido/union-a-partido", modelo);
+                    return new ModelAndView("/union-a-partido", modelo);
                 }else
                 {
                     modelo.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
                     modelo.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
                     modelo.put("msg", "¡No puedes unirte al partido porque actualmente estas SANCIONADO!");
-                    return new ModelAndView("partido/unirme-al-partido", modelo);
+                    return new ModelAndView("/unirme-al-partido", modelo);
                 }
 
             }
@@ -152,7 +153,7 @@ public class ControladorPartido {
                 modelo.put("PARTIDOS", servicioCrearPartido.todosLosPartidos());
                 modelo.put("LOCALIDAD", servicioLocalidad.todasLasLocalidades());
                 modelo.put("msg", "¡Ya te haz unido a este partido!");
-                return new ModelAndView("partido/unirme-al-partido", modelo);
+                return new ModelAndView("/unirme-al-partido", modelo);
             }
         }
         catch (Exception e){
@@ -168,10 +169,14 @@ public class ControladorPartido {
 
     @RequestMapping(path = "partidos-por-cancha/{id}", method = RequestMethod.GET)
     public ModelAndView listarPartidosPorCancha(@PathVariable Long id){
+
         ModelMap model = new ModelMap();
+
         Cancha cancha = servicioCancha.buscarCanchaPorId(id);
+
         model.put("PARTIDO", servicioCrearPartido.buscarPartidosPorCancha(cancha));
-        return new ModelAndView("partido/lista-partidos-por-cancha", model);
+
+        return new ModelAndView("/lista-partidos-por-cancha", model);
     }
 
 }

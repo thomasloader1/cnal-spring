@@ -28,6 +28,6 @@ public class ControladorReporte {
 
         servicioReporte.aprobarReporte(id);
 
-        return new ModelAndView("admin/reporte-aprobado");
+        return new ModelAndView("reporte-aprobado");
     }
 }

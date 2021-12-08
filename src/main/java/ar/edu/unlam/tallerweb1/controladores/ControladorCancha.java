@@ -30,7 +30,7 @@ public class ControladorCancha {
     @RequestMapping(path = "/buscar-cancha", method = RequestMethod.GET)
     public ModelAndView irABuscarCancha() {
         ModelMap model = listarCanchaYLocalidadMethod();
-        return new ModelAndView("cancha/buscar-cancha", model);
+        return new ModelAndView("buscar-cancha", model);
     }
 
     private ModelMap listarCanchaYLocalidadMethod() {
@@ -42,7 +42,7 @@ public class ControladorCancha {
 
     @RequestMapping(path = "/registro-cancha", method = RequestMethod.GET)
     public ModelAndView irARegistroCancha() {
-        return new ModelAndView("cancha/registro-cancha");
+        return new ModelAndView("registro-cancha");
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/registrar-cancha")
@@ -56,10 +56,10 @@ public class ControladorCancha {
         }
         catch (Exception e){
             model.put("msg","La cancha ya existe");
-            return new ModelAndView("cancha/registro-cancha", model);
+            return new ModelAndView("registro-cancha", model);
         }
 
-        return new ModelAndView("cancha/cancha-registrada", model);
+        return new ModelAndView("cancha-registrada", model);
     }
 
     @RequestMapping(path = "listar-canchas-filtradas", method = RequestMethod.GET)
@@ -67,7 +67,7 @@ public class ControladorCancha {
         ModelMap model = new ModelMap();
         model.put("CANCHA", servicioCancha.filtrarCanchasPorLocalidad(localidad));
         model.put("LOCALIDAD" , servicioLocalidad.todasLasLocalidades());
-        return new ModelAndView("cancha/buscar-cancha", model);
+        return new ModelAndView("buscar-cancha", model);
     }
 
     @RequestMapping(path = "lista-canchas-admin", method = RequestMethod.GET)
@@ -76,7 +76,7 @@ public class ControladorCancha {
         Usuario usuario = servicioUsuario.buscarUsuarioPorId(idUsuario);
         ModelMap model = new ModelMap();
         model.put("CANCHA", servicioCancha.todasLasCanchasPorAdmin(usuario));
-        return new ModelAndView("admin/lista-canchas-admin", model);
+        return new ModelAndView("lista-canchas-admin", model);
     }
 
     @RequestMapping(path = "ir-a-modificar-datos-cancha/{id}", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class ControladorCancha {
         Cancha cancha = servicioCancha.buscarCanchaPorId(id);
         ModelMap model = new ModelMap();
         model.put("CANCHA", cancha);
-        return new ModelAndView("cancha/modificar-cancha", model);
+        return new ModelAndView("modificar-cancha", model);
     }
 
     @RequestMapping(path = "modificar-datos-cancha/{id}", method = RequestMethod.GET)
@@ -107,7 +107,7 @@ public class ControladorCancha {
 
         servicioCancha.modificarDatosCancha(cancha);
 
-        return new ModelAndView("cancha/modificacion-cancha-exitosa");
+        return new ModelAndView("modificacion-cancha-exitosa");
     }
 
 
@@ -128,6 +128,6 @@ public class ControladorCancha {
         model.put("CANCHA", cancha);
         model.put("RESPUESTA", respuesta);
 
-        return  new ModelAndView("cancha/detalles-cancha", model);
+        return  new ModelAndView("detalles-cancha", model);
     }
 }

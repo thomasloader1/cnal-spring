@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Equipo;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEquipo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class ControladorEquipo {
 
     @RequestMapping(path = "/registro-equipo", method = RequestMethod.GET)
     public ModelAndView irARegistroEquipo() {
-        return new ModelAndView("equipo/registro-equipo");
+        return new ModelAndView("registro-equipo");
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/registrar-equipo")
@@ -43,23 +45,29 @@ public class ControladorEquipo {
         }
         catch (Exception e){
             model.put("msg","La cancha ya existe");
-            return new ModelAndView("equipo/registro-equipo", model);
+            return new ModelAndView("registro-equipo", model);
         }
 
-        return new ModelAndView("equipo/equipo-registrado", model);
+        return new ModelAndView("equipo-registrado", model);
     }
+
+
 
     @RequestMapping(path = "/unirme-a-equipo", method = RequestMethod.GET)
     public ModelAndView irAUnirmeAUnEquipo() {
         ModelMap model = new ModelMap();
         model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
-        return new ModelAndView("equipo/unirme-a-equipo", model);
+        return new ModelAndView("unirme-a-equipo", model);
     }
+
 
     @RequestMapping(path = "/unirse-a-equipo/{id}", method = RequestMethod.GET)
     public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") @PathVariable Long id, HttpServletRequest request) {
 
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+        //Long idUsuario = iDUsuario;
+
         ModelMap model = new ModelMap();
         ModelAndView modeloVista;
 
@@ -69,18 +77,18 @@ public class ControladorEquipo {
             if(!sancionado)
             {
                 servicioEquipo.registrarEnEquipo(id, idUsuario);
-                modeloVista = new ModelAndView("equipo/union-equipo-exitosa", model);
+                modeloVista = new ModelAndView("union-equipo-exitosa", model);
             }else
             {
                 model.put("error", "No te puedes unir al equipo porque te encuentras SANCIONADO!");
                 model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
-                modeloVista = new ModelAndView("equipo/unirme-a-equipo", model);
+                modeloVista = new ModelAndView("unirme-a-equipo", model);
             }
         }
         catch (Exception e){
             model.put("error", "El equipo ya esta completo");
             model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
-            modeloVista = new ModelAndView("equipo/unirme-a-equipo", model);
+            modeloVista = new ModelAndView("unirme-a-equipo", model);
         }
         return modeloVista;
     }
@@ -93,8 +101,8 @@ public class ControladorEquipo {
         if(tipoPartido.toString().toLowerCase(Locale.ROOT).equals("0") ){
             model.put("msg", "¡Debe seleccionar un tipo de partido para filtrar!");
             model.put("EQUIPOS", servicioEquipo.buscarTodosLosEquipos());
-            return new ModelAndView("equipo/unirme-a-equipo", model);
+            return new ModelAndView("unirme-a-equipo", model);
         }
-        return new ModelAndView("equipo/unirme-a-equipo", model);
+        return new ModelAndView("unirme-a-equipo", model);
     }
 }

@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,7 +77,7 @@ public class ControladorUsuario {
         model.put("USUARIO_ACTUAL", usarioActual);
         model.put("USUARIO", usuarioList);
 
-        return new ModelAndView("jugador/lista-jugadores", model);
+        return new ModelAndView("lista-jugadores", model);
     }
 
     @RequestMapping(path = "reportar-usuario/{id}", method = RequestMethod.GET)
@@ -94,7 +95,7 @@ public class ControladorUsuario {
 
         model.put("IDUSUARIO", id);
 
-        return new ModelAndView("jugador/formulario-reporte", model);
+        return new ModelAndView("formulario-reporte", model);
     }
 
     @RequestMapping(value = "enviar-reporte-usuario/{id}", method = RequestMethod.POST)
@@ -119,7 +120,7 @@ public class ControladorUsuario {
 
         servicioUsuario.enviarReporteUsuario(reporteUsuario);
 
-        return new ModelAndView("jugador/envio-formulario-reporte", model);
+        return new ModelAndView("envio-formulario-reporte", model);
     }
 
     @RequestMapping(path = "ver-reportes-usuario/{id}", method = RequestMethod.GET)
@@ -133,7 +134,7 @@ public class ControladorUsuario {
 
         model.put("REPORTES", reporteUsuariosList);
 
-        return new ModelAndView("admin/lista-reportes", model);
+        return new ModelAndView("lista-reportes", model);
     }
 
     @RequestMapping(path = "sancionarUsuario/{id}", method = RequestMethod.GET)
@@ -148,17 +149,8 @@ public class ControladorUsuario {
         model.put("REPORTES", reporteUsuariosList);
         model.put("error", "El Jugador ha sido sancionado");
 
-        return new ModelAndView("admin/lista-reportes", model);
+        return new ModelAndView("lista-reportes", model);
     }
 
-    @RequestMapping(path = "ir-a-perfil-jugador" , method = RequestMethod.GET)
-    public ModelAndView verPerfil(HttpServletRequest request){
-        ModelMap model = new ModelMap();
-        Long idUsuario = (Long) request.getSession().getAttribute("ID");
-        Usuario usuario = servicioUsuario.verPerfil(idUsuario);
-        request.getSession().setAttribute("id", usuario.getId());
-        model.put("usuario", usuario);
-        return new ModelAndView("perfil-jugador", model);
-    }
 }
 

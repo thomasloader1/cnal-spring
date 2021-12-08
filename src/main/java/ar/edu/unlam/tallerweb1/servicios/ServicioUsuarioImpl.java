@@ -110,6 +110,5 @@ public class ServicioUsuarioImpl implements ServicioUsuario
         return repositorioUsuario.buscarUsuarioPorId(id);
     }
 
-    @Override
-    public Usuario verPerfil(Long id){ return repositorioUsuario.verPerfil(id); }
+
 }
