@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
-import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -116,6 +113,12 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .add(Restrictions.eq("fechaPartido",fechaPartido ))
                 .add(Restrictions.eq("horario", horarioPartido))
                 .list();
+    }
+
+    @Override
+    public void cargarReserva(Compra compra) {
+        final Session session = sessionFactory.getCurrentSession();
+        session.save(compra);
     }
 
 

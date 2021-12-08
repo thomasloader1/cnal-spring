@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
-import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
+import ar.edu.unlam.tallerweb1.modelo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -21,4 +18,5 @@ public interface RepositorioPartido {
     List<Partido> todosLosPartidosPorUsuario(Long idUsuario);
     List<Partido> buscarPartidosPorCancha(Cancha cancha);
     List<Partido> buscarPartidosPorFechaYHora(String fechaPartido, String horarioPartido);
+    void cargarReserva(Compra compra);
 }

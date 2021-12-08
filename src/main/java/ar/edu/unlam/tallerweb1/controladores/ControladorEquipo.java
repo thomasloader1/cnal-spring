@@ -49,6 +49,8 @@ public class ControladorEquipo {
         return new ModelAndView("equipo/equipo-registrado", model);
     }
 
+
+
     @RequestMapping(path = "/unirme-a-equipo", method = RequestMethod.GET)
     public ModelAndView irAUnirmeAUnEquipo() {
         ModelMap model = new ModelMap();
@@ -56,10 +58,14 @@ public class ControladorEquipo {
         return new ModelAndView("equipo/unirme-a-equipo", model);
     }
 
+
     @RequestMapping(path = "/unirse-a-equipo/{id}", method = RequestMethod.GET)
     public ModelAndView unirmeAUnEquipo(@ModelAttribute("unirse-a-equipo") @PathVariable Long id, HttpServletRequest request) {
 
         Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+        //Long idUsuario = iDUsuario;
+
         ModelMap model = new ModelMap();
         ModelAndView modeloVista;
 
