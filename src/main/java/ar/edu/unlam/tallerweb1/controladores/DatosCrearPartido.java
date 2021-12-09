@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 
 import java.util.Date;
@@ -14,12 +13,12 @@ public class DatosCrearPartido {
     private String horario;
     private String localidad;
     private String direccion;
-    private String fechaPartido;
+    private Date fechaPartido;
 
 
     public DatosCrearPartido() {}
 
-    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad, String direccion, String fechaPartido) {
+    public DatosCrearPartido(int cant_jugadores, String tipo, String categoria, String horario, String localidad, String direccion, Date fechaPartido) {
         this.cant_jugadores = cant_jugadores;
         this.cant_lugaresDisp = 0;
         this.tipo = tipo;
@@ -78,9 +77,9 @@ public class DatosCrearPartido {
 
     public String getDireccion(){return direccion;}
 
-    public String getFechaPartido() {return fechaPartido;}
+    public Date getFechaPartido() {return fechaPartido;}
 
-    public void setFechaPartido(String fechaPartido) {this.fechaPartido = fechaPartido;}
+    public void setFechaPartido(Date fechaPartido) {this.fechaPartido = fechaPartido;}
 
     public String losDatosIngresadosSonValidos(DatosCrearPartido datosPartido) {
         String mensaje = "";

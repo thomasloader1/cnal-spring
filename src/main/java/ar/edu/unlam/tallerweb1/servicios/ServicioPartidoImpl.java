@@ -136,7 +136,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
     }
 
     @Override
-    public List<Partido> buscarPartidoPorFechaYHora(String fechaPartido, String horarioPartido) {
+    public List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido, String horarioPartido) {
         return repositorioPartidoImpl.buscarPartidosPorFechaYHora(fechaPartido,horarioPartido);
     }
 
