@@ -184,38 +184,6 @@ public class RepositorioPartidoTest extends SpringTest {
         session().save(usuarioPartido);
     }
 
-    @Test
-    @Transactional
-    @Rollback
-    public void buscarUsuarioPartido(){
-        USUARIO.setId(1L);
-        PARTIDO.setId(1L);
-        givenUnoUsuarioAPartido(USUARIO.getId(), PARTIDO.getId());
-        UsuarioPartido usuarioPartido = whenEncuentroUsuarioPartido(USUARIO.getId(), PARTIDO.getId());
-        thenEncontreElUsusarioPartido(usuarioPartido);
-    }
-
-    private void thenEncontreElUsusarioPartido(UsuarioPartido usuarioPartido) {
-        Long expected = 1L;
-        Long actual = usuarioPartido.getPrimaryOne();
-        Assert.assertEquals(expected, actual);
-    }
-
-    private UsuarioPartido whenEncuentroUsuarioPartido(Long idUsuario, Long idPartido){
-        return repositorioPartido.buscarUsuarioPartido(idUsuario, idPartido);
-    }
-
-    private void givenUnoUsuarioAPartido( Long idUsuario, Long idPartido){
-        UsuarioPartido usuarioPartido = new UsuarioPartido();
-
-        usuarioPartido.setPrimaryOne(idUsuario);
-
-        usuarioPartido.setPrimaryTwo(idPartido);
-
-        session().save(usuarioPartido);
-    }
-
-}
 
 }
 
