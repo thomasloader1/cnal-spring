@@ -13,6 +13,10 @@
                 <a class="btn btn-outline-secondary waves-effect mb-1" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><strong>Informacion personal</strong></a>
                 <a class="btn btn-outline-secondary waves-effect mb-1" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><strong>Datos de facturacion</strong></a>
                 <a class="btn btn-outline-secondary waves-effect mb-1" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><strong>Cambiar contrasena</strong></a>
+                <form:form class="nav flex-column nav-pills" id="v-pills-tab" action="/proyecto_limpio_spring_war_exploded/ver-mis-reportes" method="GET">
+                    <button class="btn btn-outline-secondary waves-effect mb-1 col-mb-3" type="submit"><strong>Mis Reportes</strong></button>
+                    <!--<a class="btn btn-outline-secondary waves-effect mb-1" id="v-pills-report-tab" data-toggle="pill" role="tab" aria-controls="v-pills-report" aria-selected="false"><strong>Mis Reportes</strong></a>-->
+                </form:form>
                 <a class="btn btn-secondary waves-effect" href="/proyecto_limpio_spring_war_exploded/cerrarSesion"><strong>Cerrar sesion</strong></a>
             </div>
 
