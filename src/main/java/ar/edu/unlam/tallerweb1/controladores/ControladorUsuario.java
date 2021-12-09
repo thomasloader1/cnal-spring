@@ -160,5 +160,27 @@ public class ControladorUsuario {
         model.put("usuario", usuario);
         return new ModelAndView("perfil-jugador", model);
     }
+
+    @RequestMapping(path= "ver-mis-reportes", method = RequestMethod.GET)
+    public ModelAndView verMisReportes(HttpServletRequest request){
+        ModelMap model = new ModelMap();
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+        List<ReporteUsuario> reportes = servicioUsuario.todosLosReportesPorUsuario(idUsuario);
+
+        Boolean sancionado = servicioUsuario.jugadorEstaSancionado(idUsuario);
+        String estadoJugador;
+
+        if(sancionado == true){
+            estadoJugador = "Sancionado";
+        }
+        else{
+            estadoJugador = "Activo";
+        }
+
+        model.put("ESTADO", estadoJugador);
+        model.put("REPORTES", reportes);
+
+        return new ModelAndView("reportes-usuario",model);
+    }
 }
 
