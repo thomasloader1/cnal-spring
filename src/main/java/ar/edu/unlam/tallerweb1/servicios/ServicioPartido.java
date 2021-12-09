@@ -23,4 +23,5 @@ public interface ServicioPartido {
     List<Partido> buscarPartidosPorUsuario(Long idUsuario);
     List<Partido> buscarPartidosPorCancha(Cancha cancha);
     List<Partido> buscarPartidoPorFechaYHora(Date fechaPartido,String horarioPartido);
+    Partido reservarCancha(Long idPartido);
 }

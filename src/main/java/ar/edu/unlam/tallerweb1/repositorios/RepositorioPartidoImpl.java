@@ -118,6 +118,13 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
                 .list();
     }
 
+    @Override
+    public Partido reservarCancha(Long idPartido) {
+        final Session session = this.sessionFactory.getCurrentSession();
+        Partido partido = session.get(Partido.class, idPartido);
+        return partido;
+    }
+
 
 }
 

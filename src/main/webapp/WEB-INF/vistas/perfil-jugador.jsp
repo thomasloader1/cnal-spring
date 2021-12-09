@@ -1,13 +1,28 @@
-@@ -1,65 +0,0 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <%@ include file = "partial/header.jsp" %>
 <body>
 <%@ include file = "partial/navbarJugador.jsp" %>
-<div class="container mt-2">
-
-    <div class="row">
+<div class="container page-content">
+    <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(ima);">
+        <div class="container">
+            <div class="dez-bnr-inr-entry">
+                <h1 class="text-white">Equipo: ${usuario.equipo.nombre}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner END -->
+    <!-- Breadcrumb row -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="/proyecto_limpio_spring_war_exploded/index-jugador">Home</a></li>
+                <li>Mi perfil</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-3">
         <div class="col-md-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="btn btn-outline-secondary waves-effect mb-1" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><strong>Informacion personal</strong></a>
@@ -21,7 +36,7 @@
             </div>
 
         </div>
-        <div class="col-8 mt-2">
+        <div class="col-8">
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div class = "container mt-2 mb-2">
@@ -54,16 +69,20 @@
                         <h1 class="text-center">Cambiar contrasena</h1>
                         <hr>
                     </div>
+
                     <label>Contrasena actual</label>
-                    <input type="password" class="form-control mb-4">
+                    <input type="password" class="form-control mb-4" name="password" placeholder="${usuario.password}">
                     <label>Nueva contrasena</label>
-                    <input type="password" class="form-control mb-4">
-                    <button class="btn btn-dark float-right" type="button">Confirmar</button>
+                    <form:form action="cambiar-contrasenia" method="post">
+                    <input type="password" class="form-control mb-4" name="password">
+                    <button class="btn btn-dark float-right" type="submit">Confirmar</button>
+                </form:form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <%@ include file = "partial/scripts.jsp" %>
 <%@ include file = "partial/footer.jsp" %>
 </body>

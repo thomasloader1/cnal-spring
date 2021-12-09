@@ -140,5 +140,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
         return repositorioPartidoImpl.buscarPartidosPorFechaYHora(fechaPartido,horarioPartido);
     }
 
+    @Override
+    public Partido reservarCancha(Long idPartido) {
+        return repositorioPartidoImpl.buscarPartidoPorID(idPartido);
+    }
+
 
 }

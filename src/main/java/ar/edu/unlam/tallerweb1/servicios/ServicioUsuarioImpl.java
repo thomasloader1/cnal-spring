@@ -111,4 +111,9 @@ public class ServicioUsuarioImpl implements ServicioUsuario
     }
     @Override
     public Usuario verPerfil(Long id){ return repositorioUsuario.verPerfil(id); }
+
+    @Override
+    public void cambiarContraseña(Usuario usuario) {
+        repositorioUsuario.cambiarContraseña(usuario);
+    }
 }

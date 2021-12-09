@@ -35,6 +35,7 @@
 <script src="plugins/revolution/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
 <script src="plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js"></script>
 <script src="js/rev.slider.js"></script>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
     jQuery(document).ready(function() {
         'use strict';
@@ -71,4 +72,22 @@
                 }
             });
     });	/*ready*/
+</script>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script>
+    // Agrega credenciales de SDK
+    const mp = new MercadoPago('TEST-d629bab3-7a69-4606-8e5c-c4c40a5ecde7', {
+        locale: 'es-AR'
+    });
+
+    // Inicializa el checkout
+    mp.checkout({
+        preference: {
+            id: '174501329-d59f8b06-3475-4f0a-8561-24ac3b1ee519'
+        },
+        render: {
+            container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+            label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+        }
+    });
 </script>

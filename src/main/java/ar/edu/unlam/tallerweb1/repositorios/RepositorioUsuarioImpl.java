@@ -102,4 +102,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		Usuario usuario = session.get(Usuario.class , id);
 		return usuario;
 	}
+	@Override
+	public void cambiarContraseña(Usuario usuario){
+	Usuario usuarioActualizar = this.sessionFactory.getCurrentSession().load(Usuario.class,usuario.getId());
+		usuarioActualizar.setPassword(usuario.getPassword());
+		this.sessionFactory.getCurrentSession().update(usuarioActualizar);
+	}
 }

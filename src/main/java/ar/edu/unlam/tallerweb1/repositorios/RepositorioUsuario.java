@@ -18,4 +18,5 @@ public interface RepositorioUsuario {
 	void eliminarUsuario(Usuario usuario);
 	List<Usuario> listarJugadoresPorPartido(Long idPartido);
 	Usuario verPerfil(Long id);
+	void cambiarContraseña(Usuario usuario);
 }

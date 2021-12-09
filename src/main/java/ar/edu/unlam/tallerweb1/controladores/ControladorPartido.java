@@ -4,10 +4,9 @@ import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
-import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
-import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
+import ar.edu.unlam.tallerweb1.servicios.*;
+import com.mercadopago.resources.Preference;
+import com.mercadopago.resources.datastructures.preference.Item;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,6 +25,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
+import com.mercadopago.MercadoPago;
+import com.mercadopago.exceptions.MPConfException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.Payment;
+import com.mercadopago.resources.datastructures.payment.Payer;
+
 @Controller
 @SessionAttributes("partido")
 public class ControladorPartido {
@@ -34,13 +39,15 @@ public class ControladorPartido {
     private ServicioLocalidad servicioLocalidad;
     private ServicioUsuario servicioUsuario;
     private ServicioCancha servicioCancha;
+    private ServicioAbonar servicioAbonar;
 
     @Autowired
-    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario, ServicioCancha servicioCancha) {
+    public ControladorPartido(ServicioPartido servicioCrearPartido, ServicioLocalidad servicioLocalidad, ServicioUsuario servicioUsuario, ServicioCancha servicioCancha,ServicioAbonar servicioAbonar) {
         this.servicioCrearPartido = servicioCrearPartido;
         this.servicioLocalidad = servicioLocalidad;
         this.servicioUsuario = servicioUsuario;
         this.servicioCancha = servicioCancha;
+        this.servicioAbonar = servicioAbonar;
     }
 
     @RequestMapping(path = "/registro-partido/{id}", method = RequestMethod.POST)
@@ -190,5 +197,22 @@ public class ControladorPartido {
         return new ModelAndView("/lista-partidos-por-cancha", model);
     }
 
+    @RequestMapping(path = "/facturacion", method = RequestMethod.GET)
+    public ModelAndView facturacion(HttpServletRequest request) {
+        return new ModelAndView("facturacion");
+    }
+
+    @RequestMapping(path = "/mercado-pago/{idPartido}", method = RequestMethod.GET)
+    public ModelAndView reservarCancha(HttpServletRequest request , @PathVariable Long idPartido) throws MPException {
+        ModelMap model = new ModelMap();
+        Long idUsuario = (Long) request.getSession().getAttribute("id");
+        Partido partido = servicioCrearPartido.buscarPartidoPorID(idPartido);
+        model.put("partido", partido);
+        Usuario usuario = servicioUsuario.buscarUsuarioPorId(idUsuario);
+        model.put("usuario", usuario);
+        float precio = 100f;
+        model.put("preference", servicioAbonar.reservarCancha(partido,usuario));
+        return new ModelAndView("facturacion", model);
+    }
 
 }

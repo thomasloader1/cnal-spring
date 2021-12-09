@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.ReporteUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -182,5 +183,14 @@ public class ControladorUsuario {
 
         return new ModelAndView("reportes-usuario",model);
     }
+
+    @RequestMapping(path = "cambiar-contrasenia" , method = RequestMethod.POST)
+    public ModelAndView cambiarContraseña(HttpServletRequest request){
+        Long idUsuario = (Long) request.getSession().getAttribute("ID");
+        Usuario usuario = servicioUsuario.verPerfil(idUsuario);
+        servicioUsuario.cambiarContraseña(usuario);
+        return new ModelAndView("redirect:/ir-a-perfil-jugador");
+    }
+
 }
 
