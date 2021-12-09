@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,27 +23,28 @@ import java.util.*;
 
 @RestController
 public class ControladorPartidoRest {
-        private ServicioPartido servicioPartido;
-        @Autowired
-        public ControladorPartidoRest(ServicioPartido servicioPartido){
-            this.servicioPartido = servicioPartido;
+
+    private ServicioPartido servicioPartido;
+    @Autowired
+    public ControladorPartidoRest(ServicioPartido servicioPartido){
+        this.servicioPartido = servicioPartido;
+    }
+
+    @RequestMapping(value = "/partidos", method = RequestMethod.GET, produces="application/json")
+    @ResponseBody
+    public List<EventoPartido> getPartidos() throws JsonProcessingException {
+        List<Partido> partidos = servicioPartido.todosLosPartidos();
+
+        List<EventoPartido> eventos = new ArrayList<>();
+
+        for(Partido p : partidos){
+            EventoPartido ep = new EventoPartido(p.getId(),p.getLocalidad(),p.getFechaPartido(),p);
+            eventos.add(ep);
         }
 
-        @RequestMapping(value = "/partidos", method = RequestMethod.GET, produces="application/json")
-        @ResponseBody
-        public List<EventoPartido> getPartidos() throws JsonProcessingException {
-           List<Partido> partidos = servicioPartido.todosLosPartidos();
+        return eventos;
+        // return eventos;
 
-            List<EventoPartido> eventos = new ArrayList<>();
-
-            for(Partido p : partidos){
-
-                EventoPartido ep = new EventoPartido(p.getId(),p.getLocalidad(), p.getFechaPartido(),p);
-                eventos.add(ep);
-            }
-
-            return eventos;
-           // return eventos;
-
-        }
+    }
 }
+

@@ -48,32 +48,22 @@ public class RepositorioPartidoTest extends SpringTest {
     @Transactional
     @Rollback
     public void buscarPartidoPorHoraYCategoria() throws Exception {
-
         givenQueExistenPartidosConHoraYCategoria(Horario, Categoria);
-
         Partido partido= whenBuscoPartidosPorHoraYCategoria(Horario, Categoria);
-
         thenEncuentroLosPartidos(partido);
     }
-
     private void thenEncuentroLosPartidos(Partido partido) {
         Assert.assertNotNull(partido);
     }
-
     private Partido whenBuscoPartidosPorHoraYCategoria(String horario, String categoria) throws Exception {
         return repositorioPartido.buscarPartido(horario, categoria);
     }
-
     private void givenQueExistenPartidosConHoraYCategoria(String horario, String categoria) {
-
         Partido partido= new Partido();
         partido.setCategoria(categoria);
         partido.setHorario(horario);
-
         session().save(partido);
     }
-
-
     @Test
     @Transactional
     @Rollback
@@ -118,12 +108,9 @@ public class RepositorioPartidoTest extends SpringTest {
     @Rollback
     public void traerPartidosFiltradosPorCategoriaYLocalidad(){
         givenQueExistenPartidosConLocalidadYCategoria(SANJUSTO, Categoria, 3);
-
         List<Partido> partido = whenBuscoPartidoPorCategoriaYLocalidad(SANJUSTO, Categoria);
-
         thenEncuentroLosPartidosFiltrados(partido, 3);
     }
-
     private void givenQueExistenPartidosConLocalidadYCategoria(String localidad, String categoria, int cantidadPartidos) {
         for(int i=0; i<cantidadPartidos; i++){
             Partido partidoNuevo = new Partido();
@@ -134,54 +121,68 @@ public class RepositorioPartidoTest extends SpringTest {
             partidoNuevo.setLocalidad(localidad);
             partidoNuevo.setHorario("18:00");
             partidoNuevo.setDireccion("Calle "+i);
-
             session().save(partidoNuevo);
         }
     }
-
     private List<Partido> whenBuscoPartidoPorCategoriaYLocalidad(String localidad, String categoria) {
         return repositorioPartido.partidosFiltrados(localidad, categoria);
     }
-
     private void thenEncuentroLosPartidosFiltrados(List<Partido> partidos, int cantidadPartidosEncontrados) {
         assertThat(partidos).hasSize(cantidadPartidosEncontrados);
     }
-
-
     @Test
     @Transactional
     @Rollback
     public void traerPartidosPorUsuario(){
-
         givenPartidosPorUsuario(IDUSUARIO, 1L);
-
         givenPartidosPorUsuario(IDUSUARIO, 2L);
-
         givenPartidosPorUsuario(IDUSUARIO, 3L);
-
         List<Partido> partidos = whenBuscoPartidosPorUsuario(IDUSUARIO);
-
         thenEncuentroCantidadDePartidosPorUsuario(partidos , 3);
     }
-
     private void givenPartidosPorUsuario(Long idUsuario, Long idPartido){
-
-            UsuarioPartido usuarioPartido = new UsuarioPartido();
-
-            usuarioPartido.setPrimaryOne(idUsuario);
-
-            usuarioPartido.setPrimaryTwo(idPartido);
-
-            session().save(usuarioPartido);
+        UsuarioPartido usuarioPartido = new UsuarioPartido();
+        usuarioPartido.setPrimaryOne(idUsuario);
+        usuarioPartido.setPrimaryTwo(idPartido);
+        session().save(usuarioPartido);
+    }
+    private List<Partido> whenBuscoPartidosPorUsuario(Long idUsuario){
+        return repositorioPartido.todosLosPartidosPorUsuario(idUsuario);
+    }
+    private void thenEncuentroCantidadDePartidosPorUsuario(List<Partido> partidos, int cantidadPartidosEncontrados){
+        assertThat(partidos).hasSize(cantidadPartidosEncontrados);
     }
 
-   private List<Partido> whenBuscoPartidosPorUsuario(Long idUsuario){
-        return repositorioPartido.todosLosPartidosPorUsuario(idUsuario);
-   }
+    @Test
+    @Transactional
+    @Rollback
+    public void buscarUsuarioPartido(){
+        USUARIO.setId(1L);
+        PARTIDO.setId(1L);
+        givenUnoUsuarioAPartido(USUARIO.getId(), PARTIDO.getId());
+        UsuarioPartido usuarioPartido = whenEncuentroUsuarioPartido(USUARIO.getId(), PARTIDO.getId());
+        thenEncontreElUsusarioPartido(usuarioPartido);
+    }
 
-   private void thenEncuentroCantidadDePartidosPorUsuario(List<Partido> partidos, int cantidadPartidosEncontrados){
-       assertThat(partidos).hasSize(cantidadPartidosEncontrados);
-   }
+    private void thenEncontreElUsusarioPartido(UsuarioPartido usuarioPartido) {
+        Long expected = 1L;
+        Long actual = usuarioPartido.getPrimaryOne();
+        Assert.assertEquals(expected, actual);
+    }
+
+    private UsuarioPartido whenEncuentroUsuarioPartido(Long idUsuario, Long idPartido){
+        return repositorioPartido.buscarUsuarioPartido(idUsuario, idPartido);
+    }
+
+    private void givenUnoUsuarioAPartido( Long idUsuario, Long idPartido){
+        UsuarioPartido usuarioPartido = new UsuarioPartido();
+
+        usuarioPartido.setPrimaryOne(idUsuario);
+
+        usuarioPartido.setPrimaryTwo(idPartido);
+
+        session().save(usuarioPartido);
+    }
 
     @Test
     @Transactional
@@ -215,3 +216,6 @@ public class RepositorioPartidoTest extends SpringTest {
     }
 
 }
+
+}
+

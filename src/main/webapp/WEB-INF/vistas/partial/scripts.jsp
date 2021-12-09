@@ -36,11 +36,7 @@
 <script src="plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js"></script>
 <script src="js/rev.slider.js"></script>
 <script src="https://sdk.mercadopago.com/js/v2"></script>
-<script>
-    jQuery(document).ready(function() {
-        'use strict';
-        dz_rev_slider_1();
-
+<script>     
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap',
@@ -79,7 +75,6 @@
     const mp = new MercadoPago('TEST-d629bab3-7a69-4606-8e5c-c4c40a5ecde7', {
         locale: 'es-AR'
     });
-
     // Inicializa el checkout
     mp.checkout({
         preference: {
