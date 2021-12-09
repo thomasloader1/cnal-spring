@@ -8,9 +8,6 @@
     <h4 class="mb-3">Solo por hoy 25% off en todo el sitio</h4>
     <a class="btn text-white" href="" role="button" style="background-color: #2b542c">Reservar</a>
 </div>
-<div class="container">
-    <div id='calendar'></div>
-</div>
 <div class="container py-3">
     <h3 style="margin-bottom: 3%; margin-top: 3%">Partidos disponibles</h3>
 

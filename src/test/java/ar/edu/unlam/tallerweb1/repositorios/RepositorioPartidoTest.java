@@ -33,8 +33,8 @@ public class RepositorioPartidoTest extends SpringTest {
     private static final Long IDUSUARIO = 1L;
 
     Usuario USUARIO = new Usuario("email", "pass", "ADMIN", "nombre", "apellido", Date.from(Instant.now()));
-    Partido PARTIDO = new Partido(9, 5, "5", "Juvenil", "20:00", "Merlo", "calle falsa 123", Date.from(Instant.now()));
-    Partido PARTIDO2 = new Partido(8, 6, "5", "Juvenil", "21:00", "Merlo", "calle falsa 456", Date.from(Instant.now()));
+    Partido PARTIDO = new Partido(9, 5, "5", "Juvenil", "20:00", "Merlo", "calle falsa 123", "11/12/2021");
+    Partido PARTIDO2 = new Partido(8, 6, "5", "Juvenil", "21:00", "Merlo", "calle falsa 456", "11/12/2021");
     @Autowired
     private RepositorioPartido repositorioPartido;
     MockHttpSession session;

@@ -9,12 +9,12 @@ public class EventoPartido {
 
     private Long id;
     private String title;
-    private Date start;
+    private String start;
     private Date end;
     private Partido partido;
 
 
-    public EventoPartido(Long id,String title, Date start, Partido partido) {
+    public EventoPartido(Long id,String title, String start, Partido partido) {
         this.id = id;
         this.title = title;
         this.start = start;
@@ -45,11 +45,11 @@ public class EventoPartido {
         this.title = title;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 

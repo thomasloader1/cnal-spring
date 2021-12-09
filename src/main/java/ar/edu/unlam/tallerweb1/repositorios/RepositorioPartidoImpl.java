@@ -109,7 +109,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido{
     }
 
     @Override
-    public List<Partido> buscarPartidosPorFechaYHora(Date fechaPartido, String horarioPartido) {
+    public List<Partido> buscarPartidosPorFechaYHora(String fechaPartido, String horarioPartido) {
         final Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Partido.class)
                 .add(Restrictions.eq("fechaPartido",fechaPartido ))

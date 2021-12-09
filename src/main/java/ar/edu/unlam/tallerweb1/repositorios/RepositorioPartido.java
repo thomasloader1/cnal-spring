@@ -19,7 +19,7 @@ public interface RepositorioPartido {
     UsuarioPartido buscarUsuarioPartido(Long idUsuario, Long idPartido);
     List<Partido> todosLosPartidosPorUsuario(Long idUsuario);
     List<Partido> buscarPartidosPorCancha(Cancha cancha);
-    List<Partido> buscarPartidosPorFechaYHora(Date fechaPartido, String horarioPartido);
+    List<Partido> buscarPartidosPorFechaYHora(String fechaPartido, String horarioPartido);
     Partido reservarCancha(Long idPartido);
 
 }

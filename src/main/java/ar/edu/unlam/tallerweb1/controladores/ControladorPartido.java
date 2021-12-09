@@ -197,12 +197,12 @@ public class ControladorPartido {
         return new ModelAndView("/lista-partidos-por-cancha", model);
     }
 
-    @RequestMapping(path = "/facturacion", method = RequestMethod.GET)
-    public ModelAndView facturacion(HttpServletRequest request) {
-        return new ModelAndView("facturacion");
-    }
+//    @RequestMapping(path = "/facturacion", method = RequestMethod.GET)
+//    public ModelAndView facturacion(HttpServletRequest request) {
+//        return new ModelAndView("facturacion");
+//    }
 
-    @RequestMapping(path = "/mercado-pago/{idPartido}", method = RequestMethod.GET)
+    @RequestMapping(path = "/facturacion", method = RequestMethod.GET)
     public ModelAndView reservarCancha(HttpServletRequest request , @PathVariable Long idPartido) throws MPException {
         ModelMap model = new ModelMap();
         Long idUsuario = (Long) request.getSession().getAttribute("id");

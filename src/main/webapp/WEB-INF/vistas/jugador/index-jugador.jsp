@@ -12,13 +12,6 @@
     <a class="btn text-white" href="" role="button" style="background-color: #2b542c">Reservar</a>
 
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div id='calendar'></div>
-        </div>
-    </div>
-</div>
 <div class="container py-3">
     <h3 style="margin-bottom: 3%; margin-top: 3%">Canchas disponibles</h3>
 

@@ -70,7 +70,7 @@ public class ServicioAbonarImpl implements  ServicioAbonar{
         Item item = new Item();
         item.setTitle(partido.getLocalidad())
                 .setQuantity(1)
-                .setUnitPrice(500.00f);
+                .setUnitPrice(partido.getCancha().getPrecio().floatValue());
         preference.appendItem(item);
 
         preference.save();

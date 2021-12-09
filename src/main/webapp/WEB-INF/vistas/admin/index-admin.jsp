@@ -35,19 +35,19 @@
                         <td>${USUARIO.equipo.nombre}</td>
                         <td>${USUARIO.rol}</td>
                         <td>
-                            <form:form action="cambio-rol/${USUARIO.id}" method="get">
+                            <form:form action="/proyecto_limpio_spring_war_exploded/cambio-rol/${USUARIO.id}" method="get">
                                 <button class="btn text-white" style="background-color: #67b168" type="submit">Cambiar Rol</button>
                             </form:form>
                         </td>
 
                         <!--<td>
-                            <form:form action="eliminar-usuario/${USUARIO.id}" method="get">
+                            <form:form action="/proyecto_limpio_spring_war_exploded/eliminar-usuario/${USUARIO.id}" method="get">
                                 <button class="btn btn-danger" type="submit">Eliminar</button>
                             </form:form>
                         </td>-->
 
                         <td>
-                            <form:form action="ver-reportes-usuario/${USUARIO.id}" method="get">
+                            <form:form action="/proyecto_limpio_spring_war_exploded/ver-reportes-usuario/${USUARIO.id}" method="get">
                                 <button class="btn btn-danger" type="submit">Ver reportes</button>
                             </form:form>
                         </td>
