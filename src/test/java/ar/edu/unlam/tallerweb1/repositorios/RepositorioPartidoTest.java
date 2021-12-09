@@ -1,17 +1,27 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.UsuarioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartidoImpl;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.annotation.Rollback;
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class RepositorioPartidoTest extends SpringTest {
 
@@ -22,9 +32,16 @@ public class RepositorioPartidoTest extends SpringTest {
     private static final String CIUDADELA = "Ciudadela";
     private static final Long IDUSUARIO = 1L;
 
+    Usuario USUARIO = new Usuario("email", "pass", "ADMIN", "nombre", "apellido", Date.from(Instant.now()));
+    Partido PARTIDO = new Partido(9, 5, "5", "Juvenil", "20:00", "Merlo", "calle falsa 123", "12/12/22");
+    Partido PARTIDO2 = new Partido(8, 6, "5", "Juvenil", "21:00", "Merlo", "calle falsa 456", "12/01/22");
     @Autowired
     private RepositorioPartido repositorioPartido;
     MockHttpSession session;
+    @Autowired
+    RepositorioCancha repositorioCancha;
+
+    ServicioPartido servicioPartido = new ServicioPartidoImpl(repositorioPartido);
 
 
     @Test
@@ -61,14 +78,39 @@ public class RepositorioPartidoTest extends SpringTest {
     @Transactional
     @Rollback
     public void guardarPartido(){
+        givenGuardoPartido (PARTIDO);
+        List<Partido> partidoEncontrado = thenEncuentroElPartido();
+        whenEncontréElPartido(partidoEncontrado, 1);
+    }
 
+    private void whenEncontréElPartido(List<Partido> partidoEncontrado, int cantidadDeEncontrados) {
+        assertThat(partidoEncontrado.size()).isEqualTo(cantidadDeEncontrados);
+    }
+
+    private List<Partido> thenEncuentroElPartido() {
+        return repositorioPartido.todosLosPartidos();
+    }
+
+    private void givenGuardoPartido(Partido partido) {
+        repositorioPartido.guardarPartido(partido);
     }
 
     @Test
     @Transactional
     @Rollback
     public void traerTodosLosPartidos(){
+        givenGuardoPartido(PARTIDO);
+        givenGuardoPartido(PARTIDO2);
+        List<Partido> partidos = thenBuscoLosPartidos();
+        whenTraigoLosPartidos(partidos, 2);
+    }
 
+    private void whenTraigoLosPartidos(List<Partido> partidos, int i) {
+        assertThat(partidos.size()).isEqualTo(i);
+    }
+
+    private List<Partido> thenBuscoLosPartidos() {
+        return repositorioPartido.todosLosPartidos();
     }
 
     @Test
@@ -140,5 +182,36 @@ public class RepositorioPartidoTest extends SpringTest {
    private void thenEncuentroCantidadDePartidosPorUsuario(List<Partido> partidos, int cantidadPartidosEncontrados){
        assertThat(partidos).hasSize(cantidadPartidosEncontrados);
    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void buscarUsuarioPartido(){
+        USUARIO.setId(1L);
+        PARTIDO.setId(1L);
+        givenUnoUsuarioAPartido(USUARIO.getId(), PARTIDO.getId());
+        UsuarioPartido usuarioPartido = whenEncuentroUsuarioPartido(USUARIO.getId(), PARTIDO.getId());
+        thenEncontreElUsusarioPartido(usuarioPartido);
+    }
+
+    private void thenEncontreElUsusarioPartido(UsuarioPartido usuarioPartido) {
+        Long expected = 1L;
+        Long actual = usuarioPartido.getPrimaryOne();
+        Assert.assertEquals(expected, actual);
+    }
+
+    private UsuarioPartido whenEncuentroUsuarioPartido(Long idUsuario, Long idPartido){
+        return repositorioPartido.buscarUsuarioPartido(idUsuario, idPartido);
+    }
+
+    private void givenUnoUsuarioAPartido( Long idUsuario, Long idPartido){
+        UsuarioPartido usuarioPartido = new UsuarioPartido();
+
+        usuarioPartido.setPrimaryOne(idUsuario);
+
+        usuarioPartido.setPrimaryTwo(idPartido);
+
+        session().save(usuarioPartido);
+    }
 
 }
