@@ -30,6 +30,14 @@
                 console.group("dateCLick f():")
                 console.info(event)
                 console.groupEnd()
+            },
+            eventClick: function (info){
+                console.group("eventClick f():")
+                console.info(info)
+                let contentTemplate = `Estas inscripto para este partido`
+                $("#genericModalContent").html(contentTemplate)
+                $("#genericModal").modal("toggle")
+                console.groupEnd()
             }
         });
         calendar.render();

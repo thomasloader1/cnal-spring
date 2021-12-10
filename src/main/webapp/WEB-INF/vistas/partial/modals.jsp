@@ -15,12 +15,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
+      <div class="modal-body" id="genericModalContent"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Aceptar</button>
       </div>
     </div>
   </div>
