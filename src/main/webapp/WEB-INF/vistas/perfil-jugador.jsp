@@ -62,6 +62,17 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary d-inline" style="width: 20px; height: 20px; border-radius: 50%;"></div>
+                    <p class="mx-2 mb-0">Tus partidos</p>
+                </div>
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </div>
 </div>
 <%@ include file = "partial/scripts.jsp" %>
 <%@ include file = "partial/footer.jsp" %>

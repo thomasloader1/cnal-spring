@@ -4,41 +4,40 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js"></script>
-
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>     
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                themeSystem: 'bootstrap',
-                initialView: 'timeGridWeek',
-                slotMinTime: '07:00:00',
-                slotMaxTime: '24:00:00',
-                allDaySlot: false,
-                selectable: true,
-                height: 650,
-                contentHeight: 600,
-                eventSources: {
-                    url: 'http://localhost:8080/proyecto_limpio_spring_war_exploded/partidos',
-                    method: 'GET'
-                },
-                select: function (info){
-                    console.group("select f():")
-                    console.info(info)
-                    console.groupEnd()
-                },
-                dateClick: function (event){
-                    console.group("dateCLick f():")
-                    console.info(event)
-                    console.groupEnd()
-                },
-                eventClick: function(info) {
-                    console.log(info.event)
-                    $("#genericModal").modal("toggle")
-                    console.log()
-                }
-            });
-    });	/*ready*/
+           $(document).ready( e =>{
+               var calendarEl = document.getElementById('calendar');
+               var calendar = new FullCalendar.Calendar(calendarEl, {
+                   themeSystem: 'bootstrap',
+                   initialView: 'timeGridWeek',
+                   slotMinTime: '07:00:00',
+                   slotMaxTime: '24:00:00',
+                   allDaySlot: false,
+                   selectable: true,
+                   height: 650,
+                   contentHeight: 600,
+                   eventSources: {
+                       url: 'http://localhost:8080/proyecto_limpio_spring_war_exploded/partidos',
+                       method: 'GET'
+                   },
+                   select: function (info){
+                       console.group("select f():")
+                       console.info(info)
+                       console.groupEnd()
+                   },
+                   dateClick: function (event){
+                       console.group("dateCLick f():")
+                       console.info(event)
+                       console.groupEnd()
+                   },
+                   eventClick: function(info) {
+                       console.log(info.event)
+                       $("#genericModal").modal("toggle")
+                       console.log()
+                   }
+               });
+           })
+
 </script>
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
